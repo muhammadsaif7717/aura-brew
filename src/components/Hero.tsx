@@ -1,7 +1,7 @@
 "use client";
 
 import { RestaurantClient } from "@/data/restaurants";
-import { Sparkles, ShoppingBag, Calendar, Star, Clock, MapPin, ShieldCheck, ArrowRight } from "lucide-react";
+import { Sparkles, ShoppingBag, Calendar, Star, Clock, MapPin, ArrowRight } from "lucide-react";
 
 interface HeroProps {
   client: RestaurantClient;
@@ -87,51 +87,72 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
 
           </div>
 
-          {/* Right Visual Food Card / Showcase Frame */}
+          {/* Right Visual Image & Showcase Frame */}
           <div className="lg:col-span-5 relative">
-            <div className="rounded-3xl bg-gradient-to-br from-amber-950 via-slate-900 to-amber-900 text-white p-6 sm:p-8 shadow-2xl border border-amber-800/40 relative overflow-hidden group">
+            <div className="rounded-3xl bg-slate-950 text-white overflow-hidden shadow-2xl border border-amber-900/40 relative group">
               
-              {/* Background Glow */}
-              <div className="absolute -top-10 -right-10 w-44 h-44 bg-amber-500/20 rounded-full blur-2xl" />
+              {/* High-Resolution Hero Visual Photography */}
+              <div className="relative h-64 sm:h-72 w-full overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={client.heroImage}
+                  alt={client.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                
+                {/* Badges on Image */}
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-amber-300 font-mono text-xs font-bold border border-white/10">
+                    {client.businessType}
+                  </span>
+                </div>
 
-              <div className="flex items-center justify-between pb-4 border-b border-white/10 text-xs">
-                <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-mono font-semibold">
-                  Today&apos;s Featured Highlights
-                </span>
-                <span className="text-emerald-400 font-mono flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Kitchen Active
-                </span>
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Kitchen Active
+                  </span>
+                </div>
               </div>
 
-              {/* Sample Food Cards */}
-              <div className="mt-5 space-y-3.5">
-                {client.menu.slice(0, 3).map((item, idx) => (
+              {/* Bottom Content Frame with Sample Food Items */}
+              <div className="p-6 bg-slate-950 space-y-3.5 border-t border-white/10">
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                  <span className="text-xs font-mono text-slate-400">
+                    🔥 Featured Menu Highlights
+                  </span>
+                  <span className="text-xs text-amber-400 font-bold">
+                    Direct Order
+                  </span>
+                </div>
+
+                {client.menu.slice(0, 2).map((item) => (
                   <div
                     key={item.id}
-                    className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors flex items-center justify-between gap-3"
+                    className="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors"
                   >
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-sm font-bold text-white">{item.bengaliName}</h4>
-                        {item.badge && (
-                          <span className="text-[9px] font-bold text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded-full">
-                            {item.badge}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">
-                        {item.description}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-12 h-12 rounded-xl object-cover shrink-0 border border-white/10"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-xs sm:text-sm font-bold text-white truncate">
+                        {item.bengaliName}
+                      </h4>
+                      <p className="text-[11px] text-slate-400 truncate">
+                        {item.name}
                       </p>
                     </div>
-
                     <div className="text-right shrink-0">
-                      <span className="text-sm font-extrabold text-amber-400 block font-mono">
-                        ৳ {item.price}
+                      <span className="text-xs font-black text-amber-400 block font-mono">
+                        ৳{item.price}
                       </span>
                       <button
                         onClick={onOpenOrder}
-                        className="text-[11px] text-amber-200 hover:text-white underline cursor-pointer"
+                        className="text-[10px] text-amber-200 hover:text-white underline cursor-pointer"
                       >
                         অর্ডার
                       </button>
@@ -140,25 +161,16 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
                 ))}
               </div>
 
-              {/* Bottom Address Reminder */}
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                  <span className="truncate max-w-[220px]">{client.address}</span>
-                </div>
-                <span className="font-bold text-amber-400">Open Now</span>
-              </div>
-
             </div>
 
-            {/* Floating Floating Badge */}
+            {/* Floating Clean Badge */}
             <div className="absolute -bottom-4 -left-4 sm:left-4 bg-white text-slate-900 px-4 py-2.5 rounded-2xl border border-amber-200 shadow-xl flex items-center gap-3 animate-float-slow">
               <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
                 ✓
               </div>
               <div className="text-left text-xs">
                 <span className="font-bold block">1-Click WhatsApp Order</span>
-                <span className="text-slate-500 text-[10px]">কোনো ফুড অ্যাপ ফি নেই</span>
+                <span className="text-slate-500 text-[10px]">০% অ্যাপ কমিশন • সরাসরি কিচেন রেট</span>
               </div>
             </div>
 

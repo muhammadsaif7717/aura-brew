@@ -139,3 +139,4 @@ export default function Footer({ client, onOpenOrder }: FooterProps) {
     </footer>
   );
 }
+

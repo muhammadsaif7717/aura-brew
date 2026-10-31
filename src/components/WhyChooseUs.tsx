@@ -118,3 +118,4 @@ export default function WhyChooseUs({ client }: WhyChooseUsProps) {
     </section>
   );
 }
+

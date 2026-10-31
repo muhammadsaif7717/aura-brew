@@ -38,15 +38,15 @@ export default function MenuSection({ client, onSelectItemForOrder }: MenuSectio
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            সুস্বাদু খাবার ও পানীয়ের তালিকা
+            সুস্বাদু খাবার ও পানীয়ের চিত্রশালা
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            পছন্দের আইটেমে ক্লিক করে সহজেই সরাসরি হোয়াটসঅ্যাপে অর্ডার বা পার্সেল নিশ্চিত করুন। কোনো অ্যাপ ডাউনলোড করার ঝামেলা নেই।
+            টাটকা প্রস্তুত করা প্রতিটি খাবারের ছবি ও বিস্তারিত দেখে পছন্দের আইটেমে ক্লিক করুন। সরাসরি হোয়াটসঅ্যাপে দ্রুত পৌঁছে যাবে আপনার অর্ডার।
           </p>
         </div>
 
-        {/* Category Tabs */}
+        {/* Category Filter Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {categories.map((cat) => {
             const Icon = cat.icon;
@@ -58,7 +58,7 @@ export default function MenuSection({ client, onSelectItemForOrder }: MenuSectio
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition cursor-pointer active:scale-95 ${
                   isActive
-                    ? "bg-amber-600 text-white shadow-md shadow-amber-600/20"
+                    ? "bg-amber-600 text-white shadow-md shadow-amber-600/25"
                     : "bg-slate-50 text-slate-700 hover:bg-amber-50/80 hover:text-amber-900 border border-slate-200/80"
                 }`}
               >
@@ -69,60 +69,114 @@ export default function MenuSection({ client, onSelectItemForOrder }: MenuSectio
           })}
         </div>
 
-        {/* Menu Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Mouth-Watering Menu Cards with Real Food Photography */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-3xl p-6 border border-amber-900/10 shadow-xs hover:border-amber-400 hover:shadow-xl transition-all duration-200 flex flex-col justify-between group"
+              className="bg-white rounded-3xl border border-amber-900/10 shadow-xs hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group"
             >
               <div>
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <div>
+                {/* Top Image Showcase */}
+                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/20" />
+
+                  {/* Badge */}
+                  {item.badge && (
+                    <div className="absolute top-3.5 left-3.5">
+                      <span className="text-[10px] font-extrabold text-amber-950 bg-amber-400 px-3 py-1 rounded-full shadow-sm uppercase tracking-wide">
+                        {item.badge}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Price Tag Overlay */}
+                  <div className="absolute bottom-3 right-3.5">
+                    <span className="text-base font-black text-white bg-slate-900/85 backdrop-blur-md border border-white/20 px-3 py-1 rounded-xl font-mono shadow-md">
+                      ৳ {item.price}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content Body */}
+                <div className="p-6">
+                  <div className="mb-2">
                     <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
                       {item.bengaliName}
                     </h3>
-                    <span className="text-xs text-slate-400 font-mono block">
+                    <span className="text-xs text-slate-400 font-mono block mt-0.5">
                       {item.name}
                     </span>
                   </div>
 
-                  {item.badge && (
-                    <span className="text-[10px] font-bold text-amber-800 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full whitespace-nowrap shrink-0">
-                      {item.badge}
-                    </span>
-                  )}
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
                 </div>
-
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mt-2">
-                  {item.description}
-                </p>
               </div>
 
-              {/* Price & Quick Order Action */}
-              <div className="pt-6 mt-4 border-t border-slate-100 flex items-center justify-between">
-                <div>
-                  <span className="text-[11px] text-slate-400 block font-mono">মূল্য</span>
-                  <span className="text-xl font-black text-slate-900 font-mono">
-                    ৳ {item.price}
-                  </span>
-                </div>
+              {/* Card Footer Action */}
+              <div className="px-6 pb-6 pt-0 flex items-center justify-between gap-3">
+                <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Kitchen Fresh
+                </span>
 
                 <button
                   type="button"
                   onClick={() => onSelectItemForOrder(item)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-sm shadow-amber-600/20 transition active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-sm shadow-amber-600/25 transition active:scale-95 cursor-pointer"
                 >
-                  <Plus className="w-3.5 h-3.5" />
+                  <Plus className="w-4 h-4" />
                   <span>অর্ডার করুন</span>
                 </button>
               </div>
+
             </div>
           ))}
         </div>
 
+        {/* Bottom Atmosphere Gallery Preview */}
+        <div className="mt-16 pt-12 border-t border-amber-900/10">
+          <div className="text-center mb-8">
+            <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-full uppercase">
+              আউটলেটের জীবন্ত পরিবেশ ও ডাইনিং
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-2">
+              আমাদের ক্যাফে ও খাবারের কিছু মুহূর্ত
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {client.gallery.map((g, idx) => (
+              <div
+                key={idx}
+                className="relative h-40 sm:h-48 rounded-2xl overflow-hidden group shadow-md"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={g.url}
+                  alt={g.caption}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-3">
+                  <span className="text-xs text-white font-medium truncate">
+                    {g.caption}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Bottom Fast Delivery Prompt */}
-        <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-amber-950 text-amber-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-lg">
+        <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-amber-950 text-amber-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xl">
           <div>
             <h4 className="text-base sm:text-lg font-bold text-white">
               🚀 ফুড অ্যাপের অতিরিক্ত ৩০% কমিশন বাঁচান!

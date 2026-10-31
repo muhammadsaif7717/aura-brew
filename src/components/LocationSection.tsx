@@ -148,3 +148,4 @@ export default function LocationSection({ client }: LocationSectionProps) {
     </section>
   );
 }
+

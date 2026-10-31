@@ -5,6 +5,7 @@ export interface MenuItem {
   category: "all" | "coffee" | "bakery" | "mains" | "beverages" | "desserts";
   description: string;
   price: number;
+  image: string;
   badge?: string;
   popular?: boolean;
 }
@@ -32,6 +33,7 @@ export interface RestaurantClient {
   heroHeadline: string;
   heroSubheadline: string;
   specialHighlight: string;
+  heroImage: string;
   accentGradient: string;
   primaryColor: string;
   minOrderDelivery: number;
@@ -39,6 +41,10 @@ export interface RestaurantClient {
     title: string;
     desc: string;
     icon: string;
+  }[];
+  gallery: {
+    url: string;
+    caption: string;
   }[];
   menu: MenuItem[];
   reviews: ReviewItem[];
@@ -59,6 +65,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
     heroHeadline: "তাজা বেকড পেস্ট্রি ও প্রিমিয়াম কফির এক অনন্য অভিজ্ঞতা",
     heroSubheadline: "খিলগাঁও তালতলায় সকালের ফ্রেশ বাটার ক্রোয়াসাঁ, কাস্টমাইজড সেলিব্রেশন কেক আর সুগন্ধি এসপ্রেসো ব্রু উপভোগ করুন ক্যাফেতে বা সরাসরি ১-ক্লিক হোম ডেলিভারিতে।",
     specialHighlight: "প্রতিদিন সকালে ওভেনে বেক হওয়া ১০০% ফ্রেশ পেস্ট্রি ও কেক",
+    heroImage: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80",
     accentGradient: "from-amber-600 via-orange-500 to-yellow-500",
     primaryColor: "#d97706",
     minOrderDelivery: 300,
@@ -84,6 +91,12 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         icon: "Coffee",
       },
     ],
+    gallery: [
+      { url: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80", caption: "ফ্রেশ ফ্রেঞ্চ ক্রোয়াসাঁ" },
+      { url: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80", caption: "বেলজিয়ান চকলেট ফাজ কেক" },
+      { url: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=80", caption: "বারিস্তা স্পেশাল ক্যাপুচিনো" },
+      { url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80", caption: "ক্যাফে লাউঞ্জ অ্যাম্বিয়েন্স" },
+    ],
     menu: [
       {
         id: "c1",
@@ -94,16 +107,18 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 180,
         badge: "Morning Fresh",
         popular: true,
+        image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "c2",
         name: "Belgian Chocolate Fudge Cake",
         bengaliName: "বেলজিয়ান চকলেট ফাজ কেক (স্লাইস)",
         category: "desserts",
-        description: "রিম ডার্ক চকলেট ও মোলায়েম ক্রিমের স্তরবিশিষ্ট ক্লাসিক কেক স্লাইস।",
+        description: "রিচ ডার্ক চকলেট ও মোলায়েম ক্রিমের স্তরবিশিষ্ট ক্লাসিক কেক স্লাইস।",
         price: 240,
         badge: "Best Seller",
         popular: true,
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "c3",
@@ -114,6 +129,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 220,
         badge: "Barista Pick",
         popular: true,
+        image: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "c4",
@@ -122,6 +138,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "bakery",
         description: "ক্রিস্পি পেস্ট্রি ক্রাস্টে চিজি এগ ও স্মোকড চিকেন কিউবসের সুস্বাদু বেক।",
         price: 210,
+        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "c5",
@@ -131,6 +148,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "কোল্ড ফ্রেশ মিল্ক, রিচ ভ্যানিলা এবং ওপরে ড্রপ করা এসপ্রেসো ও গোল্ডেন ক্যারামেল।",
         price: 260,
         popular: true,
+        image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "c6",
@@ -139,6 +157,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "desserts",
         description: "নরম লাল স্পঞ্জ এবং খাঁটি ফিলাডেলফিয়া ক্রিম চিজের স্তর।",
         price: 250,
+        image: "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=800&q=80",
       },
     ],
     reviews: [
@@ -174,6 +193,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
     heroHeadline: "অভিজাত আবেশে খাঁটি কন্টিনেন্টাল স্বাদ ও রুচিশীল ডাইনিং",
     heroSubheadline: "মেট্রো শপিং মলের পাশে নিরিবিলি কাঠের আবহে সিজলিং রিবআই স্টেক, উড-ওভেন পিৎজা এবং রিফ্রেশিং মকটেইল নিয়ে প্রস্তুত আপনার রিজার্ভেশন টেবিল।",
     specialHighlight: "ধানমন্ডিতে রোমান্টিক ডাইনিং ও প্রিমিয়াম প্রাইভেট টেবিল রিজার্ভেশন",
+    heroImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
     accentGradient: "from-emerald-800 via-teal-700 to-amber-700",
     primaryColor: "#047857",
     minOrderDelivery: 500,
@@ -199,6 +219,12 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         icon: "Sparkles",
       },
     ],
+    gallery: [
+      { url: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80", caption: "গ্রিলড প্রাইম স্টেক" },
+      { url: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80", caption: "উড-ফায়ার্ড ক্রিস্পি পিৎজা" },
+      { url: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80", caption: "মিন্ট মোহিতো মকটেইল" },
+      { url: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80", caption: "হট সিজলিং ব্রাউনি" },
+    ],
     menu: [
       {
         id: "p1",
@@ -209,6 +235,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 520,
         badge: "Chef's Signature",
         popular: true,
+        image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "p2",
@@ -219,6 +246,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 680,
         badge: "Wood Oven",
         popular: true,
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "p3",
@@ -228,6 +256,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "লোহার গরম তাওয়ায় ধোঁয়া ওঠা সিজলিং বিফ স্ট্রিপস ও স্পাইসি পেপার সস।",
         price: 590,
         popular: true,
+        image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "p4",
@@ -236,6 +265,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "beverages",
         description: "তাজা পুদিনা পাতা, তাজা লেবুর রস ও কুচানো বরফের সাথে গ্রিন অ্যাপল ফিজ।",
         price: 240,
+        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "p5",
@@ -245,6 +275,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "গরম চকলেট সসে ফুটতে থাকা ডার্ক ব্রাউনি ওপরে ঠাণ্ডা প্রিমিয়াম ভ্যানিলা আইসক্রিম।",
         price: 320,
         popular: true,
+        image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "p6",
@@ -253,6 +284,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "coffee",
         description: "গাঢ় ডার্ক রোস্টেড কফির তীব্রতা আর এক ফোঁটা ঘন দুধের নরম ফোম।",
         price: 190,
+        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
       },
     ],
     reviews: [
@@ -288,6 +320,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
     heroHeadline: "চীজি পাস্তা ও ক্রিস্পি উড-ওভেন পিৎজার স্বর্গরাজ্য",
     heroSubheadline: "খিলগাঁওয়ের জমজমাট ফুড স্ট্রিটে বন্ধু আর পরিবার নিয়ে উপভোগ করুন আমাদের সিগনেচার স্পেশাল বেকড লাসানিয়া, ক্রিমি আলফ্রেডো পাস্তা ও গ্রিলড প্ল্যাটার।",
     specialHighlight: "জিরো ডেলিভারি ফি সহ সরাসরি হোয়াটসঅ্যাপে অর্ডার করুন",
+    heroImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
     accentGradient: "from-rose-600 via-red-600 to-amber-600",
     primaryColor: "#e11d48",
     minOrderDelivery: 350,
@@ -313,6 +346,12 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         icon: "Users",
       },
     ],
+    gallery: [
+      { url: "https://images.unsplash.com/photo-1621996346565-e3d5d6281729?auto=format&fit=crop&w=800&q=80", caption: "ওভেন বেকড পাস্তা বাস্তা" },
+      { url: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80", caption: "বিবিকিউ মিট লাভার্স পিৎজা" },
+      { url: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80", caption: "বিফ লাসানিয়া বোলোগনিজ" },
+      { url: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80", caption: "নুটেলা থিক মিল্কশেক" },
+    ],
     menu: [
       {
         id: "a1",
@@ -323,6 +362,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 360,
         badge: "Top Seller",
         popular: true,
+        image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281729?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "a2",
@@ -333,6 +373,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 650,
         badge: "House Favorite",
         popular: true,
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "a3",
@@ -342,6 +383,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "বিফ কিমা, বেসামেল সস ও পারমেসান চিজের স্তরে স্তরে বেক হওয়া রাজকীয় ডিশ।",
         price: 420,
         popular: true,
+        image: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "a4",
@@ -350,6 +392,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "mains",
         description: "মচমচে চিকেন ফিঙ্গার সাথে স্পাইসি গার্লিক মেয়ো ডিপ সস।",
         price: 260,
+        image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "a5",
@@ -359,6 +402,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "প্রচুর নুটেলা, চকলেট আইসক্রিম আর ওপরে হুইপড ক্রিম ও চকলেট চিপস।",
         price: 240,
         popular: true,
+        image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "a6",
@@ -367,6 +411,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "beverages",
         description: "আইসি ব্লু কুরাকাও ফ্লেভার, তাজা লেমন আর স্পার্কলিং রিফ্রেশার।",
         price: 180,
+        image: "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=800&q=80",
       },
     ],
     reviews: [
@@ -402,6 +447,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
     heroHeadline: "ক্যাফে আড্ডা ও লোভনীয় খাবারের সেরা কম্বিনেশন",
     heroSubheadline: "তালতলার প্রাণকেন্দ্রে মন মাতানো কফি, ক্রিস্পি বাটার-ফ্রাইড চিকেন, জুসি ডাবল ডেকার বার্গার আর সিগনেচার চেরি শেক নিয়ে আপনার ক্যাফে মেমোরিজ গড়ুন।",
     specialHighlight: "ওপেন এয়ার ভাইব ও স্পেশাল বার্থডে / ফ্রেন্ডস সেলিব্রেশন কর্নার",
+    heroImage: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
     accentGradient: "from-pink-600 via-rose-600 to-purple-600",
     primaryColor: "#db2777",
     minOrderDelivery: 300,
@@ -427,6 +473,12 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         icon: "CalendarCheck",
       },
     ],
+    gallery: [
+      { url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80", caption: "মনস্টার ডাবল বিফ বার্গার" },
+      { url: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80", caption: "চেরি ব্লসম স্পেশাল শেক" },
+      { url: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80", caption: "নুটেলা প্যানকেক টাওয়ার" },
+      { url: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80", caption: "রুফটপ ক্যাফে অ্যাম্বিয়েন্স" },
+    ],
     menu: [
       {
         id: "ch1",
@@ -437,6 +489,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 340,
         badge: "Crowd Favorite",
         popular: true,
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ch2",
@@ -447,6 +500,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 230,
         badge: "Must Try",
         popular: true,
+        image: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ch3",
@@ -455,6 +509,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "mains",
         description: "স্পাইসি ক্রাঞ্চি ড্রামস্টিকস ও ক্রিস্পি পটেটো ওয়েজেস সাথে স্পাইসি সস।",
         price: 290,
+        image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ch4",
@@ -464,6 +519,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "মিষ্টি কনডেন্সড মিল্কের সাথে বোল্ড এসপ্রেসো শট ও দারুচিনির মিষ্টি সুবাস।",
         price: 210,
         popular: true,
+        image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ch5",
@@ -472,6 +528,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "desserts",
         description: "৩ স্তরের নরম চকলেট প্যানকেকের ভেতরে তরল নুটেলা ওপরে আইসক্রিম স্কুপ।",
         price: 280,
+        image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ch6",
@@ -480,6 +537,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "beverages",
         description: "তাজা পুদিনা, বিট লবণ আর স্পার্কলিং লেবু পানির দারুণ ক্লান্তিহরণকারী ড্রিংক।",
         price: 160,
+        image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
       },
     ],
     reviews: [
@@ -515,6 +573,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
     heroHeadline: "এক কাপ খাঁটি কফিতে জমে উঠুক বন্ধুদের আপন আড্ডা",
     heroSubheadline: "চৌধুরীপাড়ার শান্ত ক্যাফে আবহে ফ্রেশলি গ্রাউন্ড এসপ্রেসো, ডার্ক মোকা, কোল্ড ব্রু আর মচমচে ওয়াফেল নিয়ে আপনার আড্ডার বিশ্বস্ত সঙ্গী আপন কফি হাউজ।",
     specialHighlight: "১০০% প্রিমিয়াম অ্যারাবিকা এসপ্রেসো ব্রু ও কোল্ড ব্রু স্পেশালিস্ট",
+    heroImage: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80",
     accentGradient: "from-amber-900 via-amber-800 to-yellow-600",
     primaryColor: "#78350f",
     minOrderDelivery: 250,
@@ -540,6 +599,12 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         icon: "BookOpen",
       },
     ],
+    gallery: [
+      { url: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80", caption: "ক্লাসিক বারিস্তা লাতে আর্ট" },
+      { url: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80", caption: "১৮-আওয়ার স্লো কোল্ড ব্রু" },
+      { url: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80", caption: "বেলজিয়ান চকলেট ওয়াফেল" },
+      { url: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80", caption: "আপন কফি শপ কর্নার" },
+    ],
     menu: [
       {
         id: "ap1",
@@ -550,6 +615,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 190,
         badge: "Coffee Classic",
         popular: true,
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ap2",
@@ -560,6 +626,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 230,
         badge: "Specialty Cold",
         popular: true,
+        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ap3",
@@ -569,6 +636,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "ভেতরে নরম বাইরে ক্রিস্পি সোনালী ওয়াফেল, ওপরে গলিত ডার্ক চকলেট গানাশ।",
         price: 220,
         popular: true,
+        image: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ap4",
@@ -577,6 +645,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "mains",
         description: "ফ্রেশ ফ্রেঞ্চ ব্রেডে স্মোকড বিফ কিউবস, চিজ, লেটুস ও ডিয়ো সস।",
         price: 260,
+        image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ap5",
@@ -586,6 +655,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "আইসড কফি ও ডার্ক চকলেটের ব্লেন্ড, ওপরে চকলেট সসের ড্রপ।",
         price: 240,
         popular: true,
+        image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "ap6",
@@ -594,6 +664,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "bakery",
         description: "কফিতে ডুবিয়ে খাওয়ার জন্য ঐতিহ্যবাহী ডাবল বেকড ইতালিয়ান বাদাম কুকি।",
         price: 90,
+        image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80",
       },
     ],
     reviews: [
@@ -629,6 +700,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
     heroHeadline: "ক্রাঞ্চি বাইটস, থিক শেক আর চিল ভাইবের আড্ডাঘর",
     heroSubheadline: "শংকরের প্রাণকেন্দ্রে লোডেড চিজ ফ্রাইস, চকলেট ব্রাউনি শেক আর জুসি বার্গার কম্বো নিয়ে ধানমন্ডির প্রতিদিনের আড্ডার সেরা স্পট।",
     specialHighlight: "স্টুডেন্ট বাজেট ফ্রেন্ডলি প্ল্যাটার ও ফ্রি ওয়াইফাই চিল স্পেস",
+    heroImage: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80",
     accentGradient: "from-orange-500 via-amber-600 to-indigo-700",
     primaryColor: "#ea580c",
     minOrderDelivery: 300,
@@ -654,6 +726,12 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         icon: "Zap",
       },
     ],
+    gallery: [
+      { url: "https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=800&q=80", caption: "অজ লোডেড চিজ ফ্রাইস" },
+      { url: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80", caption: "স্ম্যাশ ক্রিস্পি চিকেন বার্গার" },
+      { url: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80", caption: "ওরিও মাডস্লাইড থিক শেক" },
+      { url: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80", caption: "ডার্ক চকলেট লাভা কেক" },
+    ],
     menu: [
       {
         id: "oz1",
@@ -664,6 +742,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 240,
         badge: "Must Order",
         popular: true,
+        image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "oz2",
@@ -674,6 +753,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 220,
         badge: "Top Value",
         popular: true,
+        image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "oz3",
@@ -683,6 +763,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "চূর্ণ ওরিও বিস্কুট, ভ্যানিলা জেলাটো ও ঘন তরল চকলেট ক্রিমের লোভনীয় ব্লেন্ড।",
         price: 210,
         popular: true,
+        image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "oz4",
@@ -691,6 +772,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "coffee",
         description: "ক্যারামেল সসে মোড়ানো গ্লাসে কফি ব্লেন্ড আর চকোলেট পাউডারের ডাস্টিং।",
         price: 180,
+        image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "oz5",
@@ -699,6 +781,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "mains",
         description: "চিকেন, ডিম, মেয়ো আর চিজের ট্রিপল ডেকার টোস্টেড স্যান্ডউইচ।",
         price: 240,
+        image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "oz6",
@@ -708,6 +791,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "চামচ দিলেই ভেতরে থাকা গরম চকলেট লাভা বেরিয়ে আসার জাদুকরী স্বাদ।",
         price: 230,
         popular: true,
+        image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
       },
     ],
     reviews: [
@@ -743,6 +827,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
     heroHeadline: "কফি আর লাইম-এর রিফ্রেশিং ফিউশনে এক নতুন স্বাদ",
     heroSubheadline: "খিলগাঁও চৌধুরীপাড়ায় সারা দিনের ক্লান্তি দূর করতে নিন আমাদের স্পেশাল স্পার্কলিং লাইম কফি, আইসড মিন্ট রিফ্রেশার এবং স্পাইসি গ্রিলড র‍্যাপস।",
     specialHighlight: "ইউনিক সাইট্রাস-কফি ফিউশন ও ইনস্ট্যান্ট টেকঅ্যাওয়ে সার্ভিস",
+    heroImage: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
     accentGradient: "from-lime-600 via-emerald-600 to-teal-700",
     primaryColor: "#65a30d",
     minOrderDelivery: 250,
@@ -768,6 +853,12 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         icon: "ShoppingBag",
       },
     ],
+    gallery: [
+      { url: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=80", caption: "স্পার্কলিং লাইম আইসড কফি" },
+      { url: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80", caption: "ভিয়েতনামীজ ড্রিপ কফি" },
+      { url: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80", caption: "স্পাইসি চিকেন র‍্যাপ" },
+      { url: "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80", caption: "লেমন ড্রিজল কেক স্লাইস" },
+    ],
     menu: [
       {
         id: "l1",
@@ -778,6 +869,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         price: 220,
         badge: "House Specialty",
         popular: true,
+        image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "l2",
@@ -787,6 +879,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "গাঢ় ডার্ক ড্রিপ কফি আর মিষ্টি কনডেন্সড মিল্কের মনকাড়া আইসড ব্লেন্ড।",
         price: 210,
         popular: true,
+        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "l3",
@@ -796,6 +889,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         description: "নরম টর্টিলা রুটিতে মোড়ানো ক্রাঞ্চি চিকেন কিউব, মেয়ো আর স্পাইসি সালসা সস।",
         price: 220,
         popular: true,
+        image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "l4",
@@ -804,6 +898,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "beverages",
         description: "তাজা পুদিনা পাতা, লাইম স্লাইস আর কার্বনেটেড ওয়াটারের রিফ্রেশিং ড্রিংক।",
         price: 160,
+        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "l5",
@@ -812,6 +907,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "coffee",
         description: "স্টিমড মিল্ক, রিচ এসপ্রেসো আর মিষ্টি গোল্ডেন ক্যারামেলের নরম চুমুক।",
         price: 200,
+        image: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "l6",
@@ -820,6 +916,7 @@ export const RESTAURANT_CLIENTS: RestaurantClient[] = [
         category: "desserts",
         description: "তাজা লেবুর জেস্ট আর হালকা মিষ্টি সিরাপের ভেজা ভেজা নরম কেক।",
         price: 150,
+        image: "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80",
       },
     ],
     reviews: [

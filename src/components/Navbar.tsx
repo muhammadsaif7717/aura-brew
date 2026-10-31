@@ -197,3 +197,4 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
     </>
   );
 }
+
