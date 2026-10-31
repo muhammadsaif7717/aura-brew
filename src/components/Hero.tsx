@@ -24,7 +24,7 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
           <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-amber-200 shadow-xs backdrop-blur-md text-xs text-amber-900">
             <span className="flex items-center gap-1.5 text-amber-600 font-bold font-mono text-[11px]">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{client.businessType}</span>
+              <span>{client.category}</span>
             </span>
             <span className="text-amber-300 hidden sm:inline">•</span>
             <span className="text-slate-600 font-medium hidden sm:inline">{client.specialHighlight}</span>
@@ -51,7 +51,7 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
                 className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-amber-600/30 transition-all hover:scale-102 active:scale-95 flex items-center justify-center gap-2.5 cursor-pointer"
               >
                 <ShoppingBag className="w-5 h-5 text-amber-200" />
-                <span>সরাসরি হোয়াটসঅ্যাপে খাবার অর্ডার</span>
+                <span>{client.uiLabels.orderCta}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -60,7 +60,7 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
                 className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white hover:bg-amber-50/80 text-amber-950 font-semibold text-sm sm:text-base border border-amber-200 transition shadow-xs flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-amber-700" />
-                <span>টেবিল প্রি-বুকিং</span>
+                <span>{client.uiLabels.reservationCta}</span>
               </button>
             </div>
 
@@ -76,7 +76,7 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
 
               <div className="p-3 rounded-xl bg-white/80 border border-amber-100 shadow-2xs">
                 <span className="font-extrabold text-emerald-600 text-sm block mb-0.5">০% কমিশন</span>
-                <p className="text-[11px] text-slate-500 font-medium">ডাইরেক্ট ক্যাফে প্রাইস</p>
+                <p className="text-[11px] text-slate-500 font-medium">অরিজিনাল মেনু রেট</p>
               </div>
 
               <div className="p-3 rounded-xl bg-white/80 border border-amber-100 shadow-2xs">
@@ -104,14 +104,14 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
                 {/* Badges on Image */}
                 <div className="absolute top-4 left-4 flex items-center gap-2">
                   <span className="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-amber-300 font-mono text-xs font-bold border border-white/10">
-                    {client.businessType}
+                    {client.category}
                   </span>
                 </div>
 
                 <div className="absolute top-4 right-4">
                   <span className="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Kitchen Active
+                    {client.uiLabels.kitchenStatus}
                   </span>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function Hero({ client, onOpenOrder, onOpenReservation }: HeroPro
                         onClick={onOpenOrder}
                         className="text-[10px] text-amber-200 hover:text-white underline cursor-pointer"
                       >
-                        অর্ডার
+                        অর্ডার করুন
                       </button>
                     </div>
                   </div>

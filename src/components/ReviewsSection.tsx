@@ -24,7 +24,7 @@ export default function ReviewsSection({ client }: ReviewsSectionProps) {
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            গুগল ও সোশ্যাল মিডিয়ায় ভোজনরসিকদের ভালোবাসায় আমরা সিক্ত।
+            গুগল ও সোশ্যাল মিডিয়ায় অতিথিদের আন্তরিক ভালোবাসায় আমরা সিক্ত।
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export default function ReviewsSection({ client }: ReviewsSectionProps) {
                 </div>
 
                 <div className="text-right">
-                  <span className="text-[10px] text-amber-800 font-mono block uppercase">অর্ডারকৃত খাবার</span>
+                  <span className="text-[10px] text-amber-800 font-mono block uppercase">অর্ডারকৃত আইটেম</span>
                   <span className="text-xs font-bold text-amber-900 bg-amber-100/80 px-2.5 py-0.5 rounded-lg">
                     {rev.dish}
                   </span>

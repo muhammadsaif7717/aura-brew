@@ -28,7 +28,7 @@ export default function LocationSection({ client }: LocationSectionProps) {
                 আমাদের আউটলেটে সরাসরি আসুন
               </h2>
               <p className="text-slate-600 text-sm mt-2">
-                পরিবার বা বন্ধুদের নিয়ে চমৎকার খাবারের স্বাদ নিতে চলে আসুন আমাদের ঠিকানায়।
+                পরিবার বা বন্ধুদের নিয়ে চমৎকার সময় ও স্বাদ উপভোগ করতে চলে আসুন আমাদের ঠিকানায়।
               </p>
             </div>
 

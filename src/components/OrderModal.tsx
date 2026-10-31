@@ -39,10 +39,10 @@ export default function OrderModal({ isOpen, onClose, client, initialItem }: Ord
 
     const orderTypeLabel =
       orderType === "delivery"
-        ? "🏠 হোম ডেলিভারি (Home Delivery)"
+        ? client.uiLabels.orderTypeDelivery
         : orderType === "takeaway"
-        ? "🛍️ টেকঅ্যাওয়ে পার্সেল (Takeaway Parcel)"
-        : `🍽️ ডাইন-ইন টেবিল অর্ডার (Table #${tableNumber || "Self-Seated"})`;
+        ? client.uiLabels.orderTypeTakeaway
+        : `${client.uiLabels.orderTypeDinein} (Table #${tableNumber || "Self-Seated"})`;
 
     const locationDetail =
       orderType === "delivery"
@@ -51,7 +51,7 @@ export default function OrderModal({ isOpen, onClose, client, initialItem }: Ord
         ? `🪑 টেবিল নম্বর: ${tableNumber || "এখনই বসেছি"}`
         : "🏢 পিকআপ: কাউন্টার টেকঅ্যাওয়ে";
 
-    const formattedOrderMsg = `*${client.name} — নতুন ফুড অর্ডার*
+    const formattedOrderMsg = `*${client.name} — নতুন অর্ডার*
 ----------------------------------------
 📌 অর্ডারের ধরণ: ${orderTypeLabel}
 👤 কাস্টমারের নাম: ${customerName}
@@ -64,7 +64,7 @@ ${locationDetail}
 
 ${instructions ? `📝 বিশেষ নির্দেশনা: ${instructions}\n` : ""}----------------------------------------
 💰 *সর্বমোট বিল:* ৳${totalPrice}
-⚡ _Axiovyn Direct Ordering Platform থেকে প্রেরিত_`;
+⚡ _Axiovyn Direct Platform থেকে প্রেরিত_`;
 
     const whatsappUrl = `https://wa.me/${client.whatsapp}?text=${encodeURIComponent(formattedOrderMsg)}`;
 
@@ -91,13 +91,13 @@ ${instructions ? `📝 বিশেষ নির্দেশনা: ${instructio
             <div className="mb-6">
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-800 mb-2">
                 <ShoppingBag className="w-3.5 h-3.5 text-amber-600" />
-                <span>সরাসরি হোয়াটসঅ্যাপ ফুড অর্ডার</span>
+                <span>{client.uiLabels.orderCta}</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
                 {client.name}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                পছন্দের আইটেম ও ঠিকানা দিয়ে সরাসরি রেস্টুরেন্টের হোয়াটসঅ্যাপে অর্ডার পাঠান।
+                পছন্দের আইটেম ও ঠিকানা দিয়ে সরাসরি {client.name}-এর হোয়াটসঅ্যাপে অর্ডার পাঠান।
               </p>
             </div>
 
@@ -112,35 +112,35 @@ ${instructions ? `📝 বিশেষ নির্দেশনা: ${instructio
                   <button
                     type="button"
                     onClick={() => setOrderType("delivery")}
-                    className={`py-2 px-3 rounded-xl border text-xs font-semibold transition cursor-pointer ${
+                    className={`py-2 px-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer text-center truncate ${
                       orderType === "delivery"
                         ? "bg-amber-600 text-white border-amber-600 shadow-xs"
                         : "bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200"
                     }`}
                   >
-                    🏠 ডেলিভারি
+                    {client.uiLabels.orderTypeDelivery.split("(")[0]}
                   </button>
                   <button
                     type="button"
                     onClick={() => setOrderType("takeaway")}
-                    className={`py-2 px-3 rounded-xl border text-xs font-semibold transition cursor-pointer ${
+                    className={`py-2 px-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer text-center truncate ${
                       orderType === "takeaway"
                         ? "bg-amber-600 text-white border-amber-600 shadow-xs"
                         : "bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200"
                     }`}
                   >
-                    🛍️ টেকঅ্যাওয়ে
+                    {client.uiLabels.orderTypeTakeaway.split("(")[0]}
                   </button>
                   <button
                     type="button"
                     onClick={() => setOrderType("dinein")}
-                    className={`py-2 px-3 rounded-xl border text-xs font-semibold transition cursor-pointer ${
+                    className={`py-2 px-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer text-center truncate ${
                       orderType === "dinein"
                         ? "bg-amber-600 text-white border-amber-600 shadow-xs"
                         : "bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200"
                     }`}
                   >
-                    🍽️ ডাইন-ইন
+                    {client.uiLabels.orderTypeDinein.split("(")[0]}
                   </button>
                 </div>
               </div>
@@ -150,7 +150,7 @@ ${instructions ? `📝 বিশেষ নির্দেশনা: ${instructio
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">
-                      বাছাইকৃত খাবার
+                      বাছাইকৃত মেনু আইটেম
                     </span>
                     <select
                       value={selectedItem.id}

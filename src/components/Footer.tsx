@@ -32,7 +32,7 @@ export default function Footer({ client, onOpenOrder }: FooterProps) {
 
             <div className="flex items-center gap-2 text-xs text-emerald-400 font-mono">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Kitchen & Dine-in Active</span>
+              <span>{client.uiLabels.kitchenStatus}</span>
             </div>
           </div>
 
@@ -44,7 +44,7 @@ export default function Footer({ client, onOpenOrder }: FooterProps) {
             <ul className="space-y-2 text-xs">
               <li>
                 <a href="#menu" className="hover:text-amber-400 transition">
-                  ডিজিটাল ফুড মেনু
+                  ডিজিটাল মেনু তালিকা
                 </a>
               </li>
               <li>
@@ -92,14 +92,14 @@ export default function Footer({ client, onOpenOrder }: FooterProps) {
               অনলাইন পার্সেল ও ডেলিভারি
             </h4>
             <p className="text-xs text-slate-400">
-              ফুড অ্যাপের বেশি দাম এড়িয়ে সরাসরি কিচেন রেটে ঘরে খাবার পেতে হোয়াটসঅ্যাপে অর্ডার করুন।
+              {client.uiLabels.commissionNoticeDesc}
             </p>
             <button
               onClick={onOpenOrder}
               className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer active:scale-95"
             >
-              <ShoppingBag className="w-3.5 h-3.5 text-amber-200" />
-              <span>হোয়াটসঅ্যাপে খাবার অর্ডার</span>
+              <ShoppingBag className="w-4 h-4 text-amber-200" />
+              <span>{client.uiLabels.orderCta}</span>
             </button>
           </div>
 

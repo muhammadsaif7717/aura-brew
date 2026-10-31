@@ -61,7 +61,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
             </div>
             <div className="flex items-center gap-2 text-emerald-300 font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Direct WhatsApp Ordering Available (0% App Commission)</span>
+              <span>{client.uiLabels.commissionNoticeTitle}</span>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
                   {client.name}
                 </span>
                 <span className="hidden sm:inline-block text-[10px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full uppercase">
-                  {client.businessType}
+                  {client.category}
                 </span>
               </div>
               <p className="text-xs text-slate-500 font-medium">
@@ -92,7 +92,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
             <a href="#menu" className="hover:text-amber-600 transition">
-              ফুড মেনু
+              মেনু আইটেম
             </a>
             <a href="#features" className="hover:text-amber-600 transition">
               কেন আমরা সেরা
@@ -112,7 +112,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/80 transition cursor-pointer active:scale-95"
             >
               <Calendar className="w-3.5 h-3.5 text-amber-700" />
-              <span>টেবিল বুকিং</span>
+              <span>{client.uiLabels.reservationCta}</span>
             </button>
 
             <button
@@ -120,7 +120,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
               className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white shadow-md shadow-amber-600/25 transition cursor-pointer active:scale-95"
             >
               <ShoppingBag className="w-3.5 h-3.5 text-amber-200" />
-              <span>হোয়াটসঅ্যাপ অর্ডার</span>
+              <span>{client.uiLabels.orderCta}</span>
             </button>
           </div>
 
@@ -144,7 +144,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2.5 px-3 rounded-xl hover:bg-amber-50 hover:text-amber-700 transition"
               >
-                🍽️ ডিজিটাল ফুড মেনু
+                ☕ ডিজিটাল মেনু তালিকা
               </a>
               <a
                 href="#features"
@@ -178,7 +178,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
                 className="w-full py-3 rounded-xl bg-amber-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md"
               >
                 <ShoppingBag className="w-4 h-4 text-amber-200" />
-                <span>সরাসরি হোয়াটসঅ্যাপে অর্ডার করুন</span>
+                <span>{client.uiLabels.orderCta}</span>
               </button>
               <button
                 onClick={() => {
@@ -188,7 +188,7 @@ export default function Navbar({ client, onOpenOrder, onOpenReservation }: Navba
                 className="w-full py-2.5 rounded-xl bg-amber-50 text-amber-900 border border-amber-200 font-semibold text-xs flex items-center justify-center gap-2"
               >
                 <Calendar className="w-3.5 h-3.5 text-amber-700" />
-                <span>টেবিল প্রি-বুকিং রিকোয়েস্ট</span>
+                <span>{client.uiLabels.reservationCta}</span>
               </button>
             </div>
           </div>

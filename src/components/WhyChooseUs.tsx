@@ -20,11 +20,13 @@ export default function WhyChooseUs({ client }: WhyChooseUsProps) {
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            কেন {client.name} ভোজনরসিকদের প্রথম পছন্দ?
+            কেন {client.name} {client.uiLabels.audiencePraise}?
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            খাবারের গুণমান, স্বাস্থ্যসম্মত কিচেন ও অতিথিপরায়ণ সেবায় আমরা আপসহীন।
+            {client.category.includes("Cafe") || client.category.includes("Bakery")
+              ? "প্রিমিয়াম ইনগ্রিডিয়েন্টস, নিখুঁত ব্রুয়িং ও আন্তরিক আতিথেয়তায় আমরা আপসহীন।"
+              : "খাবারের সেরা স্বাদ, স্বাস্থ্যসম্মত কিচেন ও অতিথিপরায়ণ সেবায় আমরা আপসহীন।"}
           </p>
         </div>
 
@@ -77,11 +79,11 @@ export default function WhyChooseUs({ client }: WhyChooseUsProps) {
                 </li>
                 <li className="flex items-center gap-2 text-rose-800">
                   <X className="w-4 h-4 text-rose-600 shrink-0" />
-                  <span>রান্না সম্পর্কে বিশেষ কোনো নির্দেশনা দেওয়া যায় না</span>
+                  <span>কাস্টম প্রিপারেশন সম্পর্কে বিশেষ নোট দেওয়া যায় না</span>
                 </li>
                 <li className="flex items-center gap-2 text-rose-800">
                   <X className="w-4 h-4 text-rose-600 shrink-0" />
-                  <span>দেরিতে খাবার ডেলিভারি ও ঠান্ডা হওয়ার ঝুঁকি</span>
+                  <span>দেরিতে ডেলিভারি ও মান হারানোর ঝুঁকি থাকে</span>
                 </li>
               </ul>
             </div>
@@ -94,7 +96,7 @@ export default function WhyChooseUs({ client }: WhyChooseUsProps) {
               <ul className="space-y-3 text-xs sm:text-sm text-slate-800 font-medium">
                 <li className="flex items-center gap-2 text-emerald-900">
                   <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>রেস্টুরেন্টের অরিজিনাল সাশ্রয়ী মূল্য</span>
+                  <span>আউটলেটের অরিজিনাল সাশ্রয়ী মূল্য</span>
                 </li>
                 <li className="flex items-center gap-2 text-emerald-900">
                   <Check className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -102,11 +104,11 @@ export default function WhyChooseUs({ client }: WhyChooseUsProps) {
                 </li>
                 <li className="flex items-center gap-2 text-emerald-900">
                   <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>সরাসরি শেফ ও ম্যানেজারের সাথে কাস্টম নোট দেওয়ার সুযোগ</span>
+                  <span>সরাসরি বারিস্টা/শেফের সাথে কাস্টম নোট দেওয়ার সুযোগ</span>
                 </li>
                 <li className="flex items-center gap-2 text-emerald-900">
                   <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>তাৎক্ষণিক কিচেন থেকে গরম গরম দ্রুত ডেলিভারি</span>
+                  <span>তাৎক্ষণিক ফ্রেশ তৈরি ও দ্রুততম ডেলিভারি</span>
                 </li>
               </ul>
             </div>

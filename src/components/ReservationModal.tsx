@@ -62,13 +62,15 @@ ${occasion ? `🎉 উপলক্ষ্য / বিশেষ অনুরোধ
             <div className="mb-6">
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-800 mb-2">
                 <Calendar className="w-3.5 h-3.5 text-amber-600" />
-                <span>ভিআইপি টেবিল রিজার্ভেশন</span>
+                <span>{client.uiLabels.reservationCta}</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                {client.name} এ টেবিল বুক করুন
+                {client.uiLabels.reservationHeading}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                বিশেষ ডিনার, জন্মদিন বা পারিবারিক আড্ডার জন্য ঝামেলা ছাড়াই আগে থেকে টেবিল নিশ্চিত করুন।
+                {client.category.includes("Cafe") || client.category.includes("Bakery")
+                  ? "পছন্দের নিরিবিলি টেবিল বা কজি কর্নার আগে থেকেই সহজে বুক করে রাখুন।"
+                  : "বিশেষ ডিনার, জন্মদিন বা পারিবারিক আড্ডার জন্য ঝামেলা ছাড়াই আগে থেকে টেবিল নিশ্চিত করুন।"}
               </p>
             </div>
 
@@ -189,7 +191,7 @@ ${occasion ? `🎉 উপলক্ষ্য / বিশেষ অনুরোধ
                 className="w-full py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-extrabold text-sm shadow-lg shadow-amber-600/30 transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer mt-2"
               >
                 <Calendar className="w-4 h-4 text-amber-200" />
-                <span>টেবিল বুকিং রিকোয়েস্ট পাঠান</span>
+                <span>{client.uiLabels.reservationCta} নিশ্চিত করুন</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 

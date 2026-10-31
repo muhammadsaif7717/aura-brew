@@ -12,13 +12,22 @@ interface MenuSectionProps {
 export default function MenuSection({ client, onSelectItemForOrder }: MenuSectionProps) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
+  const categoryLabels: Record<string, { label: string; icon: typeof Coffee }> = {
+    coffee: { label: "কফি ও এসপ্রেসো", icon: Coffee },
+    mains: { label: "মেইন ডিশ ও মিলস", icon: Flame },
+    bakery: { label: "তাজা বেকারি ও পেস্ট্রি", icon: Cake },
+    beverages: { label: "রিফ্রেশিং বেভারেজ ও শেক", icon: GlassWater },
+    desserts: { label: "ডেজার্ট ও সুইটস", icon: Sparkles },
+  };
+
+  const availableCategories = Array.from(new Set(client.menu.map((m) => m.category)));
   const categories = [
     { id: "all", label: "সব আইটেম", icon: Utensils },
-    { id: "coffee", label: "কফি ও এসপ্রেসো", icon: Coffee },
-    { id: "mains", label: "মেইন মিলস ও প্ল্যাটার", icon: Flame },
-    { id: "bakery", label: "বেকারি ও পেস্ট্রি", icon: Cake },
-    { id: "beverages", label: "কোল্ড বেভারেজ ও শেক", icon: GlassWater },
-    { id: "desserts", label: "ডেজার্ট ও কেক", icon: Sparkles },
+    ...availableCategories.map((catId) => ({
+      id: catId,
+      label: categoryLabels[catId]?.label || catId,
+      icon: categoryLabels[catId]?.icon || Sparkles,
+    })),
   ];
 
   const filteredItems =
@@ -34,15 +43,15 @@ export default function MenuSection({ client, onSelectItemForOrder }: MenuSectio
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-800">
             <Utensils className="w-3.5 h-3.5 text-amber-600" />
-            <span>আমাদের সিগনেচার ডিজিটাল মেনু</span>
+            <span>{client.uiLabels.menuSectionTitle}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            সুস্বাদু খাবার ও পানীয়ের চিত্রশালা
+            {client.uiLabels.menuSectionSubtitle}
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            টাটকা প্রস্তুত করা প্রতিটি খাবারের ছবি ও বিস্তারিত দেখে পছন্দের আইটেমে ক্লিক করুন। সরাসরি হোয়াটসঅ্যাপে দ্রুত পৌঁছে যাবে আপনার অর্ডার।
+            টাটকা প্রস্তুত করা প্রতিটি আইটেমের ছবি ও বিবরণ দেখে পছন্দের আইটেমে ক্লিক করুন। সরাসরি হোয়াটসঅ্যাপে দ্রুত পৌঁছে যাবে আপনার অর্ডার।
           </p>
         </div>
 
@@ -146,10 +155,10 @@ export default function MenuSection({ client, onSelectItemForOrder }: MenuSectio
         <div className="mt-16 pt-12 border-t border-amber-900/10">
           <div className="text-center mb-8">
             <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-full uppercase">
-              আউটলেটের জীবন্ত পরিবেশ ও ডাইনিং
+              {client.uiLabels.galleryTitle}
             </span>
             <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-2">
-              আমাদের ক্যাফে ও খাবারের কিছু মুহূর্ত
+              {client.uiLabels.gallerySubtitle}
             </h3>
           </div>
 
@@ -179,21 +188,21 @@ export default function MenuSection({ client, onSelectItemForOrder }: MenuSectio
         <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-amber-950 text-amber-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xl">
           <div>
             <h4 className="text-base sm:text-lg font-bold text-white">
-              🚀 ফুড অ্যাপের অতিরিক্ত ৩০% কমিশন বাঁচান!
+              🚀 {client.uiLabels.commissionNoticeTitle}
             </h4>
             <p className="text-xs sm:text-sm text-amber-300/80 mt-1">
-              আমাদের অফিসিয়াল হোয়াটসঅ্যাপে সরাসরি অর্ডার করলে পেয়ে যাচ্ছেন রেস্টুরেন্টের খাঁটি রেট এবং দ্রুততম ডেলিভারি।
+              {client.uiLabels.commissionNoticeDesc}
             </p>
           </div>
 
           <a
-            href={`https://wa.me/${client.whatsapp}?text=${encodeURIComponent(`Hello ${client.name}, I would like to order food directly from your online menu.`)}`}
+            href={`https://wa.me/${client.whatsapp}?text=${encodeURIComponent(`Hello ${client.name}, I would like to place an order directly from your online menu.`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-md transition active:scale-95 shrink-0 inline-flex items-center gap-2"
           >
             <ShoppingBag className="w-4 h-4 text-slate-950" />
-            <span>সরাসরি হোয়াটসঅ্যাপে কথা বলুন</span>
+            <span>{client.uiLabels.orderCta}</span>
           </a>
         </div>
 
