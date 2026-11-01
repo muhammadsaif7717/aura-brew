@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { RestaurantClient, MenuItem } from "@/data/restaurants";
-import { X, ShoppingBag, Plus, Minus, ArrowRight, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
+import { X, ShoppingBag, Plus, Minus, ArrowRight, CheckCircle2, Loader2, Utensils } from "lucide-react";
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -20,6 +20,7 @@ export default function OrderModal({ isOpen, onClose, client, initialItem }: Ord
   const [address, setAddress] = useState("");
   const [tableNumber, setTableNumber] = useState("");
   const [instructions, setInstructions] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -29,13 +30,28 @@ export default function OrderModal({ isOpen, onClose, client, initialItem }: Ord
     }
   }, [initialItem]);
 
+  // Handle escape key to close
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const totalPrice = selectedItem.price * quantity;
 
   const handleSubmitOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
 
     const orderTypeLabel =
       orderType === "delivery"
@@ -68,163 +84,170 @@ ${instructions ? `📝 বিশেষ নির্দেশনা: ${instructio
 
     const whatsappUrl = `https://wa.me/${client.whatsapp}?text=${encodeURIComponent(formattedOrderMsg)}`;
 
+    // Realistic optimistic loading state (Vercel Guidelines)
     setTimeout(() => {
-      window.open(whatsappUrl, "_blank");
-    }, 400);
+      setIsSubmitting(false);
+      setSubmitted(true);
+      setTimeout(() => {
+        window.open(whatsappUrl, "_blank");
+      }, 700);
+    }, 600);
+  };
+
+  const handleReset = () => {
+    setSubmitted(false);
+    setCustomerName("");
+    setCustomerPhone("");
+    setAddress("");
+    setTableNumber("");
+    setInstructions("");
+    setQuantity(1);
+    onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-amber-200 shadow-2xl relative max-h-[92vh] overflow-y-auto text-left">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="order-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-7 border border-amber-200 shadow-2xl relative my-auto max-h-[92vh] overflow-y-auto text-left animate-slide-up">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
-          aria-label="Close"
+          className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+          aria-label="ফর্ম বন্ধ করুন"
         >
           <X className="w-5 h-5" />
         </button>
 
         {!submitted ? (
           <div>
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-800 mb-2">
-                <ShoppingBag className="w-3.5 h-3.5 text-amber-600" />
-                <span>{client.uiLabels.orderCta}</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            <div className="mb-5 pr-8">
+              <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wide block">
                 {client.name}
-              </h3>
-              <p className="text-xs text-slate-500 mt-1">
-                পছন্দের আইটেম ও ঠিকানা দিয়ে সরাসরি {client.name}-এর হোয়াটসঅ্যাপে অর্ডার পাঠান।
+              </span>
+              <h2 id="order-modal-title" className="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5 tracking-tight">
+                সরাসরি খাবার অর্ডার করুন (০% কমিশন)
+              </h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                অর্ডার নিশ্চিত করার পর সরাসরি হোয়াটসঅ্যাপে ডেলিভারি রসিদ পাবেন।
               </p>
             </div>
 
             <form onSubmit={handleSubmitOrder} className="space-y-4">
               
-              {/* Order Type Selector */}
+              {/* Order Type Switcher */}
               <div>
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">
-                  অর্ডারের ধরণ সিলেক্ট করুন:
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  অর্ডারের ধরণ নির্বাচন করুন
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     type="button"
                     onClick={() => setOrderType("delivery")}
-                    className={`py-2 px-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer text-center truncate ${
+                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 ${
                       orderType === "delivery"
                         ? "bg-amber-600 text-white border-amber-600 shadow-xs"
-                        : "bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200"
+                        : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                     }`}
                   >
-                    {client.uiLabels.orderTypeDelivery.split("(")[0]}
+                    হোম ডেলিভারি
                   </button>
                   <button
                     type="button"
                     onClick={() => setOrderType("takeaway")}
-                    className={`py-2 px-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer text-center truncate ${
+                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 ${
                       orderType === "takeaway"
                         ? "bg-amber-600 text-white border-amber-600 shadow-xs"
-                        : "bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200"
+                        : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                     }`}
                   >
-                    {client.uiLabels.orderTypeTakeaway.split("(")[0]}
+                    টেকঅ্যাওয়ে (পিকআপ)
                   </button>
                   <button
                     type="button"
                     onClick={() => setOrderType("dinein")}
-                    className={`py-2 px-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer text-center truncate ${
+                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 ${
                       orderType === "dinein"
                         ? "bg-amber-600 text-white border-amber-600 shadow-xs"
-                        : "bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200"
+                        : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                     }`}
                   >
-                    {client.uiLabels.orderTypeDinein.split("(")[0]}
+                    ডাইন-ইন (টেবিল)
                   </button>
                 </div>
               </div>
 
-              {/* Item Selection & Quantity */}
-              <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">
-                      বাছাইকৃত মেনু আইটেম
-                    </span>
-                    <select
-                      value={selectedItem.id}
-                      onChange={(e) => {
-                        const found = client.menu.find((m) => m.id === e.target.value);
-                        if (found) setSelectedItem(found);
-                      }}
-                      className="bg-transparent text-sm font-bold text-slate-900 focus:outline-none cursor-pointer mt-0.5"
-                    >
-                      {client.menu.map((m) => (
-                        <option key={m.id} value={m.id}>
-                          {m.bengaliName} — ৳{m.price}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Quantity Counter */}
-                  <div className="flex items-center gap-2 bg-white rounded-xl border border-amber-200 p-1">
-                    <button
-                      type="button"
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer"
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="font-mono font-bold text-sm px-1 text-slate-900">
-                      {quantity}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => setQuantity(quantity + 1)}
-                      className="w-7 h-7 rounded-lg bg-amber-600 hover:bg-amber-500 text-white flex items-center justify-center cursor-pointer"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+              {/* Selected Item and Quantity */}
+              <div className="p-3.5 rounded-xl bg-amber-50/60 border border-amber-200/80 flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <h4 className="text-sm font-bold text-slate-900 truncate">
+                    {selectedItem.bengaliName}
+                  </h4>
+                  <p className="text-xs text-amber-700 font-semibold">
+                    ৳{selectedItem.price} প্রতি প্লেট
+                  </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-amber-200/60 text-xs font-bold text-slate-800">
-                  <span>বিল এস্টিমেট:</span>
-                  <span className="text-base text-amber-700 font-mono font-black">
-                    ৳ {totalPrice}
+                {/* Quantity Stepper */}
+                <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-lg border border-amber-200 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                    className="p-1 rounded-md text-slate-600 hover:bg-slate-100 transition active:scale-90 min-h-[32px] min-w-[32px] flex items-center justify-center cursor-pointer"
+                    aria-label="পরিমাণ কমান"
+                  >
+                    <Minus className="w-3.5 h-3.5" />
+                  </button>
+                  <span className="font-extrabold text-sm text-slate-900 w-5 text-center">
+                    {quantity}
                   </span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((q) => q + 1)}
+                    className="p-1 rounded-md text-slate-600 hover:bg-slate-100 transition active:scale-90 min-h-[32px] min-w-[32px] flex items-center justify-center cursor-pointer"
+                    aria-label="পরিমাণ বাড়ান"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
 
-              {/* Customer Contact Inputs */}
+              {/* Customer Inputs */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    আপনার নাম *
+                  <label htmlFor="order-name" className="block text-xs font-semibold text-slate-700 mb-1">
+                    আপনার নাম <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="order-name"
                     type="text"
                     required
+                    placeholder="আপনার নাম লিখুন"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="যেমন: তানভীর আহমেদ"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    ফোন বা হোয়াটসঅ্যাপ নম্বর *
+                  <label htmlFor="order-phone" className="block text-xs font-semibold text-slate-700 mb-1">
+                    মোবাইল নম্বর <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="order-phone"
                     type="tel"
                     required
+                    placeholder="০১XXXXXXXXX"
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
-                    placeholder="017XX-XXXXXX"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px]"
                   />
                 </div>
               </div>
@@ -232,84 +255,101 @@ ${instructions ? `📝 বিশেষ নির্দেশনা: ${instructio
               {/* Conditional Location Input */}
               {orderType === "delivery" && (
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    সম্পূর্ণ ডেলিভারি ঠিকানা *
+                  <label htmlFor="delivery-address" className="block text-xs font-semibold text-slate-700 mb-1">
+                    সম্পূর্ণ ডেলিভারি ঠিকানা <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="delivery-address"
                     type="text"
                     required
+                    placeholder="বাড়ি, রোড নম্বর, এলাকা..."
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    placeholder="বাড়ি নং, রোড নং, এরিয়া (যেমন: খিলগাঁও / ধানমন্ডি)"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px]"
                   />
                 </div>
               )}
 
               {orderType === "dinein" && (
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    আপনার টেবিল নম্বর (যদি বসে থাকেন)
+                  <label htmlFor="table-number" className="block text-xs font-semibold text-slate-700 mb-1">
+                    টেবিল নম্বর (যদি বসে থাকেন)
                   </label>
                   <input
+                    id="table-number"
                     type="text"
+                    placeholder="যেমন: টেবিল ৪"
                     value={tableNumber}
                     onChange={(e) => setTableNumber(e.target.value)}
-                    placeholder="যেমন: Table 4 / Corner Booth"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px]"
                   />
                 </div>
               )}
 
-              {/* Special Cooking Instructions */}
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  স্পেশাল রান্নার নির্দেশনা (ঐচ্ছিক)
+                <label htmlFor="order-instructions" className="block text-xs font-semibold text-slate-700 mb-1">
+                  বিশেষ নির্দেশনা (ঐচ্ছিক)
                 </label>
                 <input
+                  id="order-instructions"
                   type="text"
+                  placeholder="যেমন: ঝাল কম, চিনি ছাড়া কফি, এক্সট্রা সস..."
                   value={instructions}
                   onChange={(e) => setInstructions(e.target.value)}
-                  placeholder="যেমন: অতিরিক্ত ঝাল কম, চিনি ছাড়া বা এক্সট্রা চিজ"
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20"
                 />
               </div>
 
-              {/* Submit CTA */}
-              <button
-                type="submit"
-                className="w-full py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-extrabold text-sm shadow-lg shadow-amber-600/30 transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer mt-2"
-              >
-                <ShoppingBag className="w-4 h-4 text-amber-200" />
-                <span>হোয়াটসঅ্যাপে অর্ডার নিশ্চিত করুন (৳{totalPrice})</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              {/* Total & Submit */}
+              <div className="pt-2 border-t border-slate-100">
+                <div className="flex items-center justify-between mb-3 text-sm">
+                  <span className="font-semibold text-slate-700">সর্বমোট বিল:</span>
+                  <span className="text-xl font-extrabold text-amber-700">৳{totalPrice}</span>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 active:scale-[0.98] text-white font-bold text-sm shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 min-h-[44px] cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>অর্ডার প্রসেস হচ্ছে...</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag className="w-4 h-4 text-amber-100" />
+                      <span>অর্ডার নিশ্চিত করুন (৳{totalPrice})</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
             </form>
           </div>
         ) : (
-          <div className="py-8 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+          <div className="text-center py-6 sm:py-8 space-y-3.5">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-2xs">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <h3 className="text-xl font-extrabold text-slate-900">
-              হোয়াটসঅ্যাপে অর্ডার পাঠানো হচ্ছে!
+            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+              অর্ডার সফলভাবে প্রেরিত হয়েছে!
             </h3>
 
-            <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-              স্বয়ংক্রিয়ভাবে {client.name}-এর হোয়াটসঅ্যাপে আপনার অর্ডার বিবরণ প্রস্তুত হয়েছে। শুধু মেসেজটি সেন্ড করুন।
+            <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+              ধন্যবাদ <strong>{customerName}</strong>! আপনার ৳{totalPrice} টাকার অর্ডারটি {client.name}-এর হোয়াটসঅ্যাপে পাঠানো হয়েছে। কিচেন থেকে দ্রুত কনফার্মেশন পাবেন।
             </p>
 
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                onClose();
-              }}
-              className="px-6 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition cursor-pointer"
-            >
-              উইন্ডো বন্ধ করুন
-            </button>
+            <div className="pt-4 flex flex-col gap-2">
+              <button
+                onClick={handleReset}
+                className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition active:scale-[0.98] min-h-[44px]"
+              >
+                বন্ধ করুন
+              </button>
+            </div>
           </div>
         )}
 
@@ -317,4 +357,3 @@ ${instructions ? `📝 বিশেষ নির্দেশনা: ${instructio
     </div>
   );
 }
-

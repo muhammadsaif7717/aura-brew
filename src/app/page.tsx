@@ -106,8 +106,12 @@ function RestaurantApp() {
         onOpenOrder={() => handleOpenOrder()}
       />
 
-      {/* Mobile-Only WhatsApp Quick Floating Action */}
-      <FloatingCta client={currentClient} />
+      {/* Mobile-Only Quick Floating Action */}
+      <FloatingCta
+        client={currentClient}
+        onOpenOrder={() => handleOpenOrder()}
+        onOpenReservation={handleOpenReservation}
+      />
 
       {/* 1-Click WhatsApp Food Ordering Modal */}
       <OrderModal

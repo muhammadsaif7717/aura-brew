@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RestaurantClient } from "@/data/restaurants";
-import { X, Calendar, Clock, Users, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import { X, Calendar, Clock, Users, CheckCircle2, Loader2 } from "lucide-react";
 
 interface ReservationModalProps {
   isOpen: boolean;
@@ -18,13 +18,29 @@ export default function ReservationModal({ isOpen, onClose, client }: Reservatio
   const [guests, setGuests] = useState("২ জন");
   const [seating, setSeating] = useState("কজি উইন্ডো সাইড টেবিল");
   const [occasion, setOccasion] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
 
     const bookingMsg = `*${client.name} — নতুন টেবিল রিজার্ভেশন রিকোয়েস্ট*
 ----------------------------------------
@@ -39,187 +55,221 @@ ${occasion ? `🎉 উপলক্ষ্য / বিশেষ অনুরোধ
 
     const whatsappUrl = `https://wa.me/${client.whatsapp}?text=${encodeURIComponent(bookingMsg)}`;
 
+    // Realistic optimistic loading state (Vercel Guidelines)
     setTimeout(() => {
-      window.open(whatsappUrl, "_blank");
-    }, 400);
+      setIsSubmitting(false);
+      setSubmitted(true);
+      setTimeout(() => {
+        window.open(whatsappUrl, "_blank");
+      }, 700);
+    }, 600);
+  };
+
+  const handleReset = () => {
+    setSubmitted(false);
+    setName("");
+    setPhone("");
+    setDate("");
+    setOccasion("");
+    onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-amber-200 shadow-2xl relative max-h-[92vh] overflow-y-auto text-left">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="reservation-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-7 border border-amber-200 shadow-2xl relative my-auto max-h-[92vh] overflow-y-auto text-left animate-slide-up">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
-          aria-label="Close"
+          className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+          aria-label="ফর্ম বন্ধ করুন"
         >
           <X className="w-5 h-5" />
         </button>
 
         {!submitted ? (
           <div>
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-800 mb-2">
-                <Calendar className="w-3.5 h-3.5 text-amber-600" />
-                <span>{client.uiLabels.reservationCta}</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            <div className="mb-5 pr-8">
+              <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wide block">
+                {client.name}
+              </span>
+              <h2 id="reservation-modal-title" className="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5 tracking-tight">
                 {client.uiLabels.reservationHeading}
-              </h3>
-              <p className="text-xs text-slate-500 mt-1">
-                {client.category.includes("Cafe") || client.category.includes("Bakery")
-                  ? "পছন্দের নিরিবিলি টেবিল বা কজি কর্নার আগে থেকেই সহজে বুক করে রাখুন।"
-                  : "বিশেষ ডিনার, জন্মদিন বা পারিবারিক আড্ডার জন্য ঝামেলা ছাড়াই আগে থেকে টেবিল নিশ্চিত করুন।"}
+              </h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                আপনার পছন্দের সময় ও টেবিল নির্বাচন করুন, আমরা দ্রুত কনফার্ম করব।
               </p>
             </div>
 
-            <form onSubmit={handleBookingSubmit} className="space-y-4">
-              
+            <form onSubmit={handleBookingSubmit} className="space-y-3.5 text-left">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    আপনার নাম *
+                  <label htmlFor="res-name" className="block text-xs font-semibold text-slate-700 mb-1">
+                    আপনার নাম <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="res-name"
                     type="text"
                     required
+                    placeholder="আপনার নাম লিখুন"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="যেমন: আসিফ চৌধুরী"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    ফোন নম্বর *
+                  <label htmlFor="res-phone" className="block text-xs font-semibold text-slate-700 mb-1">
+                    মোবাইল নম্বর <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="res-phone"
                     type="tel"
                     required
+                    placeholder="০১XXXXXXXXX"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="017XX-XXXXXX"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    তারিখ *
+                  <label htmlFor="res-date" className="block text-xs font-semibold text-slate-700 mb-1">
+                    রিজার্ভেশনের তারিখ
                   </label>
                   <input
+                    id="res-date"
                     type="date"
-                    required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    সময় স্লট *
+                  <label htmlFor="res-time" className="block text-xs font-semibold text-slate-700 mb-1">
+                    পছন্দের সময়
                   </label>
                   <select
+                    id="res-time"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer font-medium"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px] bg-white"
                   >
-                    <option value="দুপুর ১:০০ - ২:০০ (লাঞ্চ)">দুপুর ১:০০ - ২:০০ (লাঞ্চ)</option>
-                    <option value="দুপুর ২:০০ - ৩:০০ (লাঞ্চ)">দুপুর ২:০০ - ৩:০০ (লাঞ্চ)</option>
-                    <option value="বিকাল ৫:০০ - ৬:০০ (স্ন্যাক্স/কফি)">বিকাল ৫:০০ - ৬:০০ (কফি টাইম)</option>
-                    <option value="সন্ধ্যা ৭:০০ - ৮:০০ (ডিনার)">সন্ধ্যা ৭:০০ - ৮:০০ (ডিনার)</option>
-                    <option value="রাত ৮:০০ - ৯:০০ (ডিনার)">রাত ৮:০০ - ৯:০০ (ডিনার)</option>
-                    <option value="রাত ৯:০০ - ১০:০০ (লেট ডিনার)">রাত ৯:০০ - ১০:০০ (লেট ডিনার)</option>
+                    <option value="দুপুর ১২:০০ - ১:০০">দুপুর ১২:০০ - ১:০০ (লাঞ্চ)</option>
+                    <option value="দুপুর ১:০০ - ২:৩০">দুপুর ১:০০ - ২:৩০</option>
+                    <option value="বিকাল ৫:০০ - ৬:৩০">বিকাল ৫:০০ - ৬:৩০ (ইভনিং স্ন্যাকস)</option>
+                    <option value="সন্ধ্যা ৭:০০ - ৮:০০">সন্ধ্যা ৭:০০ - ৮:০০ (ডিনার)</option>
+                    <option value="রাত ৮:০০ - ৯:৩০">রাত ৮:০০ - ৯:৩০</option>
                   </select>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
-                    অতিথি সংখ্যা *
+                  <label htmlFor="res-guests" className="block text-xs font-semibold text-slate-700 mb-1">
+                    মেহমান সংখ্যা
                   </label>
                   <select
+                    id="res-guests"
                     value={guests}
                     onChange={(e) => setGuests(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer font-medium"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px] bg-white"
                   >
-                    <option value="১-২ জন (কাপল/সিঙ্গেল)">১-২ জন (কাপল টেবিল)</option>
-                    <option value="৩-৪ জন (ছোট ফ্যামিলি/ফ্রেন্ডস)">৩-৪ জন (ফ্যামিলি)</option>
-                    <option value="৫-৮ জন (গ্রুপ গ্যাদারিং)">৫-৮ জন (গ্রুপ টেবিল)</option>
-                    <option value="১০+ জন (পার্টি সেলিব্রেশন)">১০+ জন (বড় পার্টি)</option>
+                    <option value="১ জন">১ জন</option>
+                    <option value="২ জন">২ জন (কাপল)</option>
+                    <option value="৩-৪ জন">৩-৪ জন (ফ্যামিলি / ফ্রেন্ডস)</option>
+                    <option value="৫-৮ জন">৫-৮ জন (বড় পার্টি)</option>
+                    <option value="৮ জনের অধিক">৮ জনের অধিক (স্পেশাল ইভেন্ট)</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                  <label htmlFor="res-seating" className="block text-xs font-semibold text-slate-700 mb-1">
                     সিটিং পরিবেশ
                   </label>
                   <select
+                    id="res-seating"
                     value={seating}
                     onChange={(e) => setSeating(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer font-medium"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 min-h-[44px] bg-white"
                   >
-                    <option value="কজি উইন্ডো সাইড টেবিল">🌿 উইন্ডো সাইড ভিউ</option>
-                    <option value="নিরিবিলি কর্নার বুথ">🪑 নিরিবিলি কর্নার বুথ</option>
-                    <option value="ওপেন রুফটপ / গার্ডেন">☕ ওপেন রুফটপ / ক্যাফে এরিয়া</option>
-                    <option value="সেলিব্রেশন ডেকোরেটেড টেবিল">🎂 স্পেশাল সেলিব্রেশন টেবিল</option>
+                    <option value="কজি উইন্ডো সাইড টেবিল">উইন্ডো সাইড টেবিল</option>
+                    <option value="আরামদায়ক সোফা কর্নার">সোফা কর্নার (রিলাক্স)</option>
+                    <option value="সেন্ট্রাল ওপেন লাউঞ্জ">সেন্ট্রাল ওপেন লাউঞ্জ</option>
+                    <option value="আউটডোর ব্যালকনি">আউটডোর ব্যালকনি / টেরেস</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  কোনো বিশেষ অনুষ্ঠান বা উপলক্ষ্য? (ঐচ্ছিক)
+                <label htmlFor="res-occasion" className="block text-xs font-semibold text-slate-700 mb-1">
+                  উপলক্ষ্য বা স্পেশাল নোট (ঐচ্ছিক)
                 </label>
                 <input
+                  id="res-occasion"
                   type="text"
+                  placeholder="যেমন: জন্মদিন, বিবাহবার্ষিকী, ব্যবসায়িক মিটিং..."
                   value={occasion}
                   onChange={(e) => setOccasion(e.target.value)}
-                  placeholder="যেমন: বার্থডে সারপ্রাইজ, কাপল অ্যানিভার্সারি বা মিটিং"
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20"
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-extrabold text-sm shadow-lg shadow-amber-600/30 transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer mt-2"
-              >
-                <Calendar className="w-4 h-4 text-amber-200" />
-                <span>{client.uiLabels.reservationCta} নিশ্চিত করুন</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 active:scale-[0.98] text-white font-bold text-sm shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 min-h-[44px] cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>টেবিল বুকিং প্রসেস হচ্ছে...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Calendar className="w-4 h-4 text-amber-100" />
+                      <span>টেবিল রিজার্ভেশন নিশ্চিত করুন</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
             </form>
           </div>
         ) : (
-          <div className="py-8 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+          <div className="text-center py-6 sm:py-8 space-y-3.5">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-2xs">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <h3 className="text-xl font-extrabold text-slate-900">
-              টেবিল রিজার্ভেশন প্রস্তুত!
+            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+              টেবিল রিজার্ভেশন রিকোয়েস্ট সফল!
             </h3>
 
-            <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-              স্বয়ংক্রিয়ভাবে হোয়াটসঅ্যাপে আপনার টেবিল বুকিং মেসেজ তৈরি হয়েছে। রেস্টুরেন্ট টিম মেসেজটি পেয়ে সাথে সাথে আপনার টেবিল নিশ্চিত করবে।
+            <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+              ধন্যবাদ <strong>{name}</strong>! {date || "আজকের"} {time} সময়ের জন্য {guests}-এর টেবিল রিজার্ভেশন {client.name}-এ পাঠানো হয়েছে।
             </p>
 
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                onClose();
-              }}
-              className="px-6 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition cursor-pointer"
-            >
-              উইন্ডো বন্ধ করুন
-            </button>
+            <div className="pt-4 flex flex-col gap-2">
+              <button
+                onClick={handleReset}
+                className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition active:scale-[0.98] min-h-[44px]"
+              >
+                বন্ধ করুন
+              </button>
+            </div>
           </div>
         )}
 
@@ -227,4 +277,3 @@ ${occasion ? `🎉 উপলক্ষ্য / বিশেষ অনুরোধ
     </div>
   );
 }
-
