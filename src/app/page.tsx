@@ -493,11 +493,11 @@ export default function Page() {
                     <div className="row">   
                         <div className="col-lg-12">
                             <div className="section-title center-align mb-50 text-center">
-                                <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> Our Online Shop</h5>
+                                <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> In-Store Roastery Shop</h5>
                                 <h2>
-                                    Buy Our Featured Products
+                                    Featured Coffee &amp; Roastery Collection
                                 </h2>
-                                <p>Proin consectetur non dolor vitae pulvinar. Pellentesque sollicitudin dolor eget neque viverra, sed interdum metus interdum. Cras lobortis pulvinar dolor, sit amet ullamcorper dolor iaculis vel</p>
+                                <p>Discover our artisanal single-origin beans, precision roast blends, and specialty brewing gear exclusively available for physical purchase and tasting at our coffee shop.</p>
                             </div>
                            
                         </div>
@@ -511,7 +511,7 @@ export default function Page() {
                                 <a href="/shop-details"><img src="/img/shop/img1.jpg" alt="" /></a>
                                 <div className="product-action text-center">
 
-                                    <a href="/shop-details">Add Cart</a>
+                                    <a href="/shop-details">View Details</a>
 
                                 </div>
                             </div>
@@ -534,7 +534,7 @@ export default function Page() {
                                 <a href="/shop-details"><img src="/img/shop/img2.jpg" alt="" /></a>
                                 <div className="product-action text-center">
 
-                                    <a href="/shop-details">Add Cart</a>
+                                    <a href="/shop-details">View Details</a>
 
                                 </div>
                             </div>
@@ -558,7 +558,7 @@ export default function Page() {
                                 <a href="/shop-details"><img src="/img/shop/img3.jpg" alt="" /></a>
                                 <div className="product-action text-center">
 
-                                    <a href="/shop-details">Add Cart</a>
+                                    <a href="/shop-details">View Details</a>
 
                                 </div>
                             </div>
@@ -582,7 +582,7 @@ export default function Page() {
                                 <a href="/shop-details"><img src="/img/shop/img4.jpg" alt="" /></a>
                                 <div className="product-action text-center">
 
-                                    <a href="/shop-details">Add Cart</a>
+                                    <a href="/shop-details">View Details</a>
 
                                 </div>
                             </div>
@@ -604,7 +604,7 @@ export default function Page() {
                                 <a href="/shop-details"><img src="/img/shop/img5.jpg" alt="" /></a>
                                 <div className="product-action text-center">
 
-                                    <a href="/shop-details">Add Cart</a>
+                                    <a href="/shop-details">View Details</a>
 
                                 </div>
                             </div>
@@ -626,7 +626,7 @@ export default function Page() {
                                 <a href="/shop-details"><img src="/img/shop/img6.jpg" alt="" /></a>
                                 <div className="product-action text-center">
 
-                                    <a href="/shop-details">Add Cart</a>
+                                    <a href="/shop-details">View Details</a>
 
                                 </div>
                             </div>

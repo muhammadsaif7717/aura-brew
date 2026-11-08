@@ -86,7 +86,7 @@ export default function Page() {
                     <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
                       {[
                         { title: "Mobile Espresso Bar Catering", active: true },
-                        { title: "Weekly Wholesale Bean Delivery", active: false },
+                        { title: "Wholesale Bean Roastery Supply", active: false },
                         { title: "Private Cupping & Workshops", active: false },
                         { title: "Corporate Coffee Subscriptions", active: false },
                         { title: "Commercial Espresso Machine Rental", active: false },

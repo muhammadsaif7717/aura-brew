@@ -11,17 +11,7 @@ const IMAGES = [
 
 export default function ShopDetailsClient() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<"desc" | "specs" | "reviews">("desc");
-  const [cartToast, setCartToast] = useState<string | null>(null);
-
-  const handleAddToCart = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCartToast(`Added ${quantity}x Ethiopia Yirgacheffe Single Origin to your cart!`);
-    setTimeout(() => {
-      setCartToast(null);
-    }, 4000);
-  };
 
   return (
     <>
@@ -61,34 +51,6 @@ export default function ShopDetailsClient() {
       {/* Product Details Section */}
       <section className="shop-banner-area pt-120 pb-90">
         <div className="container">
-          {cartToast && (
-            <div
-              className="alert mb-40 text-white d-flex align-items-center justify-content-between p-3"
-              style={{
-                backgroundColor: "#3f271e",
-                borderLeft: "4px solid #b98754",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-              }}
-            >
-              <div>
-                <i className="fas fa-check-circle text-[#b98754] mr-2"></i>
-                <strong>{cartToast}</strong>
-              </div>
-              <Link
-                href="/contact"
-                className="btn"
-                style={{
-                  backgroundColor: "#b98754",
-                  color: "#fff",
-                  padding: "6px 18px",
-                  fontSize: "13px",
-                }}
-              >
-                Checkout
-              </Link>
-            </div>
-          )}
-
           <div className="row">
             {/* Product Gallery */}
             <div className="col-xl-7">
@@ -173,50 +135,89 @@ export default function ShopDetailsClient() {
                   <span>Light-Medium (Filter &amp; Espresso)</span>
                 </div>
 
-                <div className="product-details-action">
-                  <form onSubmit={handleAddToCart} className="d-flex align-items-center flex-wrap" style={{ gap: "15px" }}>
+                {/* In-Store Availability & Experience Card */}
+                <div
+                  className="in-store-purchase-box"
+                  style={{
+                    backgroundColor: "#fbf9f6",
+                    border: "1px solid #ede4d8",
+                    borderRadius: "10px",
+                    padding: "22px 24px",
+                    marginTop: "20px",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
                     <div
-                      className="plus-minus d-flex align-items-center border border-gray-300"
-                      style={{ height: "48px" }}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="px-3 py-2 bg-transparent border-0 text-[#3f271e] font-bold cursor-pointer"
-                        aria-label="Decrease quantity"
-                      >
-                        -
-                      </button>
-                      <input
-                        type="text"
-                        readOnly
-                        value={quantity}
-                        className="text-center font-bold"
-                        style={{ width: "45px", border: "none", outline: "none", color: "#3f271e" }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setQuantity(quantity + 1)}
-                        className="px-3 py-2 bg-transparent border-0 text-[#3f271e] font-bold cursor-pointer"
-                        aria-label="Increase quantity"
-                      >
-                        +
-                      </button>
-                    </div>
-                    <button
-                      className="btn"
-                      type="submit"
                       style={{
+                        width: "38px",
+                        height: "38px",
+                        borderRadius: "50%",
                         backgroundColor: "#3f271e",
-                        color: "#fff",
-                        height: "48px",
-                        padding: "0 30px",
-                        fontWeight: 700,
+                        color: "#c59d5f",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "1rem",
+                        flexShrink: 0,
                       }}
                     >
-                      <i className="fas fa-shopping-bag mr-2"></i> Add To Cart
-                    </button>
-                  </form>
+                      <i className="fas fa-store"></i>
+                    </div>
+                    <div>
+                      <h4 style={{ margin: 0, fontFamily: "'Caudex', Georgia, serif", color: "#3f271e", fontSize: "1.15rem", fontWeight: 700 }}>
+                        Available For In-Store Purchase
+                      </h4>
+                      <span style={{ fontSize: "0.85rem", color: "#6f7172" }}>
+                        Freshly roasted, ground to order &amp; packaged at our cafe
+                      </span>
+                    </div>
+                  </div>
+
+                  <p style={{ margin: "0 0 16px 0", color: "#6f7172", fontSize: "0.9rem", lineHeight: 1.6 }}>
+                    This single-origin coffee is roasted in limited small batches and is available exclusively for in-person purchasing and tasting at AuraBrew. Visit our roastery bar to sample this roast or have our baristas grind it specifically for your home setup (V60, French Press, AeroPress, or Espresso).
+                  </p>
+
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
+                    <Link
+                      href="/contact"
+                      className="btn"
+                      style={{
+                        backgroundColor: "#3f271e",
+                        color: "#ffffff",
+                        padding: "10px 22px",
+                        borderRadius: "4px",
+                        fontWeight: 700,
+                        fontSize: "0.88rem",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <i className="fas fa-map-marker-alt" style={{ color: "#c59d5f" }}></i>
+                      Visit Roastery / Get Directions
+                    </Link>
+                    <Link
+                      href="/#booking"
+                      className="btn"
+                      style={{
+                        backgroundColor: "transparent",
+                        color: "#3f271e",
+                        border: "1px solid #3f271e",
+                        padding: "10px 20px",
+                        borderRadius: "4px",
+                        fontWeight: 700,
+                        fontSize: "0.88rem",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <i className="fas fa-calendar-alt" style={{ color: "#b98754" }}></i>
+                      Book A Tasting Table
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="product-social mt-40">

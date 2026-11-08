@@ -151,7 +151,6 @@ export default function ShopCatalog() {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
   const [sortOrder, setSortOrder] = useState<SortOrder>("default");
   const [searchQuery, setSearchQuery] = useState("");
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const categories: { key: CategoryFilter; label: string; count: number }[] = [
     { key: "all", label: "All Roastery Goods", count: initialProducts.length },
@@ -198,44 +197,8 @@ export default function ShopCatalog() {
     return list;
   }, [activeCategory, sortOrder, searchQuery]);
 
-  const handleAddToCart = (productName: string) => {
-    setToastMessage(`✓ Added "${productName}" to your roastery cart!`);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 3200);
-  };
-
   return (
     <section className="shop-area pt-90 pb-120" style={{ backgroundColor: "#ffffff" }}>
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div
-          role="status"
-          aria-live="polite"
-          style={{
-            position: "fixed",
-            bottom: "24px",
-            right: "24px",
-            zIndex: 9999,
-            backgroundColor: "#2b1912",
-            color: "#ffffff",
-            padding: "14px 22px",
-            borderRadius: "8px",
-            border: "1px solid #c59d5f",
-            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.35)",
-            fontSize: "0.95rem",
-            fontWeight: 600,
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            animation: "fadeIn 0.25s ease-in-out",
-          }}
-        >
-          <i className="fas fa-check-circle" style={{ color: "#c59d5f", fontSize: "1.2rem" }}></i>
-          <span>{toastMessage}</span>
-        </div>
-      )}
-
       <div className="container">
         {/* Intro Banner */}
         <div className="row justify-content-center text-center mb-50">
@@ -251,7 +214,7 @@ export default function ShopCatalog() {
                 marginBottom: "8px",
               }}
             >
-              Direct From The Roastery
+              In-Store Cafe &amp; Roastery Collection
             </span>
             <h1
               style={{
@@ -262,10 +225,10 @@ export default function ShopCatalog() {
                 marginBottom: "16px",
               }}
             >
-              Specialty Beans &amp; Barista Equipment
+              Specialty Beans &amp; Barista Merchandise
             </h1>
             <p style={{ color: "#6f7172", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "680px", margin: "0 auto" }}>
-              Shop our freshly drum-roasted single-origin coffees, handcrafted pour-over drippers, precision conical burr grinders, and roastery essentials.
+              Explore our freshly drum-roasted single-origin coffees, handcrafted pour-over drippers, and brewing essentials. All items are available for in-person tasting and physical purchase at our coffee shop.
             </p>
           </div>
         </div>
@@ -577,7 +540,7 @@ export default function ShopCatalog() {
                       {product.description}
                     </p>
 
-                    {/* Price & Add to Cart Action */}
+                    {/* Price & In-Store Details Action */}
                     <div
                       style={{
                         display: "flex",
@@ -587,62 +550,66 @@ export default function ShopCatalog() {
                         borderTop: "1px solid #f2ede6",
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
-                        <span
-                          style={{
-                            fontSize: "1.35rem",
-                            fontWeight: 700,
-                            fontFamily: "'Caudex', Georgia, serif",
-                            color: "#c59d5f",
-                          }}
-                        >
-                          ${product.price.toFixed(2)}
-                        </span>
-                        {product.oldPrice && (
+                      <div>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
                           <span
                             style={{
-                              fontSize: "0.9rem",
-                              color: "#949698",
-                              textDecoration: "line-through",
+                              fontSize: "1.35rem",
+                              fontWeight: 700,
+                              fontFamily: "'Caudex', Georgia, serif",
+                              color: "#c59d5f",
                             }}
                           >
-                            ${product.oldPrice.toFixed(2)}
+                            ${product.price.toFixed(2)}
                           </span>
-                        )}
+                          {product.oldPrice && (
+                            <span
+                              style={{
+                                fontSize: "0.9rem",
+                                color: "#949698",
+                                textDecoration: "line-through",
+                              }}
+                            >
+                              ${product.oldPrice.toFixed(2)}
+                            </span>
+                          )}
+                        </div>
+                        <span style={{ fontSize: "0.75rem", color: "#8a7e75", display: "inline-flex", alignItems: "center", gap: "4px", marginTop: "2px" }}>
+                          <i className="fas fa-store" style={{ color: "#c59d5f", fontSize: "0.7rem" }}></i> In-Store Purchase
+                        </span>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => handleAddToCart(product.name)}
+                      <Link
+                        href={product.slug}
                         style={{
                           backgroundColor: "#3f271e",
-                          color: "#c59d5f",
+                          color: "#ffffff",
                           border: "1px solid #3f271e",
                           padding: "8px 16px",
                           borderRadius: "4px",
-                          fontWeight: 700,
+                          fontWeight: 600,
                           fontSize: "0.85rem",
-                          letterSpacing: "0.5px",
-                          cursor: "pointer",
+                          letterSpacing: "0.4px",
                           display: "inline-flex",
                           alignItems: "center",
                           gap: "6px",
                           transition: "all 0.2s ease",
+                          textDecoration: "none",
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = "#c59d5f";
-                          e.currentTarget.style.color = "#101010";
                           e.currentTarget.style.borderColor = "#c59d5f";
+                          e.currentTarget.style.color = "#101010";
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = "#3f271e";
-                          e.currentTarget.style.color = "#c59d5f";
                           e.currentTarget.style.borderColor = "#3f271e";
+                          e.currentTarget.style.color = "#ffffff";
                         }}
                       >
-                        <i className="fas fa-shopping-bag" style={{ fontSize: "0.8rem" }}></i>
-                        Add Cart
-                      </button>
+                        <span>Details</span>
+                        <i className="fal fa-long-arrow-right" style={{ fontSize: "0.8rem" }}></i>
+                      </Link>
                     </div>
                   </div>
                 </div>

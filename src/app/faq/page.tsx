@@ -8,14 +8,14 @@ import NewsletterSection from "@/components/NewsletterSection";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions | AuraBrew Cafe",
-  description: "Find answers regarding AuraBrew's coffee sourcing, table bookings, vegan milk options, brewing guides, and delivery.",
+  description: "Find answers regarding AuraBrew's coffee sourcing, table bookings, vegan milk options, brewing guides, and in-store purchasing.",
   keywords: ['coffee FAQ', 'cafe questions', 'table booking FAQ', 'coffee bean brewing', 'AuraBrew FAQ'],
   alternates: {
     canonical: "/faq",
   },
   openGraph: {
     title: "Frequently Asked Questions | AuraBrew Cafe",
-    description: "Find answers regarding AuraBrew's coffee sourcing, table bookings, vegan milk options, brewing guides, and delivery.",
+    description: "Find answers regarding AuraBrew's coffee sourcing, table bookings, vegan milk options, brewing guides, and in-store purchasing.",
     url: "https://aurabrew-cafe.com/faq",
     siteName: "AuraBrew Coffee Co.",
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Frequently Asked Questions | AuraBrew Cafe",
-    description: "Find answers regarding AuraBrew's coffee sourcing, table bookings, vegan milk options, brewing guides, and delivery.",
+    description: "Find answers regarding AuraBrew's coffee sourcing, table bookings, vegan milk options, brewing guides, and in-store purchasing.",
     images: ["/img/slider/slider_bg.png"],
   },
 };
@@ -79,7 +79,7 @@ export default function Page() {
                 Everything You Need To Know About AuraBrew
               </h2>
               <p style={{ color: "#6f7172", fontSize: "1rem", lineHeight: 1.7, maxWidth: "680px", margin: "10px auto 0 auto" }}>
-                Have questions about our single-origin farm sourcing, table reservations, vegan oat milk substitutions, or nationwide whole-bean shipping?
+                Have questions about our single-origin farm sourcing, table reservations, vegan oat milk substitutions, or in-store whole-bean purchasing?
               </p>
             </div>
 
