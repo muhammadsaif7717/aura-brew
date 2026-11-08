@@ -5,6 +5,7 @@ import React, { useState } from "react";
 export default function BookingForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [dateFocused, setDateFocused] = useState(false);
   const [formData, setFormData] = useState({
     firstn: "",
     email: "",
@@ -103,15 +104,49 @@ export default function BookingForm() {
         </div>
 
         <div className="col-lg-6">
-          <div className="contact-field p-relative c-option mb-20">
+          <div className="contact-field p-relative c-option mb-20" style={{ position: "relative" }}>
             <input
-              type="date"
+              type={dateFocused || formData.date ? "date" : "text"}
               id="date"
               name="date"
+              placeholder="Select Date"
               value={formData.date}
+              onFocus={() => {
+                setDateFocused(true);
+              }}
+              onBlur={() => {
+                if (!formData.date) {
+                  setDateFocused(false);
+                }
+              }}
+              onClick={(e) => {
+                try {
+                  e.currentTarget.showPicker?.();
+                } catch {}
+              }}
               onChange={(e) => setFormData({ ...formData, date: e.target.value })}
               required
+              style={{
+                color: formData.date ? "#ffffff" : "#926d63",
+                paddingRight: "42px",
+                width: "100%",
+                cursor: "pointer",
+              }}
+              aria-label="Select Reservation Date"
             />
+            <i
+              className="fal fa-calendar-alt"
+              style={{
+                position: "absolute",
+                right: "16px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "#c59d5f",
+                pointerEvents: "none",
+                fontSize: "1rem",
+              }}
+              aria-hidden="true"
+            ></i>
           </div>
         </div>
         <div className="col-lg-6">
