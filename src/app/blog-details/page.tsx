@@ -3,33 +3,43 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BlogComments from "@/components/BlogComments";
 
 export const metadata: Metadata = {
-  title: "The Science of Espresso Extraction | AuraBrew Journal",
-  description: "Explore pressure profiles, grind distribution, water temperature, and flavor extraction in this comprehensive AuraBrew coffee guide.",
-  keywords: ['espresso extraction guide', 'coffee brewing tips', 'barista technique'],
+  title: "The Sacred Art of Espresso Extraction | AuraBrew Journal",
+  description:
+    "Master the 1:2 espresso extraction ratio with water temperature calibration, grind distribution, and channeling prevention by AuraBrew Head Roaster Marcus Vance.",
+  keywords: [
+    "espresso extraction guide",
+    "coffee brewing science",
+    "espresso ratio",
+    "golden crema technique",
+    "AuraBrew coffee journal",
+  ],
   alternates: {
     canonical: "/blog-details",
   },
   openGraph: {
-    title: "The Science of Espresso Extraction | AuraBrew Journal",
-    description: "Explore pressure profiles, grind distribution, water temperature, and flavor extraction in this comprehensive AuraBrew coffee guide.",
+    title: "The Sacred Art of Espresso Extraction | AuraBrew Journal",
+    description:
+      "Master the 1:2 espresso extraction ratio with water temperature calibration, grind distribution, and channeling prevention by AuraBrew Head Roaster Marcus Vance.",
     url: "https://aurabrew-cafe.com/blog-details",
     siteName: "AuraBrew Coffee Co.",
     images: [
       {
-        url: "/img/slider/slider_bg.png",
+        url: "/img/blog/inner_b1.jpg",
         width: 1200,
         height: 630,
-        alt: "The Science of Espresso Extraction | AuraBrew Journal",
+        alt: "The Sacred Art of Espresso Extraction",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Science of Espresso Extraction | AuraBrew Journal",
-    description: "Explore pressure profiles, grind distribution, water temperature, and flavor extraction in this comprehensive AuraBrew coffee guide.",
-    images: ["/img/slider/slider_bg.png"],
+    title: "The Sacred Art of Espresso Extraction | AuraBrew Journal",
+    description:
+      "Master the 1:2 espresso extraction ratio with water temperature calibration, grind distribution, and channeling prevention.",
+    images: ["/img/blog/inner_b1.jpg"],
   },
 };
 
@@ -38,299 +48,376 @@ export default function Page() {
     <>
       <Header />
       <main>
-
-            
-            
-		<div className="modal fade bs-example-modal-lg search-bg popup1" tabIndex={-1} role="dialog">
-			<div className="modal-dialog modal-lg" role="document">
-				<div className="modal-content search-popup">
-					<div className="text-center">
-						<a href="#" className="close2" data-dismiss="modal" aria-label="Close">× close</a>
-					</div>
-					<div className="row search-outer">
-						<div className="col-md-11"><input type="text" placeholder="Search for products..." /></div>
-						<div className="col-md-1 text-right"><a href="#"><i className="fa fa-search" aria-hidden="true"></i></a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-            
-          <section className="breadcrumb-area d-flex align-items-center" style={{ "backgroundImage": "url(/img/bg/bdrc-bg.jpg)" }}>
-                <div className="container">
-                    <div className="row align-items-center">
-                        <div className="col-xl-12 col-lg-12">
-                            <div className="breadcrumb-wrap text-center">
-                                <div className="breadcrumb-title">
-                                    <h2>Blog Details</h2>    
-                                    <div className="breadcrumb-wrap">
-                              
-                                <nav aria-label="breadcrumb">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="/">Home</a></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Blog Details</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                                </div>
-                            </div>
-                        </div>
-                        
+        {/* Breadcrumb Area */}
+        <section
+          className="breadcrumb-area d-flex align-items-center"
+          style={{
+            backgroundImage: "url(/img/bg/bdrc-bg.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-xl-12 col-lg-12">
+                <div className="breadcrumb-wrap text-center">
+                  <div className="breadcrumb-title">
+                    <h1
+                      style={{
+                        color: "#ffffff",
+                        fontFamily: "'Caudex', Georgia, serif",
+                        fontSize: "clamp(2.2rem, 5vw, 3.6rem)",
+                        fontWeight: 700,
+                        margin: 0,
+                      }}
+                    >
+                      Coffee Journal Article
+                    </h1>
+                    <div className="breadcrumb-wrap mt-15">
+                      <nav aria-label="breadcrumb">
+                        <ol
+                          className="breadcrumb justify-content-center"
+                          style={{ backgroundColor: "transparent", margin: 0, padding: 0 }}
+                        >
+                          <li className="breadcrumb-item">
+                            <Link href="/" style={{ color: "#ffffff", textDecoration: "none" }}>
+                              Home
+                            </Link>
+                          </li>
+                          <li className="breadcrumb-item">
+                            <Link href="/blog" style={{ color: "#ffffff", textDecoration: "none" }}>
+                              Journal
+                            </Link>
+                          </li>
+                          <li className="breadcrumb-item active" aria-current="page" style={{ color: "#c59d5f" }}>
+                            Brewing Science
+                          </li>
+                        </ol>
+                      </nav>
                     </div>
+                  </div>
                 </div>
-            </section>
-            
-            
-            <section className="inner-blog b-details-p pt-120 pb-120">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-8">
-                            <div className="blog-details-wrap">
-                                <div className="details__content pb-30">
-                                    <h2>With our vastly improved notifications system, users
-                                        have more control.</h2>
-                                    <div className="meta-info">
-                                        <ul>
-                                            <li><i className="fal fa-eye"></i> 100 Views  </li>
-                                            <li><i className="fal fa-comments"></i> 35 Comments</li>
-                                            <li><i className="fal fa-calendar-alt"></i> 24th March 2019</li>
-                                        </ul>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo amet set for your cool happiness for lyour loyal city.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deser unt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusant ium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit asperna tur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisq.</p>
-                                    <blockquote>
-                                        <footer>By Rosalina Pong</footer>
-                                        <h3>Viral dreamcatcher keytar typewriter, aest hetic offal umami. Aesthetic polaroid pug pitchfork post-ironic.</h3>
-                                    </blockquote>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deser unt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusant.</p>
-                                    <div className="details__content-img">
-                                        <img src="/img/blog/b_details01.jpg" alt="" />
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deser unt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusan tium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi archi tecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit asperna tur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non num quam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod incididunt.</p>
-                                    <figure>
-                                        <img src="/img/blog/b_details02.jpg" alt="" />
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ali qua. Ut enim ad minim veniam, quis nostrud exercitation ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupida tat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                    </figure>
-                                    <div className="row">
-                                        <div className="col-xl-12 col-md-12">
-                                            <div className="post__tag">
-                                                <h5>Releted Tags</h5>
-                                                <ul>
-                                                    <li><a href="#">organic</a></li>
-                                                    <li><a href="#">Foods</a></li>
-                                                    <li><a href="#">tasty</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div className="posts_navigation pt-35 pb-35">
-                                    <div className="row align-items-center">
-                                        <div className="col-xl-4 col-md-5">
-                                            <div className="prev-link">
-                                                <span>Prev Post</span>
-                                                <h4><a href="#">Tips Minimalist</a></h4>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-4 col-md-2 text-left text-md-center">
-                                            <a href="/blog" className="blog-filter"><img src="/img/icon/c_d01.png" alt="" /></a>
-                                        </div>
-                                        <div className="col-xl-4 col-md-5">
-                                            <div className="next-link text-left text-md-right">
-                                                <span>next Post</span>
-                                                <h4><a href="#">Less Is More</a></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="related__post mt-45 mb-85">
-                                    <div className="post-title">
-                                        <h4>Related Post</h4>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="related-post-wrap mb-30">
-                                                <div className="post-thumb">
-                                                    <img src="/img/blog/b_details03.jpg" alt="" />
-                                                </div>
-                                                <div className="rp__content">
-                                                    <h3><a href="#">Auis nostrud exercita ullamco laboris nisi ut</a></h3>
-                                                    <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or
-                                                        incididunt ut labore et dolore.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="related-post-wrap mb-30">
-                                                <div className="post-thumb">
-                                                    <img src="/img/blog/b_details04.jpg" alt="" />
-                                                </div>
-                                                <div className="rp__content">
-                                                    <h3><a href="#">Excepteur sint occaecat cupida tat non proident</a></h3>
-                                                    <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or
-                                                        incididunt ut labore et dolore.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="avatar__wrap text-center mb-45">
-                                    <div className="avatar-img">
-                                        <img src="/img/blog/comment/avatar.png" alt="" />
-                                    </div>
-                                    <div className="avatar__info">
-                                        <h5>Rosalina William</h5>
-                                        <div className="avatar__info-social">
-                                            <a href="#"><i className="fab fa-facebook-f"></i></a>
-                                            <a href="#"><i className="fab fa-twitter"></i></a>
-                                            <a href="#"><i className="fab fa-instagram"></i></a>
-                                            <a href="#"><i className="fab fa-behance"></i></a>
-                                            <a href="#"><i className="fab fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                    <div className="avatar__wrap-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                            aliquip ex ea commodo consequa aute irure dolor.</p>
-                                    </div>
-                                </div>
-                                <div className="comment__wrap pb-45">
-                                    <div className="comment__wrap-title">
-                                        <h5>Comments</h5>
-                                    </div>
-                                    <div className="single__comment mb-35">
-                                        <div className="comments-avatar">
-                                            <img src="/img/blog/comment/c_01.png" alt="" />
-                                        </div>
-                                        <div className="comment-text">
-                                            <div className="avatar-name mb-15">
-                                                <h6>ALina Kelian</h6>
-                                                <span>19th May 2021</span>
-                                            </div>
-                                            <p>The bee's knees bite your arm off bits and bobs he nicked it gosh gutted mate blimey, old off his nut argy bargy vagabond buggered dropped.</p>
-                                             <a href="#" className="comment-reply mt-15"><i className="fas fa-reply"></i> Reply</a>
-                                        </div>
-                                    </div>
-                                    <div className="single__comment children mb-35">
-                                        <div className="comments-avatar">
-                                            <img src="/img/blog/comment/c_02.png" alt="" />
-                                        </div>
-                                        <div className="comment-text">
-                                            <div className="avatar-name mb-15">
-                                                <h6>Rlex Kelian <i className="fas fa-bookmark"></i></h6>
-                                                <span>19th May 2021</span>
-                                            </div>
-                                             <p>Do one say wind up buggered bobby bite your arm off gutted mate, David victoria sponge cup of char chap fanny around.</p>
-                                             <a href="#" className="comment-reply mt-15"><i className="fas fa-reply"></i> Reply</a>
-                                        </div>
-                                    </div>
-                                    <div className="single__comment">
-                                        <div className="comments-avatar">
-                                            <img src="/img/blog/comment/c_03.png" alt="" />
-                                        </div>
-                                        <div className="comment-text">
-                                            <div className="avatar-name mb-15">
-                                                <h6>Roboto Alex</h6>
-                                                <span>21th May 2021</span>
-                                            </div>
-                                             <p>Baking cakes is cobblers wellies William geeza bits and bobs what a plonker it's your round,</p>
-                                            <a href="#" className="comment-reply mt-15"><i className="fas fa-reply"></i> Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                               <div id="comments" className="comments-area  mt-45">
-                                   <div id="respond" className="comment-respond">
-                                      <h3 id="reply-title" className="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/finco/?p=2112#respond" style={{ "display": "none" }}>Cancel reply</a></small></h3>
-                                      <form action="http://wordpress.zcube.in/finco/wp-comments-post.php" method="post" id="commentform" className="comment-form" noValidate>
-                                         <p className="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span className="required">*</span></p>
-                                         <p className="comment-field"><i className="fas fa-user"></i><input id="author" placeholder="Your Name" name="author" type="text" /></p>
-                                         <p className="comment-field"><i className="fas fa-envelope"></i><input id="email" placeholder="your-real-email@example.com" name="email" type="text" /></p>
-                                         <p className="comment-field"><i className="fas fa-globe"></i><input id="url" name="url" placeholder="http://your-site-name.com" type="text" /> </p>
-                                         <p className="comment-form-comment"><label htmlFor="comment">Comment</label> <textarea id="comment" name="comment" cols={45} rows={8} maxLength={65525} required></textarea></p>
-                                         <p className="form-submit"><input name="submit" type="submit" id="submit" className="submit" defaultValue="Post Comment" /> <input type="hidden" name="comment_post_ID" defaultValue="2112" id="comment_post_ID" />
-                                            <input type="hidden" name="comment_parent" id="comment_parent" defaultValue="0" />
-                                         </p>
-                                      </form>
-                                   </div>
-                                   
-                                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                            </div>
-                        </div>
-                         
-                        <div className="col-sm-12 col-md-12 col-lg-4">
-                           <aside className="sidebar-widget">
-                              <section id="search-3" className="widget widget_search">
-                                 <h2 className="widget-title">Search</h2>
-                                 <form role="search" method="get" className="search-form" action="http://wordpress.zcube.in/finco/">
-                                    <label>
-                                    <span className="screen-reader-text">Search for:</span>
-                                    <input type="search" className="search-field" placeholder="Search &hellip;" defaultValue="" name="s" />
-                                    </label>
-                                    <input type="submit" className="search-submit" defaultValue="Search" />
-                                 </form>
-                              </section>
-                              <section id="custom_html-5" className="widget_text widget widget_custom_html">
-                                 <h2 className="widget-title">Follow Us</h2>
-                                 <div className="textwidget custom-html-widget">
-                                    <div className="widget-social">
-                                       <a href="#"><i className="fab fa-twitter"></i></a>
-                                       <a href="#"><i className="fab fa-pinterest-p"></i></a>
-                                       <a href="#"><i className="fab fa-facebook-f"></i></a>
-                                       <a href="#"><i className="fab fa-instagram"></i></a>
-                                       <a href="#"><i className="fab fa-wordpress"></i></a>
-                                    </div>
-                                 </div>
-                              </section>
-                              <section id="categories-1" className="widget widget_categories">
-                                 <h2 className="widget-title">Categories</h2>
-                                 <ul>
-                                    <li className="cat-item cat-item-16"><a href="#">Branding</a> (4)</li>
-                                    <li className="cat-item cat-item-23"><a href="#">Corporat</a> (3)</li>
-                                    <li className="cat-item cat-item-18"><a href="#">Design</a> (3)</li>
-                                    <li className="cat-item cat-item-22"><a href="#">Gallery</a> (3)</li>
-                                 </ul>
-                              </section>
-                              <section id="recent-posts-4" className="widget widget_recent_entries">
-                                 <h2 className="widget-title">Recent Posts</h2>
-                                 <ul>
-                                    <li>
-                                       <a href="#">User Experience Psychology And Performance Smshing</a>
-                                       <span className="post-date">August 19, 2020</span>
-                                    </li>
-                                    <li>
-                                       <a href="#">Monthly Web Development Up Cost Of JavaScript</a>
-                                       <span className="post-date">August 19, 2020</span>
-                                    </li>
-                                    <li>
-                                       <a href="#">There are many variation passages of like available.</a>
-                                       <span className="post-date">August 19, 2020</span>
-                                    </li>
-                                 </ul>
-                              </section>
-                              <section id="tag_cloud-1" className="widget widget_tag_cloud">
-                                 <h2 className="widget-title">Tag</h2>
-                                 <div className="tagcloud">
-                                     <a href="#" className="tag-cloud-link tag-link-28 tag-link-position-1" style={{ "fontSize": "8pt" }} aria-label="app (1 item)">app</a>
-                                    <a href="#" className="tag-cloud-link tag-link-17 tag-link-position-2" style={{ "fontSize": "8pt" }} aria-label="Branding (1 item)">Branding</a>
-                                    <a href="#" className="tag-cloud-link tag-link-20 tag-link-position-3" style={{ "fontSize": "8pt" }} aria-label="corporat (1 item)">corporat</a>
-                                    <a href="#" className="tag-cloud-link tag-link-24 tag-link-position-4" style={{ "fontSize": "16.4pt" }} aria-label="Design (2 items)">Design</a>
-                                    <a href="#" className="tag-cloud-link tag-link-25 tag-link-position-5" style={{ "fontSize": "22pt" }} aria-label="gallery (3 items)">gallery</a>
-                                    <a href="#" className="tag-cloud-link tag-link-26 tag-link-position-6" style={{ "fontSize": "8pt" }} aria-label="video (1 item)">video</a>
-                                    <a href="#" className="tag-cloud-link tag-link-29 tag-link-position-7" style={{ "fontSize": "16.4pt" }} aria-label="web design (2 items)">web design</a>
-                                 </div>
-                              </section>
-                           </aside>
-                        </div>
-                        
+        {/* Main Article Content */}
+        <section className="inner-blog b-details-p pt-90 pb-120">
+          <div className="container">
+            <div className="row">
+              {/* Left Column: Full Masterclass Article */}
+              <div className="col-lg-8">
+                <article className="blog-details-wrap">
+                  <div className="details__content pb-30">
+                    <div
+                      style={{
+                        display: "inline-block",
+                        padding: "4px 14px",
+                        backgroundColor: "rgba(197, 157, 95, 0.15)",
+                        border: "1px solid rgba(197, 157, 95, 0.35)",
+                        borderRadius: "20px",
+                        color: "#c59d5f",
+                        fontWeight: 700,
+                        fontSize: "0.82rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "1px",
+                        marginBottom: "14px",
+                      }}
+                    >
+                      Specialty Espresso Guide
                     </div>
-                </div>
-            </section>
-            
-        
-         
-        
+
+                    <h2
+                      style={{
+                        fontFamily: "'Caudex', Georgia, serif",
+                        color: "#3f271e",
+                        fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
+                        fontWeight: 700,
+                        lineHeight: 1.25,
+                        marginBottom: "18px",
+                      }}
+                    >
+                      The Sacred Art of Espresso Extraction: Mastering the 1:2 Brew Ratio
+                    </h2>
+
+                    <div
+                      className="meta-info mb-30"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "20px",
+                        flexWrap: "wrap",
+                        padding: "12px 18px",
+                        backgroundColor: "#f7f5f1",
+                        borderRadius: "8px",
+                        fontSize: "0.88rem",
+                        color: "#6f7172",
+                      }}
+                    >
+                      <span>
+                        <i className="far fa-user text-[#c59d5f] mr-1"></i> By Marcus Vance (Head Roaster)
+                      </span>
+                      <span>
+                        <i className="far fa-calendar-alt text-[#c59d5f] mr-1"></i> November 4, 2024
+                      </span>
+                      <span>
+                        <i className="far fa-clock text-[#c59d5f] mr-1"></i> 6 min read
+                      </span>
+                    </div>
+
+                    {/* Featured Hero Photo */}
+                    <div className="details__content-img mb-35" style={{ borderRadius: "12px", overflow: "hidden" }}>
+                      <img
+                        src="/img/blog/inner_b1.jpg"
+                        alt="Espresso Extraction with Golden Crema"
+                        style={{ width: "100%", height: "auto", display: "block" }}
+                      />
+                    </div>
+
+                    <p style={{ fontSize: "1.05rem", lineHeight: 1.8, color: "#3f271e", marginBottom: "20px" }}>
+                      Pulling a sublime shot of espresso is where physics meets sensory art. Many home baristas struggle with shots that taste violently sour or astringently bitter. The culprit almost always lies in uneven extraction dynamics.
+                    </p>
+
+                    <p style={{ fontSize: "1rem", lineHeight: 1.75, color: "#6f7172", marginBottom: "24px" }}>
+                      At AuraBrew, our baseline formula for single-origin coffees begins with an exact <strong>1:2 brew ratio</strong>. For example, 18 grams of freshly ground beans in a precision 58mm portafilter yielding precisely 36 grams of liquid espresso within 27 to 30 seconds at 9 bars of pressure.
+                    </p>
+
+                    {/* Pull Quote */}
+                    <blockquote
+                      style={{
+                        margin: "35px 0",
+                        padding: "24px 32px",
+                        backgroundColor: "#fff8f0",
+                        borderLeft: "4px solid #c59d5f",
+                        borderRadius: "0 8px 8px 0",
+                      }}
+                    >
+                      <h4
+                        style={{
+                          fontFamily: "'Caudex', Georgia, serif",
+                          color: "#3f271e",
+                          fontSize: "1.25rem",
+                          fontWeight: 600,
+                          lineHeight: 1.5,
+                          marginBottom: "8px",
+                        }}
+                      >
+                        “Espresso extraction is a race against time. The initial ten seconds yield bright fruit acids, the middle fifteen deliver rich caramelized sugars, and the final five provide balancing roast bitters.”
+                      </h4>
+                      <footer style={{ color: "#a67642", fontWeight: 700, fontSize: "0.88rem" }}>
+                        — Marcus Vance, AuraBrew Co-Founder
+                      </footer>
+                    </blockquote>
+
+                    <h3
+                      style={{
+                        fontFamily: "'Caudex', Georgia, serif",
+                        color: "#3f271e",
+                        fontSize: "1.5rem",
+                        fontWeight: 700,
+                        margin: "30px 0 16px 0",
+                      }}
+                    >
+                      The Three Golden Pillars of Flavor Balance
+                    </h3>
+
+                    <div className="row g-4 mb-35">
+                      <div className="col-md-4">
+                        <div
+                          style={{
+                            padding: "20px",
+                            backgroundColor: "#fbf9f6",
+                            borderRadius: "10px",
+                            border: "1px solid #ebdcd0",
+                            height: "100%",
+                          }}
+                        >
+                          <span style={{ fontSize: "1.8rem", color: "#c59d5f", fontWeight: 800 }}>01</span>
+                          <h5 style={{ color: "#3f271e", fontWeight: 700, margin: "10px 0 6px 0" }}>Water Temp</h5>
+                          <p style={{ color: "#6f7172", fontSize: "0.88rem", margin: 0, lineHeight: 1.5 }}>
+                            Maintain 93°C (199°F) for medium roasts. Higher temperatures scorch gentle volatile aromas.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="col-md-4">
+                        <div
+                          style={{
+                            padding: "20px",
+                            backgroundColor: "#fbf9f6",
+                            borderRadius: "10px",
+                            border: "1px solid #ebdcd0",
+                            height: "100%",
+                          }}
+                        >
+                          <span style={{ fontSize: "1.8rem", color: "#c59d5f", fontWeight: 800 }}>02</span>
+                          <h5 style={{ color: "#3f271e", fontWeight: 700, margin: "10px 0 6px 0" }}>WDT Needling</h5>
+                          <p style={{ color: "#6f7172", fontSize: "0.88rem", margin: 0, lineHeight: 1.5 }}>
+                            Break microscopic clumping before tamping to completely eliminate micro-channeling.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="col-md-4">
+                        <div
+                          style={{
+                            padding: "20px",
+                            backgroundColor: "#fbf9f6",
+                            borderRadius: "10px",
+                            border: "1px solid #ebdcd0",
+                            height: "100%",
+                          }}
+                        >
+                          <span style={{ fontSize: "1.8rem", color: "#c59d5f", fontWeight: 800 }}>03</span>
+                          <h5 style={{ color: "#3f271e", fontWeight: 700, margin: "10px 0 6px 0" }}>Pre-Infusion</h5>
+                          <p style={{ color: "#6f7172", fontSize: "0.88rem", margin: 0, lineHeight: 1.5 }}>
+                            Gently soak the puck at 2 bars for 4 seconds so the coffee bed swells evenly.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p style={{ fontSize: "1rem", lineHeight: 1.75, color: "#6f7172", marginBottom: "30px" }}>
+                      When every variable harmonizes, you will witness a rich tiger-striped stream of viscous liquid pouring into your demitasse, culminating in a velvety layer of micro-bubble crema that stays intact for minutes.
+                    </p>
+
+                    {/* Article Tags */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", paddingTop: "20px", borderTop: "1px solid #eee8df" }}>
+                      <span style={{ fontWeight: 700, color: "#3f271e", fontSize: "0.9rem" }}>Topics:</span>
+                      {["Espresso Science", "Extraction Ratios", "Golden Crema", "Home Barista", "Yirgacheffe"].map((tag) => (
+                        <span
+                          key={tag}
+                          style={{
+                            padding: "4px 12px",
+                            backgroundColor: "#f7f5f1",
+                            borderRadius: "16px",
+                            fontSize: "0.8rem",
+                            color: "#6f7172",
+                            border: "1px solid #e5dfd6",
+                          }}
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Interactive Reader Comments */}
+                  <BlogComments />
+                </article>
+              </div>
+
+              {/* Right Column: Clean Roastery Sidebar */}
+              <div className="col-lg-4">
+                <aside className="sidebar-widget">
+                  {/* Author Bio Card */}
+                  <div
+                    style={{
+                      padding: "28px",
+                      backgroundColor: "#3f271e",
+                      color: "#ffffff",
+                      borderRadius: "12px",
+                      textAlign: "center",
+                      marginBottom: "30px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                        margin: "0 auto 16px auto",
+                        border: "3px solid #c59d5f",
+                      }}
+                    >
+                      <img src="/img/team/team01.jpg" alt="Marcus Vance" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                    <h4 style={{ margin: "0 0 4px 0", color: "#ffffff", fontFamily: "'Caudex', Georgia, serif" }}>Marcus Vance</h4>
+                    <span style={{ color: "#c59d5f", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "1px", fontWeight: 600 }}>
+                      Head Roaster &amp; Co-Founder
+                    </span>
+                    <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "0.88rem", lineHeight: 1.6, marginTop: "12px" }}>
+                      Q-Grader certified with 14 years specializing in heirloom micro-lots and thermodynamics of drum roasting.
+                    </p>
+                  </div>
+
+                  {/* More Coffee Guides */}
+                  <div
+                    style={{
+                      padding: "24px",
+                      backgroundColor: "#f7f5f1",
+                      borderRadius: "12px",
+                      border: "1px solid #e8e2d8",
+                      marginBottom: "30px",
+                    }}
+                  >
+                    <h4 style={{ color: "#3f271e", fontFamily: "'Caudex', Georgia, serif", fontSize: "1.25rem", marginBottom: "18px" }}>
+                      Recent Roastery Notes
+                    </h4>
+                    <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
+                      <li>
+                        <Link href="/blog" style={{ textDecoration: "none" }}>
+                          <span style={{ fontSize: "0.8rem", color: "#c59d5f", fontWeight: 700 }}>ORIGIN JOURNALS</span>
+                          <h6 style={{ margin: "2px 0 0 0", color: "#3f271e", fontSize: "0.95rem", lineHeight: 1.4 }}>
+                            Single-Origin Bean Journey: Inside High-Altitude Ethiopian Farms
+                          </h6>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/blog" style={{ textDecoration: "none" }}>
+                          <span style={{ fontSize: "0.8rem", color: "#c59d5f", fontWeight: 700 }}>BARISTA CRAFT</span>
+                          <h6 style={{ margin: "2px 0 0 0", color: "#3f271e", fontSize: "0.95rem", lineHeight: 1.4 }}>
+                            The Chemistry of Microfoam: Achieving Silk Texture &amp; Latte Art
+                          </h6>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/blog" style={{ textDecoration: "none" }}>
+                          <span style={{ fontSize: "0.8rem", color: "#c59d5f", fontWeight: 700 }}>ROASTERY SECRETS</span>
+                          <h6 style={{ margin: "2px 0 0 0", color: "#3f271e", fontSize: "0.95rem", lineHeight: 1.4 }}>
+                            Why Small-Batch Drum Roasting Unlocks Richer Cocoa Tones
+                          </h6>
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Roastery Direct Shop CTA */}
+                  <div
+                    style={{
+                      padding: "26px",
+                      backgroundColor: "#fff8f0",
+                      borderRadius: "12px",
+                      border: "1px dashed #c59d5f",
+                      textAlign: "center",
+                    }}
+                  >
+                    <i className="fas fa-coffee" style={{ fontSize: "2rem", color: "#c59d5f", marginBottom: "12px" }}></i>
+                    <h5 style={{ color: "#3f271e", fontFamily: "'Caudex', Georgia, serif", margin: "0 0 8px 0" }}>Brew This Coffee At Home</h5>
+                    <p style={{ color: "#6f7172", fontSize: "0.88rem", marginBottom: "16px" }}>
+                      Order fresh roasted Ethiopian Yirgacheffe roasted this week in our micro-roastery.
+                    </p>
+                    <Link
+                      href="/shop"
+                      style={{
+                        padding: "10px 22px",
+                        backgroundColor: "#3f271e",
+                        color: "#c59d5f",
+                        borderRadius: "4px",
+                        fontWeight: 700,
+                        fontSize: "0.88rem",
+                        textDecoration: "none",
+                        display: "inline-block",
+                      }}
+                    >
+                      Visit Coffee Shop
+                    </Link>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

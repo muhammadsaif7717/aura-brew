@@ -84,7 +84,7 @@ export default function Page() {
                 <div className="container">
                     <div className="row justify-content-center align-items-center">
                          <div className="col-lg-6 col-md-12 col-sm-12">
-                            <div className="s-about-img p-relative  wow fadeInLeft animated" data-animation="fadeInLeft" data-delay=".4s">
+                            <div className="s-about-img p-relative" data-animate="fade-left">
                                 <img src="/img/features/about_img_02.png" alt="img" />   
                                <div className="about-icon">
                                      <img src="/img/features/about_img_03.png" alt="img" />   
@@ -94,7 +94,7 @@ export default function Page() {
                         </div>
                         
 					<div className="col-lg-6 col-md-12 col-sm-12">
-                            <div className="about-content s-about-content  wow fadeInRight  animated pl-30" data-animation="fadeInRight" data-delay=".4s">
+                            <div className="about-content s-about-content pl-30" data-animate="fade-right">
                                 <div className="about-title second-title pb-25">  
                                     <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> About Us</h5>
                                     <h2>Would You Like Delicious Coffee</h2>                                   
@@ -661,25 +661,25 @@ export default function Page() {
                                  We Offer Wide Selection of Coffee
                                 </h2>                             
                                 </div>
-                                <p>Vestibulum non ornare nunc. Maecenas a metus in est iaculis pretium. Aliquam ullamcorper nibh lacus, ac suscipit ipsum consequat porttitor.</p>
+                                <p>We partner directly with sustainable, regenerative coffee farms in Ethiopia, Colombia, and Guatemala to source the world's finest Arabica cherries, roasted in small batches to preserve their unique terroir.</p>
                                  <div className="skills-content s-about-content mt-20">
                                 <div className="skills">
                                     <div className="skill mb-30">
-                                      <div className="skill-name">Qulity Production</div>
+                                      <div className="skill-name">Ethical Single-Origin Direct Trade (96%)</div>
                                       <div className="skill-bar">
-                                        <div className="skill-per" id="80"></div>
+                                        <div className="skill-per" id="96" style={{ width: "96%", backgroundColor: "#c59d5f" }}></div>
                                       </div>
                                     </div>
                                      <div className="skill mb-30">
-                                      <div className="skill-name">Maintenance Services</div>
+                                      <div className="skill-name">Small-Batch Drum Roasting Precision (92%)</div>
                                       <div className="skill-bar">
-                                        <div className="skill-per" id="90"></div>
+                                        <div className="skill-per" id="92" style={{ width: "92%", backgroundColor: "#c59d5f" }}></div>
                                       </div>
                                     </div>
                                       <div className="skill mb-30">
-                                      <div className="skill-name">Product Managment</div>
+                                      <div className="skill-name">Master Barista Extraction Calibration (98%)</div>
                                       <div className="skill-bar">
-                                        <div className="skill-per" id="70"></div>
+                                        <div className="skill-per" id="98" style={{ width: "98%", backgroundColor: "#c59d5f" }}></div>
                                       </div>
                                     </div>
 
@@ -708,11 +708,11 @@ export default function Page() {
                     <div className="row align-items-center"> 
                         <div className="col-lg-12">
                             <div className="section-title center-align mb-50 text-center wow fadeInDown animated" data-animation="fadeInDown" data-delay=".4s">
-                                 <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> Our Blog</h5>
+                                <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> Coffee Journal</h5>
                                 <h2>
-                                    Latest Blog &amp; News
+                                    Stories From The Roastery
                                 </h2>
-                                <p>Proin consectetur non dolor vitae pulvinar. Pellentesque sollicitudin dolor eget neque viverra, sed interdum metus interdum. Cras lobortis pulvinar dolor, sit amet ullamcorper dolor iaculis vel</p>
+                                <p>Explore roasting tutorials, single-origin sourcing travels, and barista craft secrets from the AuraBrew coffee lab.</p>
                             </div>
                            
                         </div>
@@ -721,30 +721,29 @@ export default function Page() {
                        <div className="col-lg-4 col-md-6">
                             <div className="single-post2 hover-zoomin mb-30 wow fadeInUp animated" data-animation="fadeInUp" data-delay=".4s">
                                 <div className="blog-thumb2">
-                                    <a href="/blog-details"><img src="/img/blog/inner_b1.jpg" alt="img" /></a>
+                                    <a href="/blog-details"><img src="/img/blog/inner_b1.jpg" alt="The Sacred Art of Espresso" /></a>
                                 </div>                    
                                 <div className="blog-content2">    
                                     <div className="date-home">
-                                        24th March 2022
+                                        4th November 2024
                                     </div>
-                                    <h4><a href="/blog-details">Cras accumsan nulla nec lacus ultricies placerat.</a></h4> 
-                                    <p>Curabitur sagittis libero tincidunt tempor finibus. Mauris at dignissim ligula, nec tristique orci.</p>
+                                    <h4><a href="/blog-details">The Sacred Art of Espresso: Mastering the 1:2 Extraction Ratio</a></h4> 
+                                    <p>Discover how water pressure, grind granularity, and brew temperature create velvet golden crema.</p>
                                     <div className="blog-btn"><a href="/blog-details">Read More</a></div>
-                                     
                                 </div>
                             </div>
                         </div>
                          <div className="col-lg-4 col-md-6">
                             <div className="single-post2 mb-30 hover-zoomin wow fadeInUp animated" data-animation="fadeInUp" data-delay=".4s">
                                 <div className="blog-thumb2">
-                                    <a href="/blog-details"><img src="/img/blog/inner_b2.jpg" alt="img" /></a>
+                                    <a href="/blog-details"><img src="/img/blog/inner_b2.jpg" alt="Ethiopian Single-Origin Coffee Journey" /></a>
                                 </div>
                                 <div className="blog-content2">                                    
                                     <div className="date-home">
-                                       24th March 2022
+                                       28th October 2024
                                     </div>
-                                    <h4><a href="/blog-details">Dras accumsan nulla nec lacus ultricies placerat.</a></h4> 
-                                    <p>Curabitur sagittis libero tincidunt tempor finibus. Mauris at dignissim ligula, nec tristique orci.</p>
+                                    <h4><a href="/blog-details">Single-Origin Bean Journey: High-Altitude Ethiopian Farms</a></h4> 
+                                    <p>An origin travelogue through Yirgacheffe documenting heirloom varieties and floral tasting notes.</p>
                                     <div className="blog-btn"><a href="/blog-details">Read More</a></div>
                                 </div>
                             </div>
@@ -752,14 +751,14 @@ export default function Page() {
                         <div className="col-lg-4 col-md-6">
                             <div className="single-post2 mb-30 hover-zoomin wow fadeInUp animated" data-animation="fadeInUp" data-delay=".4s">
                                 <div className="blog-thumb2">
-                                    <a href="/blog-details"><img src="/img/blog/inner_b3.jpg" alt="img" /></a>
+                                    <a href="/blog-details"><img src="/img/blog/inner_b3.jpg" alt="The Chemistry of Microfoam" /></a>
                                 </div>
                                 <div className="blog-content2">                                    
                                     <div className="date-home">
-                                        24th March 2022
+                                        19th October 2024
                                     </div>
-                                    <h4><a href="/blog-details">Seas accumsan nulla nec lacus ultricies placerat.</a></h4> 
-                                    <p>Curabitur sagittis libero tincidunt tempor finibus. Mauris at dignissim ligula, nec tristique orci.</p>
+                                    <h4><a href="/blog-details">The Chemistry of Microfoam: Achieving Silk Texture & Latte Art</a></h4> 
+                                    <p>How to steam organic milk to exactly 62°C and pour delicate rosettas and swans with ease.</p>
                                     <div className="blog-btn"><a href="/blog-details">Read More</a></div>
                                 </div>
                             </div>

@@ -157,6 +157,7 @@ export default function GallerySection() {
             <button
               type="button"
               key={item.id}
+              className="gallery-card-btn animate-card"
               onClick={() => setSelectedItem(item)}
               aria-label={`View photo: ${item.title}`}
               style={{
@@ -172,7 +173,6 @@ export default function GallerySection() {
                 display: "block",
                 textAlign: "left",
               }}
-              className="gallery-card-btn"
             >
               <img
                 src={item.src}

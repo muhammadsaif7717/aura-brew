@@ -143,6 +143,7 @@ export default function TestimonialSection() {
           {filtered.map((item) => (
             <div
               key={item.id}
+              className="animate-card"
               style={{
                 backgroundColor: "#1b140f",
                 border: "1px solid rgba(197, 157, 95, 0.2)",

@@ -92,6 +92,16 @@ export default function HeroSlider() {
     touchStartX.current = null;
   };
 
+  const scrollToAbout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const target = document.getElementById("about");
+    if (target) {
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="home"
@@ -103,7 +113,9 @@ export default function HeroSlider() {
       onTouchEnd={handleTouchEnd}
       style={{
         position: "relative",
-        minHeight: "720px",
+        width: "100%",
+        height: "100vh",
+        minHeight: "100dvh",
         backgroundColor: "#101010",
         overflow: "hidden",
       }}
@@ -120,12 +132,12 @@ export default function HeroSlider() {
               left: 0,
               width: "100%",
               height: "100%",
-              backgroundImage: `linear-gradient(rgba(16, 16, 16, 0.55), rgba(16, 16, 16, 0.72)), url(${slide.bgImage})`,
+              backgroundImage: `linear-gradient(rgba(16, 16, 16, 0.58), rgba(16, 16, 16, 0.76)), url(${slide.bgImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center center",
               opacity: isActive ? 1 : 0,
-              transform: isActive ? "scale(1)" : "scale(1.04)",
-              transition: "opacity 900ms ease-in-out, transform 1200ms ease-out",
+              transform: isActive ? "scale(1)" : "scale(1.05)",
+              transition: "opacity 950ms ease-in-out, transform 1300ms ease-out",
               pointerEvents: isActive ? "auto" : "none",
               display: "flex",
               alignItems: "center",
@@ -134,28 +146,29 @@ export default function HeroSlider() {
           >
             <div className="container" style={{ position: "relative", zIndex: 3 }}>
               <div className="row justify-content-start align-items-center">
-                <div className="col-xl-8 col-lg-9 col-md-11">
+                <div className="col-xl-9 col-lg-10 col-md-11 col-sm-12">
                   <div
                     className="slider-content s-slider-content"
                     style={{
-                      paddingTop: "60px",
-                      paddingBottom: "60px",
+                      paddingTop: "clamp(80px, 12vh, 130px)",
+                      paddingBottom: "clamp(60px, 10vh, 100px)",
                     }}
                   >
+                    {/* Subtitle Badge */}
                     <div
                       style={{
                         display: "inline-block",
                         padding: "6px 16px",
-                        backgroundColor: "rgba(197, 157, 95, 0.15)",
-                        border: "1px solid rgba(197, 157, 95, 0.4)",
+                        backgroundColor: "rgba(197, 157, 95, 0.16)",
+                        border: "1px solid rgba(197, 157, 95, 0.45)",
                         borderRadius: "30px",
                         color: "#c59d5f",
-                        fontWeight: 600,
-                        fontSize: "0.88rem",
+                        fontWeight: 700,
+                        fontSize: "clamp(0.75rem, 2vw, 0.88rem)",
                         textTransform: "uppercase",
                         letterSpacing: "1.5px",
-                        marginBottom: "16px",
-                        transform: isActive ? "translateY(0)" : "translateY(20px)",
+                        marginBottom: "18px",
+                        transform: isActive ? "translateY(0)" : "translateY(18px)",
                         opacity: isActive ? 1 : 0,
                         transition: "all 600ms cubic-bezier(0.16, 1, 0.3, 1) 150ms",
                       }}
@@ -163,16 +176,17 @@ export default function HeroSlider() {
                       {slide.subtitle}
                     </div>
 
+                    {/* Main Title */}
                     <h1
                       style={{
                         color: "#ffffff",
-                        fontSize: "clamp(2.2rem, 5vw, 4.2rem)",
+                        fontSize: "clamp(2rem, 5.5vw, 4.3rem)",
                         fontWeight: 700,
-                        lineHeight: 1.18,
+                        lineHeight: 1.15,
                         letterSpacing: "-0.5px",
                         marginBottom: "20px",
                         fontFamily: "'Caudex', Georgia, serif",
-                        transform: isActive ? "translateY(0)" : "translateY(24px)",
+                        transform: isActive ? "translateY(0)" : "translateY(22px)",
                         opacity: isActive ? 1 : 0,
                         transition: "all 700ms cubic-bezier(0.16, 1, 0.3, 1) 250ms",
                       }}
@@ -180,14 +194,15 @@ export default function HeroSlider() {
                       {slide.title}
                     </h1>
 
+                    {/* Description Paragraph */}
                     <p
                       style={{
-                        color: "rgba(255, 255, 255, 0.85)",
-                        fontSize: "clamp(1rem, 1.8vw, 1.18rem)",
+                        color: "rgba(255, 255, 255, 0.88)",
+                        fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
                         lineHeight: 1.68,
                         maxWidth: "620px",
-                        marginBottom: "36px",
-                        transform: isActive ? "translateY(0)" : "translateY(24px)",
+                        marginBottom: "34px",
+                        transform: isActive ? "translateY(0)" : "translateY(22px)",
                         opacity: isActive ? 1 : 0,
                         transition: "all 700ms cubic-bezier(0.16, 1, 0.3, 1) 350ms",
                       }}
@@ -195,10 +210,12 @@ export default function HeroSlider() {
                       {slide.description}
                     </p>
 
+                    {/* Action Buttons */}
                     <div
-                      className="slider-btn d-flex flex-wrap gap-3 align-items-center"
+                      className="slider-btn d-flex flex-wrap align-items-center"
                       style={{
-                        transform: isActive ? "translateY(0)" : "translateY(24px)",
+                        gap: "12px",
+                        transform: isActive ? "translateY(0)" : "translateY(22px)",
                         opacity: isActive ? 1 : 0,
                         transition: "all 700ms cubic-bezier(0.16, 1, 0.3, 1) 450ms",
                       }}
@@ -210,9 +227,9 @@ export default function HeroSlider() {
                           backgroundColor: "#c59d5f",
                           color: "#101010",
                           border: "2px solid #c59d5f",
-                          padding: "14px 32px",
+                          padding: "clamp(10px, 2vw, 14px) clamp(22px, 3.5vw, 32px)",
                           fontWeight: 700,
-                          fontSize: "0.95rem",
+                          fontSize: "clamp(0.85rem, 1.6vw, 0.95rem)",
                           letterSpacing: "0.5px",
                           textTransform: "uppercase",
                           borderRadius: "4px",
@@ -233,10 +250,10 @@ export default function HeroSlider() {
                         style={{
                           backgroundColor: "transparent",
                           color: "#ffffff",
-                          border: "2px solid rgba(255, 255, 255, 0.7)",
-                          padding: "14px 32px",
+                          border: "2px solid rgba(255, 255, 255, 0.75)",
+                          padding: "clamp(10px, 2vw, 14px) clamp(22px, 3.5vw, 32px)",
                           fontWeight: 700,
-                          fontSize: "0.95rem",
+                          fontSize: "clamp(0.85rem, 1.6vw, 0.95rem)",
                           letterSpacing: "0.5px",
                           textTransform: "uppercase",
                           borderRadius: "4px",
@@ -251,7 +268,7 @@ export default function HeroSlider() {
                           e.currentTarget.style.backgroundColor = "rgba(197, 157, 95, 0.1)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.7)";
+                          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.75)";
                           e.currentTarget.style.color = "#ffffff";
                           e.currentTarget.style.backgroundColor = "transparent";
                         }}
@@ -267,86 +284,11 @@ export default function HeroSlider() {
         );
       })}
 
-      {/* Navigation Arrows */}
-      <button
-        type="button"
-        onClick={prevSlide}
-        aria-label="Previous Slide"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "24px",
-          transform: "translateY(-50%)",
-          zIndex: 10,
-          width: "48px",
-          height: "48px",
-          borderRadius: "50%",
-          backgroundColor: "rgba(16, 16, 16, 0.6)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          color: "#ffffff",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          transition: "all 0.25s ease",
-          outline: "none",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "#c59d5f";
-          e.currentTarget.style.color = "#101010";
-          e.currentTarget.style.borderColor = "#c59d5f";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "rgba(16, 16, 16, 0.6)";
-          e.currentTarget.style.color = "#ffffff";
-          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-        }}
-      >
-        <i className="fas fa-chevron-left" style={{ fontSize: "16px" }}></i>
-      </button>
-
-      <button
-        type="button"
-        onClick={nextSlide}
-        aria-label="Next Slide"
-        style={{
-          position: "absolute",
-          top: "50%",
-          right: "24px",
-          transform: "translateY(-50%)",
-          zIndex: 10,
-          width: "48px",
-          height: "48px",
-          borderRadius: "50%",
-          backgroundColor: "rgba(16, 16, 16, 0.6)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          color: "#ffffff",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          transition: "all 0.25s ease",
-          outline: "none",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "#c59d5f";
-          e.currentTarget.style.color = "#101010";
-          e.currentTarget.style.borderColor = "#c59d5f";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "rgba(16, 16, 16, 0.6)";
-          e.currentTarget.style.color = "#ffffff";
-          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-        }}
-      >
-        <i className="fas fa-chevron-right" style={{ fontSize: "16px" }}></i>
-      </button>
-
-      {/* Pagination Indicators */}
+      {/* Pagination Indicators (Bottom Center) */}
       <div
         style={{
           position: "absolute",
-          bottom: "32px",
+          bottom: "75px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 10,
@@ -368,10 +310,10 @@ export default function HeroSlider() {
               aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
               onClick={() => setCurrent(idx)}
               style={{
-                width: isActive ? "32px" : "10px",
+                width: isActive ? "34px" : "10px",
                 height: "10px",
                 borderRadius: "10px",
-                backgroundColor: isActive ? "#c59d5f" : "rgba(255, 255, 255, 0.4)",
+                backgroundColor: isActive ? "#c59d5f" : "rgba(255, 255, 255, 0.45)",
                 border: "none",
                 cursor: "pointer",
                 padding: 0,
@@ -382,7 +324,46 @@ export default function HeroSlider() {
           );
         })}
       </div>
+
+      {/* Scroll Down Visual Indicator */}
+      <a
+        href="#about"
+        onClick={scrollToAbout}
+        aria-label="Scroll down to explore content"
+        style={{
+          position: "absolute",
+          bottom: "22px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "4px",
+          color: "rgba(255, 255, 255, 0.75)",
+          textDecoration: "none",
+          fontSize: "0.78rem",
+          letterSpacing: "1px",
+          textTransform: "uppercase",
+          transition: "color 0.25s ease",
+          cursor: "pointer",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = "#c59d5f";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
+        }}
+      >
+        <span style={{ fontSize: "0.72rem", fontWeight: 600 }}>Scroll</span>
+        <i
+          className="fas fa-chevron-down hero-scroll-chevron"
+          style={{
+            fontSize: "0.85rem",
+            color: "#c59d5f",
+          }}
+        ></i>
+      </a>
     </section>
   );
 }
-

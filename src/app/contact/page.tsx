@@ -96,7 +96,7 @@ export default function Page() {
                                             <i className="far fa-envelope-open"></i>
                                         </div>
                                         <h5>Message Us</h5>
-                                        <p> <a href="#">support@example.com</a><br /><a href="#">info@example.com</a></p>
+                                        <p> <a href="mailto:info@aurabrew-cafe.com">info@aurabrew-cafe.com</a><br /><a href="mailto:orders@aurabrew-cafe.com">orders@aurabrew-cafe.com</a></p>
                                     </div>
                                 </div>							
                         </div>

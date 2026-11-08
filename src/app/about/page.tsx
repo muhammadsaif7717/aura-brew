@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import NewsletterSection from "@/components/NewsletterSection";
 
 export const metadata: Metadata = {
   title: "About Our Heritage & Roasting Philosophy | AuraBrew",
@@ -173,11 +174,11 @@ export default function Page() {
                     <div className="row align-items-center"> 
                         <div className="col-lg-12">
                             <div className="section-title center-align mb-50 text-center wow fadeInDown animated" data-animation="fadeInDown" data-delay=".4s">
-                                 <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> Our Blog</h5>
+                                 <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> Coffee Journal</h5>
                                 <h2>
-                                    Latest Blog &amp; News
+                                    Stories From The Roastery
                                 </h2>
-                                <p>Proin consectetur non dolor vitae pulvinar. Pellentesque sollicitudin dolor eget neque viverra, sed interdum metus interdum. Cras lobortis pulvinar dolor, sit amet ullamcorper dolor iaculis vel</p>
+                                <p>Explore roasting tutorials, single-origin sourcing travels, and barista craft secrets from the AuraBrew coffee lab.</p>
                             </div>
                            
                         </div>
@@ -186,30 +187,29 @@ export default function Page() {
                        <div className="col-lg-4 col-md-6">
                             <div className="single-post2 hover-zoomin mb-30 wow fadeInUp animated" data-animation="fadeInUp" data-delay=".4s">
                                 <div className="blog-thumb2">
-                                    <a href="/blog-details"><img src="/img/blog/inner_b1.jpg" alt="img" /></a>
+                                    <a href="/blog-details"><img src="/img/blog/inner_b1.jpg" alt="The Sacred Art of Espresso" /></a>
                                 </div>                    
                                 <div className="blog-content2">    
                                     <div className="date-home">
-                                        24th March 2022
+                                        4th November 2024
                                     </div>
-                                    <h4><a href="/blog-details">Cras accumsan nulla nec lacus ultricies placerat.</a></h4> 
-                                    <p>Curabitur sagittis libero tincidunt tempor finibus. Mauris at dignissim ligula, nec tristique orci.</p>
+                                    <h4><a href="/blog-details">The Sacred Art of Espresso: Mastering the 1:2 Extraction Ratio</a></h4> 
+                                    <p>Discover how water pressure, grind granularity, and brew temperature create velvet golden crema.</p>
                                     <div className="blog-btn"><a href="/blog-details">Read More</a></div>
-                                     
                                 </div>
                             </div>
                         </div>
                          <div className="col-lg-4 col-md-6">
                             <div className="single-post2 mb-30 hover-zoomin wow fadeInUp animated" data-animation="fadeInUp" data-delay=".4s">
                                 <div className="blog-thumb2">
-                                    <a href="/blog-details"><img src="/img/blog/inner_b2.jpg" alt="img" /></a>
+                                    <a href="/blog-details"><img src="/img/blog/inner_b2.jpg" alt="Ethiopian Single-Origin Coffee Journey" /></a>
                                 </div>
                                 <div className="blog-content2">                                    
                                     <div className="date-home">
-                                       24th March 2022
+                                       28th October 2024
                                     </div>
-                                    <h4><a href="/blog-details">Dras accumsan nulla nec lacus ultricies placerat.</a></h4> 
-                                    <p>Curabitur sagittis libero tincidunt tempor finibus. Mauris at dignissim ligula, nec tristique orci.</p>
+                                    <h4><a href="/blog-details">Single-Origin Bean Journey: High-Altitude Ethiopian Farms</a></h4> 
+                                    <p>An origin travelogue through Yirgacheffe documenting heirloom varieties and floral tasting notes.</p>
                                     <div className="blog-btn"><a href="/blog-details">Read More</a></div>
                                 </div>
                             </div>
@@ -217,14 +217,14 @@ export default function Page() {
                         <div className="col-lg-4 col-md-6">
                             <div className="single-post2 mb-30 hover-zoomin wow fadeInUp animated" data-animation="fadeInUp" data-delay=".4s">
                                 <div className="blog-thumb2">
-                                    <a href="/blog-details"><img src="/img/blog/inner_b3.jpg" alt="img" /></a>
+                                    <a href="/blog-details"><img src="/img/blog/inner_b3.jpg" alt="The Chemistry of Microfoam" /></a>
                                 </div>
                                 <div className="blog-content2">                                    
                                     <div className="date-home">
-                                        24th March 2022
+                                        19th October 2024
                                     </div>
-                                    <h4><a href="/blog-details">Seas accumsan nulla nec lacus ultricies placerat.</a></h4> 
-                                    <p>Curabitur sagittis libero tincidunt tempor finibus. Mauris at dignissim ligula, nec tristique orci.</p>
+                                    <h4><a href="/blog-details">The Chemistry of Microfoam: Achieving Silk Texture & Latte Art</a></h4> 
+                                    <p>How to steam organic milk to exactly 62°C and pour delicate rosettas and swans with ease.</p>
                                     <div className="blog-btn"><a href="/blog-details">Read More</a></div>
                                 </div>
                             </div>
@@ -235,32 +235,7 @@ export default function Page() {
                 </div>
             </section>
             
-            
-            <section className="newslater-area p-relative pt-120 pb-120" style={{ "backgroundColor": "#f7f5f1" }}>
-                <div className="animations-01"><img src="/img/bg/an-img-07.png" alt="contact-bg-an-05" /></div>
-                <div className="container">
-                    <div className="row justify-content-center align-items-center text-center">
-                        <div className="col-xl-9 col-lg-9">
-                            <div className="section-title center-align mb-40 text-center wow fadeInDown animated" data-animation="fadeInDown" data-delay=".4s">
-                                 <h5><span className="circle-left"><img src="/img/bg/circle-left.png" alt="img" /></span> Newsletter</h5>
-                                <h2>
-                                    Get Best Offers On The Coffee
-                                </h2>
-                                <p>With the subscription, enjoy your favourite coffees without having to think about it</p>
-                            </div>
-                            <form name="ajax-form" id="contact-form4" action="#" method="post" className="contact-form newslater">
-                               <div className="form-group">
-                                  <input className="form-control" id="email2" name="email" type="email" placeholder="Your Email Address" defaultValue="" required /> 
-                                  <button type="submit" className="btn btn-custom" id="send2">Subscribe Now</button>
-                               </div>
-                               	
-                            </form>
-                        </div>
-                       
-                    </div>
-                   
-                </div>
-            </section>
+            <NewsletterSection />
             
         
       </main>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
+import ScrollAnimateProvider from "@/components/ScrollAnimateProvider";
 
 export const viewport: Viewport = {
   themeColor: "#3f271e",
@@ -169,6 +170,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <ScrollAnimateProvider />
         {children}
         <ScrollToTop />
       </body>
