@@ -416,32 +416,31 @@ header.header-area .btn {
 
 .scroll-animate {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .scroll-animate.in-view {
   opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
 }
 
-/* Directional Modifiers */
+/* Directional Modifiers - Softer displacement for zero lag */
 [data-animate="fade-left"].scroll-animate {
-  transform: translateX(-40px);
+  transform: translate3d(-24px, 0, 0);
 }
 
 [data-animate="fade-right"].scroll-animate {
-  transform: translateX(40px);
+  transform: translate3d(24px, 0, 0);
 }
 
 [data-animate="fade-down"].scroll-animate {
-  transform: translateY(-30px);
+  transform: translate3d(0, -20px, 0);
 }
 
 [data-animate="zoom-in"].scroll-animate {
-  transform: scale(0.92);
+  transform: scale(0.96);
 }
 
 [data-animate="fade-left"].scroll-animate.in-view,
@@ -449,7 +448,7 @@ header.header-area .btn {
 [data-animate="fade-down"].scroll-animate.in-view,
 [data-animate="zoom-in"].scroll-animate.in-view {
   opacity: 1 !important;
-  transform: translate(0, 0) scale(1) !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
 }
 
 /* Enhanced Smooth Card Elevating Micro-Interactions */
@@ -464,9 +463,9 @@ header.header-area .btn {
 .review-card,
 .testimonial-card,
 .faq-card {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.35s ease !important;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.4s ease !important;
 }
 
 .product-card:hover,
@@ -478,7 +477,7 @@ header.header-area .btn {
 .services-08-item:hover,
 .animate-card:hover,
 .review-card:hover {
-  transform: translateY(-6px) !important;
+  transform: translate3d(0, -5px, 0) !important;
   box-shadow: 0 16px 36px rgba(63, 39, 30, 0.14) !important;
   border-color: rgba(197, 157, 95, 0.6) !important;
 }
@@ -490,18 +489,18 @@ header.header-area .btn {
 .meal-card img,
 .meal-container img,
 .services-08-item img {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 .product-card:hover img,
 .product:hover img,
 .single-post2:hover img {
-  transform: scale(1.05) !important;
+  transform: scale(1.04) !important;
 }
 
 .meal-card:hover img,
 .meal-container:hover img {
-  transform: scale(1.06) rotate(1.5deg) !important;
+  transform: scale(1.05) rotate(1deg) !important;
 }
 
 /* Signature & Tag Pulses */
@@ -554,7 +553,7 @@ header.header-area .btn {
 .grid > *:nth-child(4n + 2).scroll-animate,
 .testimonials-responsive-grid > *:nth-child(3n + 2),
 .populer-meal ul li:nth-child(4n + 2) {
-  transition-delay: 120ms;
+  transition-delay: 90ms;
 }
 
 .row > *:nth-child(4n + 3) .scroll-animate,
@@ -563,7 +562,7 @@ header.header-area .btn {
 .grid > *:nth-child(4n + 3).scroll-animate,
 .testimonials-responsive-grid > *:nth-child(3n + 3),
 .populer-meal ul li:nth-child(4n + 3) {
-  transition-delay: 240ms;
+  transition-delay: 180ms;
 }
 
 .row > *:nth-child(4n + 4) .scroll-animate,
@@ -571,7 +570,7 @@ header.header-area .btn {
 .grid > *:nth-child(4n + 4) .scroll-animate,
 .grid > *:nth-child(4n + 4).scroll-animate,
 .populer-meal ul li:nth-child(4n + 4) {
-  transition-delay: 360ms;
+  transition-delay: 270ms;
 }
 
 /* Accessibility: Full reduced motion conformance */

@@ -50,8 +50,8 @@ export default function CoffeeSkills() {
         if (entry.isIntersecting && !hasAnimated) {
           setHasAnimated(true);
 
-          // Animate percentage numbers smoothly from 0 to target
-          const duration = 1600; // ms
+          // Animate percentage numbers smoothly from 0 to target at a relaxed, graceful pace
+          const duration = 2400; // ms (smooth 2.4s count-up)
           const startTime = performance.now();
 
           const updateNumbers = (currentTime: number) => {
@@ -194,7 +194,7 @@ export default function CoffeeSkills() {
                             width: hasAnimated ? `${skill.targetPercent}%` : "0%",
                             background: "linear-gradient(90deg, #b98754 0%, #c59d5f 50%, #e0b879 100%)",
                             borderRadius: "10px",
-                            transition: "width 1.6s cubic-bezier(0.16, 1, 0.3, 1)",
+                            transition: "width 2.4s cubic-bezier(0.22, 1, 0.36, 1)",
                             position: "relative",
                             boxShadow: "0 0 12px rgba(197, 157, 95, 0.55)",
                           }}
@@ -259,3 +259,4 @@ export default function CoffeeSkills() {
     </section>
   );
 }
+

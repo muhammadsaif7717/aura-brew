@@ -59,8 +59,8 @@ export default function ScrollAnimateProvider() {
           });
         },
         {
-          rootMargin: "0px 0px -40px 0px",
-          threshold: 0.1,
+          rootMargin: "0px 0px 50px 0px",
+          threshold: 0.05,
         }
       );
 
@@ -70,8 +70,8 @@ export default function ScrollAnimateProvider() {
         }
         if (!el.classList.contains("in-view")) {
           const rect = el.getBoundingClientRect();
-          // If already in top of the initial screen, reveal it smoothly
-          if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+          // If already in the visible initial viewport, reveal smoothly without delay
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
             el.classList.add("in-view");
           } else if (observer) {
             observer.observe(el);
