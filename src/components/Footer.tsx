@@ -1,142 +1,163 @@
 "use client";
 
-import { RestaurantClient } from "@/data/restaurants";
-import { Utensils, Phone, Clock, MapPin, ArrowUp, ShoppingBag } from "lucide-react";
+import React from "react";
+import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
 
-interface FooterProps {
-  client: RestaurantClient;
-  onOpenOrder: () => void;
-}
-
-export default function Footer({ client, onOpenOrder }: FooterProps) {
+export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
-          
-          {/* Brand Info */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 text-white flex items-center justify-center font-bold">
-                <Utensils className="w-5 h-5" />
+    <footer className="footer-bg footer-p">
+      <div
+        className="footer-top pt-90 pb-40"
+        style={{
+          backgroundColor: "#2B1912",
+          backgroundImage: "url(/img/bg/footer-bg.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          borderTop: "1px solid rgba(185, 135, 84, 0.2)",
+        }}
+      >
+        <div className="container">
+          <div className="row justify-content-between">
+            {/* Widget 1: Brand Logo & Contact */}
+            <div className="col-xl-4 col-lg-4 col-sm-6">
+              <div className="footer-widget mb-30">
+                <div className="f-widget-title mb-25">
+                  <BrandLogo variant="light" size="lg" />
+                </div>
+                <p className="text-[#C8BCB3] text-sm leading-relaxed mb-4" style={{ maxWidth: "340px" }}>
+                  AuraBrew Coffee Roasters — Dedicated to sourcing ethical single-origin beans,
+                  precision small-batch roasting, and celebrating heritage coffeehouse culture since 1928.
+                </p>
+                <div className="f-contact">
+                  <ul>
+                    <li>
+                      <i className="icon fal fa-phone text-[#B98754]"></i>
+                      <span>
+                        <a href="tel:18001213637" className="text-[#E5DCD5] hover:text-[#B98754]">
+                          1800-121-3637
+                        </a>
+                        <br />
+                        <span className="text-[#C8BCB3] text-xs">Mon-Sat Customer Concierge</span>
+                      </span>
+                    </li>
+                    <li>
+                      <i className="icon fal fa-envelope text-[#B98754]"></i>
+                      <span>
+                        <a href="mailto:info@aurabrew-cafe.com" className="text-[#E5DCD5] hover:text-[#B98754]">
+                          info@aurabrew-cafe.com
+                        </a>
+                        <br />
+                        <a href="mailto:orders@aurabrew-cafe.com" className="text-[#E5DCD5] hover:text-[#B98754]">
+                          orders@aurabrew-cafe.com
+                        </a>
+                      </span>
+                    </li>
+                    <li>
+                      <i className="icon fal fa-map-marker-check text-[#B98754]"></i>
+                      <span>
+                        1247/Plot No. 39, 15th Phase,
+                        <br /> LHB Colony, Kanpur
+                      </span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <span className="text-lg font-black text-white">
-                {client.name}
-              </span>
             </div>
 
-            <p className="text-xs leading-relaxed text-slate-400">
-              {client.tagline}. টাটকা উপাদান ও আন্তরিক আতিথেয়তায় আপনাদের সেবায় নিয়োজিত।
-            </p>
+            {/* Widget 2: Quick Links */}
+            <div className="col-xl-2 col-lg-2 col-sm-6">
+              <div className="footer-widget mb-30">
+                <div className="f-widget-title">
+                  <h2 style={{ fontFamily: "'Caudex', Georgia, serif", color: "#FFFFFF" }}>Our Links</h2>
+                </div>
+                <div className="footer-link">
+                  <ul>
+                    <li>
+                      <Link href="/" className="hover:text-[#B98754]">Home</Link>
+                    </li>
+                    <li>
+                      <Link href="/about" className="hover:text-[#B98754]">About Us</Link>
+                    </li>
+                    <li>
+                      <Link href="/services" className="hover:text-[#B98754]">Services</Link>
+                    </li>
+                    <li>
+                      <Link href="/menu" className="hover:text-[#B98754]">Our Menu</Link>
+                    </li>
+                    <li>
+                      <Link href="/shop" className="hover:text-[#B98754]">Coffee Beans</Link>
+                    </li>
+                    <li>
+                      <Link href="/projects" className="hover:text-[#B98754]">Roastery Gallery</Link>
+                    </li>
+                    <li>
+                      <Link href="/contact" className="hover:text-[#B98754]">Contact &amp; Booking</Link>
+                    </li>
+                    <li>
+                      <Link href="/blog" className="hover:text-[#B98754]">Coffee Journal</Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-            <div className="flex items-center gap-2 text-xs text-emerald-400 font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{client.uiLabels.kitchenStatus}</span>
+            {/* Widget 3: Shop Location Google Maps */}
+            <div className="col-xl-6 col-lg-6 col-sm-6">
+              <div className="footer-widget mb-30">
+                <div className="f-widget-title">
+                  <h2 style={{ fontFamily: "'Caudex', Georgia, serif", color: "#FFFFFF" }}>Our Roastery Location</h2>
+                </div>
+                <div className="footer-link">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212867.83634504632!2d-112.24455686962897!3d33.52582710700138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872b743829374b03%3A0xabaac255b1e43fbe!2sPlexus%20Worldwide!5e0!3m2!1sen!2sin!4v1618567685329!5m2!1sen!2sin"
+                    width="100%"
+                    height="200"
+                    style={{ border: 0, borderRadius: "6px", boxShadow: "0 4px 15px rgba(0,0,0,0.3)" }}
+                    allowFullScreen
+                    loading="lazy"
+                    title="AuraBrew Coffee Shop Location Map"
+                  ></iframe>
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              দ্রুত লিঙ্ক
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <a href="#menu" className="hover:text-amber-400 transition">
-                  ডিজিটাল মেনু তালিকা
-                </a>
-              </li>
-              <li>
-                <a href="#features" className="hover:text-amber-400 transition">
-                  কেন আমরা সেরা
-                </a>
-              </li>
-              <li>
-                <a href="#reviews" className="hover:text-amber-400 transition">
-                  কাস্টমার রিভিউ
-                </a>
-              </li>
-              <li>
-                <a href="#location" className="hover:text-amber-400 transition">
-                  ঠিকানা ও যোগাযোগের তথ্য
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Hours & Contact */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              খোলা থাকার সময়
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-400">
-              <li className="flex items-start gap-2">
-                <Clock className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                <span>{client.openingHours}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                <span>{client.address}</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                <span>{client.phone}</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* WhatsApp Direct Order CTA */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              অনলাইন পার্সেল ও ডেলিভারি
-            </h4>
-            <p className="text-xs text-slate-400">
-              {client.uiLabels.commissionNoticeDesc}
-            </p>
-            <button
-              onClick={onOpenOrder}
-              className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-            >
-              <ShoppingBag className="w-4 h-4 text-amber-200" />
-              <span>{client.uiLabels.orderCta}</span>
-            </button>
-          </div>
-
         </div>
+      </div>
 
-        {/* Bottom Bar with Back to Top & Axiovyn Attribution */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p className="text-center sm:text-left">
-            © 2026 {client.name}. All rights reserved. • High-Speed Web Platform Engineered by{" "}
-            <a
-              href="https://developer-saif.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-amber-400 hover:text-amber-300 font-bold underline underline-offset-2 transition"
-            >
-              MD. SAIF ISLAM
-            </a>{" "}
-            (Axiovyn Technologies)
-          </p>
-
-          {/* Smooth Back to Top Button */}
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition cursor-pointer text-xs font-semibold group shadow-sm active:scale-95"
-            aria-label="Scroll back to top"
-            title="Back to Top"
-          >
-            <span>Back to Top</span>
-            <div className="w-5 h-5 rounded-md bg-slate-800 group-hover:bg-amber-600 transition flex items-center justify-center text-slate-300 group-hover:text-white">
-              <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
+      {/* Copyright Bar */}
+      <div
+        className="copyright-wrap py-3"
+        style={{
+          backgroundColor: "#1D0F0A",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-6 text-center text-lg-left text-sm text-[#A89C94]">
+              Copyright &copy; 2026 <strong>AuraBrew Coffee Co.</strong> All rights reserved.
             </div>
-          </button>
+            <div className="col-lg-6 text-center text-lg-right mt-2 mt-lg-0">
+              <div className="footer-social d-inline-flex" style={{ gap: "16px" }}>
+                <a href="#" aria-label="Facebook" className="text-[#C8BCB3] hover:text-[#B98754]">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" aria-label="Twitter" className="text-[#C8BCB3] hover:text-[#B98754]">
+                  <i className="fab fa-twitter"></i>
+                </a>
+                <a href="#" aria-label="Instagram" className="text-[#C8BCB3] hover:text-[#B98754]">
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a href="#" aria-label="YouTube" className="text-[#C8BCB3] hover:text-[#B98754]">
+                  <i className="fab fa-youtube"></i>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
     </footer>
   );
 }
-

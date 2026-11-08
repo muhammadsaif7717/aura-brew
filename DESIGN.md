@@ -1,76 +1,63 @@
-# ☕ DESIGN SYSTEM — RESTAURANT & ARTISANAL CAFE SUITE (Google Stitch Specification)
+# ☕ DESIGN SYSTEM — AURABREW ARTISANAL COFFEE & ROASTERY (Google Stitch Specification)
 
-> **Design Direction:** Artisanal Culinary Excellence, Appetizing Warmth, Gourmet Elegance, Seamless Direct Ordering (0% Commission).  
-> **Target Audience:** Food lovers, coffee connoisseurs, brunch goers, and families looking for gourmet food, specialty beverages, takeaway orders, and hassle-free table reservations.
+> **Design Direction:** Artisanal Espresso Roastery, Warm Velvet Brown, Roasted Amber, Hand-Crafted Pastries & Heritage Coffeehouse Elegance.  
+> **Brand Identity:** **AuraBrew Coffee Co.** — Heritage micro-roasters dedicated to ethical farm sourcing, single-origin varietals, precision brewing, and welcoming cafe ambiance.
 
 ---
 
 ## 🎨 1. Color Palette (Google Stitch Tokens)
 
-### Primary Culinary Brand Tokens
-- **`--color-primary-amber-50`**: `#FFFBEB` (Warm Cream Tint — Section backgrounds & Pill tags)
-- **`--color-primary-amber-100`**: `#FEF3C7` (Soft Honey — Active categories & highlighted badges)
-- **`--color-primary-amber-500`**: `#F59E0B` (Vibrant Amber — Star ratings & flame tags)
-- **`--color-primary-amber-600`**: `#D97706` (Core Brand Amber — Primary CTA buttons, key food icons)
-- **`--color-primary-amber-700`**: `#B45309` (Deep Roasted Amber — Hover CTA, strong headers)
-- **`--color-primary-amber-900`**: `#78350F` (Espresso Dark — High-emphasis culinary text)
+### Primary Roasted Brand Tokens
+- **`--color-primary-coffee`**: `#3F271E` (Warm Roasted Espresso Dark — Core Brand Canvas & Strong Headers)
+- **`--color-primary-coffee-deep`**: `#2B1912` (Deep Roasted Bean — Dark Accent Backdrops & Footers)
+- **`--color-primary-amber`**: `#C59D5F` / `#B98754` (Golden Crema / Roasted Amber — Primary CTA, Badges & Accents)
+- **`--color-primary-amber-hover`**: `#A67642` (Dark Roasted Amber — Active & Hover States)
+- **`--color-cream-tint`**: `#FFF8F0` (Froth & Milk Cream — Light Section Backdrops)
 
-### Freshness & Secondary Accents
-- **`--color-accent-rose-500`**: `#F43F5E` (Bistro Rose — Chef's recommendations & special discounts)
-- **`--color-accent-emerald-600`**: `#059669` (Fresh Basil — WhatsApp order link & table reservation success)
-- **`--color-accent-slate-900`**: `#0F172A` (Midnight Navy / Charcoal — Primary contrasting buttons & footer)
+### Backgrounds & Contrast Tokens
+- **`--color-canvas-dark`**: `#101010` (Charcoal Velvet — High Contrast Theme Background)
+- **`--color-canvas-light`**: `#FFFFFF` (Pure Card Surface)
+- **`--color-surface-soft`**: `#F5F5F5` (Soft Ash Gray — Section Dividers & Table Backgrounds)
+- **`--color-border-subtle`**: `#E4E4E4` (Delicate Line Borders)
+- **`--color-border-dark`**: `#4A352D` (Espresso Borders on Dark Sections)
 
-### Neutrals & High-Contrast Typography
-- **`--color-surface-white`**: `#FFFFFF` (Pure Sterile White — Dish card surfaces & modals)
-- **`--color-surface-warm`**: `#FFFDF7` (Warm Canvas — Gentle culinary backdrop)
-- **`--color-border-subtle`**: `#E2E8F0` (Slate 200 — Flat crisp card borders)
-- **`--color-border-warm`**: `#FDE68A` (Amber 200 — Featured item borders)
-- **`--color-text-main`**: `#0F172A` (Slate 900 — Maximum readability for food titles)
-- **`--color-text-body`**: `#334155` (Slate 700 — WCAG AAA compliant descriptions)
-- **`--color-text-muted`**: `#64748B` (Slate 500 — Captions & metadata)
+### Typography & Readability (WCAG AAA)
+- **`--color-text-title`**: `#3F271E` (Dark Espresso — Hero & Section Titles)
+- **`--color-text-white`**: `#FFFFFF` (Crisp White on Espresso & Dark Sections)
+- **`--color-text-body`**: `#6F7172` (Neutral Slate Charcoal — High Readability Body)
+- **`--color-text-muted`**: `#949698` (Subtle Metadata & Breadcrumbs)
 
 ---
 
 ## ✍️ 2. Typography Hierarchy (Taste Skill v2 Standard)
 
-- **Display Headline (Hero):** `text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900`
-- **Section Heading (H2):** `text-2xl sm:text-3xl font-bold tracking-tight text-slate-900`
-- **Card Heading (H3):** `text-lg sm:text-xl font-bold text-slate-900`
-- **Body Large:** `text-base sm:text-lg text-slate-700 leading-relaxed`
-- **Body Regular:** `text-sm sm:text-base text-slate-600 leading-normal`
-- **Price Display:** `text-base sm:text-lg font-black text-amber-700`
+- **Display Serif Font:** `'Caudex', Georgia, serif`
+- **Secondary Serif Accent:** `'Playfair Display', serif`
+- **Body & Sans Font:** `'Roboto', -apple-system, BlinkMacSystemFont, sans-serif`
 
 ---
 
-## 🔘 3. Interactive Components & States (Vercel Guidelines)
+## 🔍 3. Comprehensive SEO Architecture
 
-### Button Design Tokens
-1. **Primary Ordering CTA (Direct Order / Table Booking):**
-   - Base: `bg-amber-600 hover:bg-amber-700 text-white font-bold px-6 py-3 rounded-xl transition-all duration-150 shadow-xs`
-   - Active: `active:scale-[0.98]`
-   - Focus: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2`
-   - Min Touch Target: `min-h-[44px] min-w-[44px]`
-
-2. **Secondary Outlined Button:**
-   - Base: `border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold px-4 py-2.5 rounded-xl transition-all duration-150`
-   - Active: `active:scale-[0.98]`
-   - Focus: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2`
-
-3. **Input Fields & Quantity Steppers:**
-   - Base: `w-full px-4 py-3 text-slate-900 bg-white border border-slate-300 rounded-xl transition duration-150`
-   - Focus: `focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 focus:outline-none`
+- **Root Metadata:** Dynamic OpenGraph (1200x630), Twitter Cards, Canonical URLs, Robots meta.
+- **Structured Data:** Full `CafeOrCoffeeShop` Schema.org JSON-LD (Name, Image, Menu, Geo, Address, OpeningHours, Telephone).
+- **Sitemap & Robots:** Automatic XML Sitemap generation across all 14 routes and `robots.txt` compliant routing.
+- **Page-Level Optimization:** Custom keywords, meta descriptions, and unique canonical paths for all routes.
 
 ---
 
-## 🚫 4. Impeccable Anti-Slop Safeguards
-- ❌ **No Nested Cards:** Clean flat card layouts with ample padding (`p-5 sm:p-6 bg-white border border-slate-200/90 rounded-2xl`).
-- ❌ **No Generic Stock Photos:** High-resolution appetizing specialty coffee, burgers, pastries, and artisanal dishes.
-- ❌ **No Cliché AI Clutter:** Clean food badges (জনপ্রিয়, শেফ স্পেশাল, ফ্রেশ হট) and clear 0% commission direct ordering callouts.
-- ❌ **No Layout Shifts:** Strict aspect ratios (`aspect-[16/10]`, `aspect-[4/3]`) on food imagery.
+## 📐 4. Layout Architecture & Routes
 
----
-
-## 📱 5. Multi-Device Responsive Breakpoints
-- **Mobile (<640px):** Single column, sticky bottom Direct Order & Table Booking bar, touch-friendly food categories.
-- **Tablet (640px - 1024px):** 2-column food grid with easy quantity selection.
-- **Desktop (>1024px):** 3-column culinary showcase with interactive live ordering modal and Google Maps integration.
+- `/`: AuraBrew Master Home Page (Unified Architecture: Artisan Roasters Hero, Brand Partners Marquee, Roastery Heritage Story, Core Coffee Features, Interactive Table Booking, Featured Menu, Specialty Beans Shop, Client Reviews, Barista Craft, Coffee Journal, Newsletter)
+- `/about`: About AuraBrew (Heritage, Roasting Philosophy, Baristas, Video Gallery)
+- `/menu`: Complete Culinary & Specialty Coffee Menu with Category Tabs
+- `/services`: Coffee Services (Artisan Roasting, Private Barista Events, Coffee Subscriptions, Catering)
+- `/single-service`: Service Deep-Dive & Booking Details
+- `/projects`: Coffeehouse & Roastery Gallery / Portfolio
+- `/faq`: Frequently Asked Questions & Reservation Inquiries (Interactive Accordions)
+- `/team`: Master Baristas & Roasting Specialists
+- `/shop`: Artisan Coffee Beans, Roasting Gear & Cold Brew Merchandise
+- `/shop-details`: Product Details with Photo Gallery Switcher, Price, Reviews, Quantity Stepper & Add-to-Cart Toast
+- `/blog`: Coffee Culture, Brewing Guides & Roastery News
+- `/blog-details`: Single Article with Barista Author Bio & Comments
+- `/contact`: Visit AuraBrew Roastery, Direct Message Form & Interactive Location Map
