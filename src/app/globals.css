@@ -22,6 +22,20 @@ h1, h2, h3, h4, h5, h6, .caudex-font {
   font-family: 'Caudex', Georgia, serif;
 }
 
+/* Responsive Button & Table Overflow Guard for 360px - 380px Mobile */
+@media (max-width: 576px) {
+  .btn {
+    white-space: normal !important;
+    word-break: break-word;
+    max-width: 100% !important;
+  }
+  
+  .container {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}
+
 /* Accessibility focus-visible state (Vercel Guidelines) */
 *:focus-visible {
   outline: 2px solid #b98754 !important;
@@ -366,6 +380,27 @@ img, svg, video {
   .skills-img img {
     max-width: 100% !important;
     height: auto !important;
+  }
+
+  /* In-Store Card on Mobile */
+  .in-store-purchase-box {
+    padding: 16px !important;
+  }
+
+  .in-store-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .in-store-actions .in-store-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    white-space: normal !important;
+    padding: 12px 14px !important;
+    font-size: 0.85rem !important;
   }
 
   /* Footer on Mobile */

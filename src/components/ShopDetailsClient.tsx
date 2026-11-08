@@ -142,11 +142,13 @@ export default function ShopDetailsClient() {
                     backgroundColor: "#fbf9f6",
                     border: "1px solid #ede4d8",
                     borderRadius: "10px",
-                    padding: "22px 24px",
+                    padding: "20px 20px",
                     marginTop: "20px",
+                    maxWidth: "100%",
+                    boxSizing: "border-box",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "12px", marginBottom: "12px" }}>
                     <div
                       style={{
                         width: "38px",
@@ -159,63 +161,70 @@ export default function ShopDetailsClient() {
                         justifyContent: "center",
                         fontSize: "1rem",
                         flexShrink: 0,
+                        marginTop: "2px",
                       }}
                     >
                       <i className="fas fa-store"></i>
                     </div>
                     <div>
-                      <h4 style={{ margin: 0, fontFamily: "'Caudex', Georgia, serif", color: "#3f271e", fontSize: "1.15rem", fontWeight: 700 }}>
+                      <h4 style={{ margin: 0, fontFamily: "'Caudex', Georgia, serif", color: "#3f271e", fontSize: "1.1rem", fontWeight: 700, lineHeight: 1.3 }}>
                         Available For In-Store Purchase
                       </h4>
-                      <span style={{ fontSize: "0.85rem", color: "#6f7172" }}>
+                      <span style={{ fontSize: "0.82rem", color: "#6f7172", display: "block", marginTop: "2px" }}>
                         Freshly roasted, ground to order &amp; packaged at our cafe
                       </span>
                     </div>
                   </div>
 
-                  <p style={{ margin: "0 0 16px 0", color: "#6f7172", fontSize: "0.9rem", lineHeight: 1.6 }}>
+                  <p style={{ margin: "0 0 16px 0", color: "#6f7172", fontSize: "0.88rem", lineHeight: 1.6 }}>
                     This single-origin coffee is roasted in limited small batches and is available exclusively for in-person purchasing and tasting at AuraBrew. Visit our roastery bar to sample this roast or have our baristas grind it specifically for your home setup (V60, French Press, AeroPress, or Espresso).
                   </p>
 
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
+                  <div className="in-store-actions" style={{ display: "flex", flexWrap: "wrap", gap: "10px", alignItems: "center" }}>
                     <Link
                       href="/contact"
-                      className="btn"
+                      className="btn in-store-btn"
                       style={{
                         backgroundColor: "#3f271e",
                         color: "#ffffff",
-                        padding: "10px 22px",
+                        padding: "10px 18px",
                         borderRadius: "4px",
                         fontWeight: 700,
-                        fontSize: "0.88rem",
+                        fontSize: "0.85rem",
                         display: "inline-flex",
                         alignItems: "center",
+                        justifyContent: "center",
                         gap: "8px",
                         textDecoration: "none",
+                        boxSizing: "border-box",
+                        textAlign: "center",
                       }}
                     >
                       <i className="fas fa-map-marker-alt" style={{ color: "#c59d5f" }}></i>
-                      Visit Roastery / Get Directions
+                      <span>Visit Roastery / Directions</span>
                     </Link>
                     <Link
                       href="/#booking"
-                      className="btn"
+                      className="btn in-store-btn"
                       style={{
                         backgroundColor: "transparent",
                         color: "#3f271e",
                         border: "1px solid #3f271e",
-                        padding: "10px 20px",
+                        padding: "10px 18px",
                         borderRadius: "4px",
                         fontWeight: 700,
-                        fontSize: "0.88rem",
+                        fontSize: "0.85rem",
                         display: "inline-flex",
                         alignItems: "center",
+                        justifyContent: "center",
                         gap: "8px",
                         textDecoration: "none",
+                        boxSizing: "border-box",
+                        textAlign: "center",
                       }}
                     >
                       <i className="fas fa-calendar-alt" style={{ color: "#b98754" }}></i>
-                      Book A Tasting Table
+                      <span>Book A Tasting Table</span>
                     </Link>
                   </div>
                 </div>
