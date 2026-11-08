@@ -78,25 +78,25 @@ export default function Footer() {
                       <Link href="/" className="hover:text-[#B98754]">Home</Link>
                     </li>
                     <li>
-                      <Link href="/about" className="hover:text-[#B98754]">About Us</Link>
+                      <Link href="/#about" className="hover:text-[#B98754]">About Us</Link>
                     </li>
                     <li>
-                      <Link href="/services" className="hover:text-[#B98754]">Services</Link>
+                      <Link href="/#features" className="hover:text-[#B98754]">Our Features</Link>
                     </li>
                     <li>
-                      <Link href="/menu" className="hover:text-[#B98754]">Our Menu</Link>
+                      <Link href="/#menu" className="hover:text-[#B98754]">Our Menu</Link>
                     </li>
                     <li>
-                      <Link href="/shop" className="hover:text-[#B98754]">Coffee Beans</Link>
+                      <Link href="/#shop" className="hover:text-[#B98754]">Coffee Beans &amp; Shop</Link>
                     </li>
                     <li>
-                      <Link href="/projects" className="hover:text-[#B98754]">Roastery Gallery</Link>
+                      <Link href="/#testimonials" className="hover:text-[#B98754]">Client Reviews</Link>
                     </li>
                     <li>
-                      <Link href="/contact" className="hover:text-[#B98754]">Contact &amp; Booking</Link>
+                      <Link href="/#booking" className="hover:text-[#B98754]">Book A Table</Link>
                     </li>
                     <li>
-                      <Link href="/blog" className="hover:text-[#B98754]">Coffee Journal</Link>
+                      <Link href="/#blog" className="hover:text-[#B98754]">Coffee Journal</Link>
                     </li>
                   </ul>
                 </div>

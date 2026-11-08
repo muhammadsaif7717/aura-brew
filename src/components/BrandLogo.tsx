@@ -7,12 +7,16 @@ interface BrandLogoProps {
   className?: string;
   variant?: "light" | "dark";
   size?: "sm" | "md" | "lg";
+  href?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export default function BrandLogo({
   className = "",
   variant = "light",
   size = "md",
+  href = "/",
+  onClick,
 }: BrandLogoProps) {
   const isLight = variant === "light"; // Light text for dark coffee background
   const textColor = isLight ? "#FFFFFF" : "#3F271E";
@@ -23,7 +27,8 @@ export default function BrandLogo({
 
   return (
     <Link
-      href="/"
+      href={href}
+      onClick={onClick}
       className={`d-inline-flex align-items-center text-decoration-none group ${className}`}
       style={{ gap: `${12 * scale}px` }}
       aria-label="AuraBrew Artisanal Roastery Home"

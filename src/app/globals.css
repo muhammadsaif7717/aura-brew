@@ -95,3 +95,317 @@ iframe {
   opacity: 1 !important;
 }
 
+/* Breadcrumb area padding for fixed header */
+.breadcrumb-area {
+  padding-top: 85px !important;
+}
+
+
+
+/* ==========================================================================
+   Comprehensive Multi-Device Responsiveness (Mobile 360px, Tablet, Laptop, Desktop)
+   ========================================================================== */
+
+/* Universal Layout & Overflow Protection */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  position: relative;
+}
+
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 1. Large Screens & Desktops (>= 1200px) */
+@media (min-width: 1200px) {
+  .gallery-responsive-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+/* 2. Laptops & Small Desktops (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .gallery-responsive-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 12px !important;
+  }
+  .slider-content h2 {
+    font-size: 44px !important;
+  }
+}
+
+/* 3. Tablets & iPads (768px - 991px) */
+@media (max-width: 991px) {
+  /* Hide decorative floating animations that disrupt mobile layout */
+  .animations-01,
+  .animations-02,
+  .booking-img2 {
+    display: none !important;
+  }
+
+  /* Booking section layout fix */
+  .booking {
+    margin-top: 0 !important;
+    padding-top: 50px !important;
+  }
+
+  #features {
+    padding-bottom: 70px !important;
+  }
+
+  .booking .contact-bg02 {
+    padding: 30px 20px !important;
+  }
+
+  .booking-img {
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  .booking-img img {
+    max-width: 90% !important;
+    margin: 0 auto;
+  }
+
+  /* Tablet Gallery Grid */
+  .gallery-responsive-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+  }
+}
+
+/* 4. Small Tablets & Phablets (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .slider-content h2 {
+    font-size: 38px !important;
+    line-height: 1.25 !important;
+  }
+
+  .gallery-responsive-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+}
+
+/* 5. Mobile Phones (360px - 575px) */
+@media (max-width: 575px) {
+  /* Typography Scaling for small mobile screens (360px+) */
+  .slider-content h5 {
+    font-size: 13px !important;
+    margin-top: 20px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .slider-content h2 {
+    font-size: 30px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 15px !important;
+  }
+
+  .slider-content p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  .section-title h5 {
+    font-size: 13px !important;
+  }
+
+  .section-title h2 {
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+  }
+
+  .section-title p {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Mobile Hero Buttons: Full-width stacked with proper tap targets */
+  .slider-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 25px !important;
+    margin-bottom: 60px !important;
+  }
+
+  .slider-btn .btn {
+    width: 100% !important;
+    margin-right: 0 !important;
+    padding: 14px 20px !important;
+    text-align: center !important;
+    min-height: 48px !important;
+  }
+
+  /* Brand Logos Grid: 2 clean columns on 360px */
+  .brand-active {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+
+  .single-brand {
+    padding: 8px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .single-brand img {
+    max-width: 90px !important;
+    height: auto !important;
+    opacity: 0.85;
+  }
+
+  /* Popular Meal Items: Full-width clean flex row on mobile */
+  .populer-meal ul {
+    padding-left: 0 !important;
+  }
+
+  .meal-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 0 !important;
+  }
+
+  .meal-container div {
+    padding: 0 !important;
+  }
+
+  .meal-container .line {
+    display: none !important;
+  }
+
+  .meal-content {
+    flex: 1 1 auto !important;
+    margin-top: 0 !important;
+  }
+
+  .meal-content h5 {
+    font-size: 16px !important;
+    margin-bottom: 2px !important;
+    line-height: 1.2 !important;
+  }
+
+  .meal-content p {
+    font-size: 12px !important;
+    margin-bottom: 0 !important;
+    color: #888888 !important;
+  }
+
+  .meal-price {
+    margin-top: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .meal-price strong {
+    font-size: 16px !important;
+  }
+
+  .meal-img {
+    flex-shrink: 0 !important;
+  }
+
+  .meal-img img {
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 8px !important;
+    object-fit: cover !important;
+  }
+
+  /* Testimonials Grid on Mobile */
+  .testimonials-responsive-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  /* Gallery Grid: 2 clean columns on mobile */
+  .gallery-responsive-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  /* Newsletter Form on Mobile (< 540px) */
+  .newsletter-pill-group {
+    flex-direction: column !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    gap: 10px !important;
+  }
+
+  .newsletter-pill-group input {
+    background: #ffffff !important;
+    border: 1px solid #d9d0c7 !important;
+    border-radius: 50px !important;
+    width: 100% !important;
+    padding: 14px 20px !important;
+    text-align: center;
+  }
+
+  .newsletter-pill-group button {
+    width: 100% !important;
+    border-radius: 50px !important;
+    padding: 14px !important;
+  }
+
+  /* Skills Section on Mobile */
+  .skills-img {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .skills-img img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Footer on Mobile */
+  .footer-top {
+    padding-top: 60px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .footer-widget {
+    margin-bottom: 35px !important;
+  }
+
+  .footer-link iframe {
+    height: 180px !important;
+  }
+}
+
+/* Header High-Contrast Crisp White Text Overrides */
+header.header-area a,
+header.header-area a:visited,
+header.header-area .top-bar-link,
+header.header-area .nav-link-item,
+header.header-area span,
+header.header-area li a {
+  color: #ffffff !important;
+}
+
+header.header-area a:hover,
+header.header-area a:focus,
+header.header-area .top-bar-link:hover,
+header.header-area .nav-link-item:hover,
+header.header-area li a:hover {
+  color: #c59d5f !important;
+}
+
+header.header-area .active-item,
+header.header-area a.active-item {
+  color: #c59d5f !important;
+}
+
+header.header-area .btn {
+  color: #ffffff !important;
+}

@@ -92,7 +92,7 @@ export default function GallerySection() {
   };
 
   return (
-    <section className="profile fix pt-90 pb-90" style={{ backgroundColor: "#150f0b" }}>
+    <section id="gallery" className="profile fix pt-90 pb-90" style={{ backgroundColor: "#150f0b" }}>
       <div className="container">
         {/* Section Header */}
         <div className="row justify-content-center">
@@ -148,10 +148,9 @@ export default function GallerySection() {
       {/* Full-width Responsive Image Grid (Side-by-Side) */}
       <div className="container-fluid px-3 px-md-4">
         <div
+          className="gallery-responsive-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
-            gap: "14px",
           }}
         >
           {galleryItems.map((item) => (

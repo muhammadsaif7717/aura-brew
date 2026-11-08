@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import BookingForm from "@/components/BookingForm";
 import TestimonialSection from "@/components/TestimonialSection";
 import NewsletterSection from "@/components/NewsletterSection";
@@ -42,63 +43,8 @@ export default function Page() {
     <>
       <Header />
       <main>
+        <HeroSlider />
 
-           
-            <section id="home" className="slider-area fix p-relative">
-               
-                <div className="slider-active" style={{ "background": "#101010" }}>
-				<div className="single-slider slider-bg d-flex align-items-center" style={{ "backgroundImage": "url(/img/slider/slider_bg_02.png)", "backgroundSize": "cover" }}>
-                        <div className="container">
-                           <div className="row justify-content-center align-items-center">
-                              
-                                <div className="col-lg-7 col-md-7">
-                                    <div className="slider-content s-slider-content mt-100">
-                                         <h5 data-animation="fadeInUp" data-delay=".4s">Welcome To AuraBrew Cafe</h5>
-                                         <h2 data-animation="fadeInUp" data-delay=".4s">Enjoy Your Morning Coffee Shot</h2>
-                                        <p data-animation="fadeInUp" data-delay=".6s">Donec vitae libero non enim placerat eleifend aliquam erat volutpat. Curabitur diam ex, dapibus purus sapien, cursus sed nisl tristique, commodo gravida lectus non.</p>
-                                        
-                                          <div className="slider-btn mt-30 mb-105">     
-                                            <a href="/contact" className="btn ss-btn mr-15" data-animation="fadeInLeft" data-delay=".4s">Book  A Table</a>
-                                              <a href="/contact" className="btn ss-btn active" data-animation="fadeInLeft" data-delay=".4s">Visit Our Shop</a>
-                                        </div>        
-                                                              
-                                    </div>
-                                </div>
-                                <div className="col-lg-5 col-md-5 p-relative">
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div className="single-slider slider-bg d-flex align-items-center" style={{ "backgroundImage": "url(/img/slider/slider_bg.png)", "backgroundSize": "cover" }}>
-                        <div className="container">
-                           <div className="row justify-content-center align-items-center">
-                              
-                                <div className="col-lg-7 col-md-7">
-                                    <div className="slider-content s-slider-content mt-100">
-                                         <h5 data-animation="fadeInUp" data-delay=".4s">Welcome To AuraBrew Cafe</h5>
-                                         <h2 data-animation="fadeInUp" data-delay=".4s">Enjoy Your Morning Coffee Shot</h2>
-                                        <p data-animation="fadeInUp" data-delay=".6s">Donec vitae libero non enim placerat eleifend aliquam erat volutpat. Curabitur diam ex, dapibus purus sapien, cursus sed nisl tristique, commodo gravida lectus non.</p>
-                                        
-                                          <div className="slider-btn mt-30 mb-105">     
-                                            <a href="/contact" className="btn ss-btn mr-15" data-animation="fadeInLeft" data-delay=".4s">Book  A Table</a>
-                                              <a href="/contact" className="btn ss-btn active" data-animation="fadeInLeft" data-delay=".4s">Visit Our Shop</a>
-                                        </div>        
-                                                              
-                                    </div>
-                                </div>
-                                <div className="col-lg-5 col-md-5 p-relative">
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    
-               
-            </section>
-            
-             
             <div className="brand-area pt-60 pb-60" style={{ "background": "#3f271e" }}>
                 <div className="container">
                     <div className="row brand-active">
@@ -132,7 +78,7 @@ export default function Page() {
             </div>
             
              
-            <section className="about-area about-p pt-120 pb-120 p-relative fix">
+            <section id="about" className="about-area about-p pt-120 pb-120 p-relative fix">
                
                 <div className="animations-02"><img src="/img/bg/an-img-02.png" alt="contact-bg-an-01" /></div>
                 <div className="container">
@@ -180,7 +126,7 @@ export default function Page() {
             </section>
             
             
-            <section id="service-details2" className="pt-120 pb-380 p-relative" style={{ "backgroundColor": "#f7f5f1" }}>
+            <section id="features" className="pt-120 pb-380 p-relative" style={{ "backgroundColor": "#f7f5f1" }}>
                  <div className="animations-01"><img src="/img/bg/an-img-01.png" alt="an-img-01" /></div>
                 <div className="container">
                     <div className="row align-items-center">
@@ -250,7 +196,7 @@ export default function Page() {
             
             
             
-            <section className="booking pb-70">
+            <section id="booking" className="booking pb-70">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-6">
@@ -278,7 +224,7 @@ export default function Page() {
             </section>
             	
             
-            <section className="meal-select-section pt-120 pb-120 p-relative">
+            <section id="menu" className="meal-select-section pt-120 pb-120 p-relative">
               <div className="animations-02"><img src="/img/bg/an-img-04.png" alt="contact-bg-an-01" /></div>
              <div className="container">
                     <div className="row">
@@ -540,7 +486,7 @@ export default function Page() {
         </section>
         
                        
-            <section  className="product-slider pt-120 pb-90 p-relative fix" style={{ "backgroundColor": "#f7f5f1" }}>
+            <section id="shop" className="product-slider pt-120 pb-90 p-relative fix" style={{ "backgroundColor": "#f7f5f1" }}>
                  <div className="animations-01"><img src="/img/bg/an-img-04.png" alt="contact-bg-an-01" /></div>
                 <div className="container">
                     <div className="row">   
@@ -819,7 +765,28 @@ export default function Page() {
                             </div>
                         </div>
                 
-                        
+                        <div className="col-12 text-center mt-50">
+                            <div className="slider-btn">
+                                <a
+                                    href="/blog"
+                                    className="btn ss-btn d-inline-flex align-items-center justify-content-center"
+                                    style={{
+                                        backgroundColor: "#3f271e",
+                                        color: "#ffffff",
+                                        padding: "16px 36px",
+                                        borderRadius: "4px",
+                                        fontWeight: 700,
+                                        fontSize: "14px",
+                                        letterSpacing: "1px",
+                                        border: "1px solid rgba(197, 157, 95, 0.4)",
+                                        transition: "all 0.3s ease",
+                                        boxShadow: "0 6px 20px rgba(63, 39, 30, 0.15)",
+                                    }}
+                                >
+                                    Read All Blogs <i className="fal fa-long-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -67,6 +67,7 @@ export default function TestimonialSection() {
 
   return (
     <section
+      id="testimonials"
       className="testimonial-area pt-120 pb-100 p-relative fix"
       style={{
         backgroundColor: "#120d09",
@@ -132,10 +133,11 @@ export default function TestimonialSection() {
 
         {/* Side-by-Side Responsive Testimonial Cards */}
         <div
+          className="testimonials-responsive-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(310px, 1fr))",
-            gap: "28px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "24px",
           }}
         >
           {filtered.map((item) => (

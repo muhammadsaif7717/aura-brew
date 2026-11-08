@@ -9,88 +9,266 @@ interface HeaderProps {
   hideTopBar?: boolean;
 }
 
+interface NavLinkItem {
+  id: string;
+  label: string;
+}
+
+const navItems: NavLinkItem[] = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "features", label: "Features" },
+  { id: "menu", label: "Menu" },
+  { id: "shop", label: "Shop" },
+  { id: "testimonials", label: "Reviews" },
+  { id: "blog", label: "Blog" },
+];
+
+const mobileNavItems: NavLinkItem[] = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About Us" },
+  { id: "features", label: "Our Features" },
+  { id: "booking", label: "Book A Table" },
+  { id: "menu", label: "Our Menu" },
+  { id: "shop", label: "Our Online Shop" },
+  { id: "testimonials", label: "Client Reviews" },
+  { id: "skill", label: "Coffee We Use" },
+  { id: "blog", label: "Our Blog" },
+  { id: "newsletter", label: "Roastery Dispatch" },
+  { id: "gallery", label: "Visual Journal" },
+];
+
 export default function Header({ hideTopBar = false }: HeaderProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
-  const [isSticky, setIsSticky] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("home");
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
+  // 1. Route Detection & Scroll Spy: Track which section or route is active
   useEffect(() => {
+    // If on a dedicated subpage, highlight the corresponding nav item!
+    if (pathname.startsWith("/menu")) {
+      setActiveSection("menu");
+      setIsScrolled(true);
+      return;
+    }
+    if (pathname.startsWith("/blog")) {
+      setActiveSection("blog");
+      setIsScrolled(true);
+      return;
+    }
+    if (pathname.startsWith("/shop")) {
+      setActiveSection("shop");
+      setIsScrolled(true);
+      return;
+    }
+    if (pathname.startsWith("/about")) {
+      setActiveSection("about");
+      setIsScrolled(true);
+      return;
+    }
+    if (pathname.startsWith("/contact")) {
+      setActiveSection("booking");
+      setIsScrolled(true);
+      return;
+    }
+    if (pathname.startsWith("/services") || pathname.startsWith("/single-service")) {
+      setActiveSection("features");
+      setIsScrolled(true);
+      return;
+    }
+    if (pathname.startsWith("/projects")) {
+      setActiveSection("gallery");
+      setIsScrolled(true);
+      return;
+    }
+
+    if (pathname !== "/") return;
+
+    const sections = [
+      "home",
+      "about",
+      "features",
+      "booking",
+      "menu",
+      "shop",
+      "testimonials",
+      "skill",
+      "blog",
+      "newsletter",
+      "gallery",
+    ];
+
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 80);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      setIsScrolled(window.scrollY > 40);
 
-  // Close mobile drawer on route changes
-  useEffect(() => {
-    setMobileMenuOpen(false);
-    setActiveDropdown(null);
-    setDesktopDropdown(null);
+      const scrollPosition = window.scrollY + 140; // 140px header offset
+      let currentSection = "home";
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionEl = document.getElementById(sections[i]);
+        if (sectionEl) {
+          const top = sectionEl.offsetTop;
+          if (scrollPosition >= top) {
+            currentSection = sections[i];
+            break;
+          }
+        }
+      }
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    // Check if initial hash is present
+    if (window.location.hash) {
+      const hashId = window.location.hash.replace("#", "");
+      const el = document.getElementById(hashId);
+      if (el) {
+        setTimeout(() => {
+          const headerOffset = 75;
+          const elementPosition = el.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+          setActiveSection(hashId);
+        }, 150);
+      }
+    }
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  const toggleMobileDropdown = (name: string) => {
-    setActiveDropdown(activeDropdown === name ? null : name);
+  // 2. Smooth Scroll Click Handler
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+
+    if (pathname === "/") {
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        const headerOffset = 75;
+        const elementPosition = targetEl.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+
+        // Update URL hash without page jump
+        if (typeof window !== "undefined" && window.history) {
+          window.history.pushState(null, "", `#${targetId}`);
+        }
+        setActiveSection(targetId);
+      }
+    } else {
+      // If on another page (e.g. /blog-details), navigate back to home with hash
+      window.location.href = `/#${targetId}`;
+    }
   };
 
-  const isActive = (path: string) => pathname === path;
-  const isParentActive = (paths: string[]) => paths.includes(pathname);
-
   return (
-    <header className="header-area w-full relative z-50">
-      {/* 1. Top Announcement Bar */}
-      {!hideTopBar && (
+    <header className="header-area w-full fixed top-0 left-0 right-0 z-50">
+      {/* 1. Top Announcement Bar (Visible only at very top on desktop) */}
+      {!hideTopBar && !isScrolled && (
         <div
-          className="d-none d-lg-block w-full py-2"
+          className="d-none d-lg-block w-full py-1.5 transition-all duration-300"
           style={{
-            backgroundColor: "#2B1912",
-            borderBottom: "1px solid rgba(185, 135, 84, 0.2)",
-            color: "#E5DCD5",
-            fontSize: "13px",
+            backgroundColor: "#20120a",
+            borderBottom: "1px solid rgba(197, 157, 95, 0.2)",
+            color: "#ffffff",
+            fontSize: "12px",
           }}
         >
           <div className="container">
             <div className="d-flex align-items-center justify-content-between">
-              {/* Opening Hours */}
-              <div className="d-flex align-items-center" style={{ gap: "10px" }}>
-                <i className="fas fa-clock text-[#b98754]"></i>
-                <span>Mon - Fri: 9:00 - 19:00 / Closed on Weekends</span>
+              <div className="d-flex align-items-center" style={{ gap: "10px", color: "#ffffff" }}>
+                <i className="fas fa-clock" style={{ color: "#c59d5f" }}></i>
+                <span style={{ color: "#ffffff", fontWeight: 500 }}>
+                  Mon - Fri: 8:00 - 20:00 / Sat - Sun: 9:00 - 21:00
+                </span>
               </div>
-
-              {/* Contact & Socials */}
-              <div className="d-flex align-items-center" style={{ gap: "28px" }}>
-                <div className="d-flex align-items-center" style={{ gap: "8px" }}>
-                  <i className="fas fa-phone-alt text-[#b98754]"></i>
+              <div className="d-flex align-items-center" style={{ gap: "24px" }}>
+                <div className="d-flex align-items-center" style={{ gap: "6px" }}>
+                  <i className="fas fa-phone-alt" style={{ color: "#c59d5f" }}></i>
                   <a
                     href="tel:18001213637"
-                    className="text-[#E5DCD5] hover:text-[#b98754] transition-colors"
+                    className="top-bar-link"
+                    style={{
+                      color: "#ffffff",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#c59d5f";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "#ffffff";
+                    }}
                   >
                     1800-121-3637
                   </a>
                 </div>
-
                 <div className="d-flex align-items-center" style={{ gap: "14px" }}>
-                  <span className="text-xs uppercase tracking-widest text-[#949698]">Follow:</span>
                   <a
-                    href="#"
-                    aria-label="Facebook"
-                    className="text-[#E5DCD5] hover:text-[#b98754] transition-colors"
-                  >
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a
-                    href="#"
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="text-[#E5DCD5] hover:text-[#b98754] transition-colors"
+                    className="top-bar-link"
+                    style={{
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#c59d5f";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "#ffffff";
+                    }}
                   >
                     <i className="fab fa-instagram"></i>
                   </a>
                   <a
-                    href="#"
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="top-bar-link"
+                    style={{
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#c59d5f";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "#ffffff";
+                    }}
+                  >
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="Twitter"
-                    className="text-[#E5DCD5] hover:text-[#b98754] transition-colors"
+                    className="top-bar-link"
+                    style={{
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#c59d5f";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "#ffffff";
+                    }}
                   >
                     <i className="fab fa-twitter"></i>
                   </a>
@@ -101,270 +279,102 @@ export default function Header({ hideTopBar = false }: HeaderProps) {
         </div>
       )}
 
-      {/* 2. Main Navigation Bar */}
+      {/* 2. Main Navigation Bar (Always Fixed) */}
       <nav
-        className={`w-full transition-all duration-300 ${
-          isSticky
-            ? "fixed top-0 left-0 right-0 shadow-lg"
-            : "relative"
-        }`}
+        className="w-full transition-all duration-300"
         style={{
-          backgroundColor: isSticky ? "rgba(43, 25, 18, 0.98)" : "#3F271E",
-          backdropFilter: isSticky ? "blur(12px)" : "none",
-          borderBottom: "1px solid rgba(185, 135, 84, 0.25)",
+          backgroundColor: isScrolled ? "rgba(35, 20, 14, 0.98)" : "rgba(43, 25, 18, 0.96)",
+          backdropFilter: "blur(14px)",
+          borderBottom: "1px solid rgba(197, 157, 95, 0.25)",
+          boxShadow: isScrolled ? "0 8px 30px rgba(0, 0, 0, 0.45)" : "0 4px 15px rgba(0, 0, 0, 0.25)",
         }}
         aria-label="Main Navigation"
       >
         <div className="container">
-          <div className="d-flex align-items-center justify-content-between py-3">
-            {/* Brand Logo Component */}
+          <div className="d-flex align-items-center justify-content-between py-2.5">
+            {/* Brand Logo */}
             <div className="flex-shrink-0">
-              <BrandLogo variant="light" size="md" />
+              <BrandLogo
+                variant="light"
+                size="md"
+                href="#home"
+                onClick={(e) => scrollToSection(e, "home")}
+              />
             </div>
 
-            {/* Desktop Navigation Links */}
+            {/* Desktop Navigation Links with Crisp White & Gold Active Highlighting */}
             <div className="d-none d-lg-flex align-items-center">
-              <ul
-                className="d-flex align-items-center mb-0 list-unstyled"
-                style={{ gap: "28px" }}
-              >
-                {/* Home Link */}
-                <li>
-                  <Link
-                    href="/"
-                    className={`py-2 text-sm font-semibold tracking-wide transition-colors ${
-                      isActive("/") ? "text-[#b98754]" : "text-white hover:text-[#b98754]"
-                    }`}
-                  >
-                    Home
-                  </Link>
-                </li>
-
-                {/* About Link */}
-                <li>
-                  <Link
-                    href="/about"
-                    className={`py-2 text-sm font-semibold tracking-wide transition-colors ${
-                      isActive("/about") ? "text-[#b98754]" : "text-white hover:text-[#b98754]"
-                    }`}
-                  >
-                    About
-                  </Link>
-                </li>
-
-                {/* Menu Link */}
-                <li>
-                  <Link
-                    href="/menu"
-                    className={`py-2 text-sm font-semibold tracking-wide transition-colors ${
-                      isActive("/menu") ? "text-[#b98754]" : "text-white hover:text-[#b98754]"
-                    }`}
-                  >
-                    Menu
-                  </Link>
-                </li>
-
-                {/* Services Dropdown */}
-                <li
-                  className="relative group"
-                  onMouseEnter={() => setDesktopDropdown("services")}
-                  onMouseLeave={() => setDesktopDropdown(null)}
-                >
-                  <Link
-                    href="/services"
-                    className={`d-inline-flex align-items-center py-2 text-sm font-semibold tracking-wide transition-colors ${
-                      isParentActive(["/services", "/single-service"]) ? "text-[#b98754]" : "text-white hover:text-[#b98754]"
-                    }`}
-                  >
-                    Services <i className="fas fa-chevron-down text-xs ml-1.5 opacity-70"></i>
-                  </Link>
-                  {desktopDropdown === "services" && (
-                    <div
-                      className="position-absolute shadow-xl py-2"
-                      style={{
-                        top: "100%",
-                        left: 0,
-                        minWidth: "190px",
-                        backgroundColor: "#2B1912",
-                        border: "1px solid #4A352D",
-                        borderRadius: "4px",
-                        zIndex: 100,
-                      }}
-                    >
-                      <Link
-                        href="/services"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/services") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
+              <ul className="d-flex align-items-center mb-0 list-unstyled" style={{ gap: "28px" }}>
+                {navItems.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <li key={item.id} className="relative">
+                      <a
+                        href={`#${item.id}`}
+                        onClick={(e) => scrollToSection(e, item.id)}
+                        className={`nav-link-item d-inline-block py-2 text-sm font-semibold tracking-wide transition-all duration-200 ${
+                          isActive ? "active-item" : ""
                         }`}
+                        style={{
+                          position: "relative",
+                          textDecoration: "none",
+                          color: isActive ? "#c59d5f" : "#ffffff",
+                          fontWeight: isActive ? 700 : 600,
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isActive) e.currentTarget.style.color = "#c59d5f";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isActive) e.currentTarget.style.color = "#ffffff";
+                        }}
                       >
-                        All Services
-                      </Link>
-                      <Link
-                        href="/single-service"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/single-service") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        Service Details
-                      </Link>
-                    </div>
-                  )}
-                </li>
-
-                {/* Pages Dropdown */}
-                <li
-                  className="relative group"
-                  onMouseEnter={() => setDesktopDropdown("pages")}
-                  onMouseLeave={() => setDesktopDropdown(null)}
-                >
-                  <a
-                    href="#pages"
-                    className={`d-inline-flex align-items-center py-2 text-sm font-semibold tracking-wide transition-colors ${
-                      isParentActive(["/projects", "/faq", "/team", "/shop", "/shop-details"])
-                        ? "text-[#b98754]"
-                        : "text-white hover:text-[#b98754]"
-                    }`}
-                  >
-                    Pages <i className="fas fa-chevron-down text-xs ml-1.5 opacity-70"></i>
-                  </a>
-                  {desktopDropdown === "pages" && (
-                    <div
-                      className="position-absolute shadow-xl py-2"
-                      style={{
-                        top: "100%",
-                        left: 0,
-                        minWidth: "190px",
-                        backgroundColor: "#2B1912",
-                        border: "1px solid #4A352D",
-                        borderRadius: "4px",
-                        zIndex: 100,
-                      }}
-                    >
-                      <Link
-                        href="/projects"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/projects") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        Roastery Gallery
-                      </Link>
-                      <Link
-                        href="/faq"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/faq") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        FAQ
-                      </Link>
-                      <Link
-                        href="/team"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/team") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        Barista Team
-                      </Link>
-                      <Link
-                        href="/shop"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/shop") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        Coffee Beans &amp; Shop
-                      </Link>
-                      <Link
-                        href="/shop-details"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/shop-details") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        Product Details
-                      </Link>
-                    </div>
-                  )}
-                </li>
-
-                {/* Blog Dropdown */}
-                <li
-                  className="relative group"
-                  onMouseEnter={() => setDesktopDropdown("blog")}
-                  onMouseLeave={() => setDesktopDropdown(null)}
-                >
-                  <Link
-                    href="/blog"
-                    className={`d-inline-flex align-items-center py-2 text-sm font-semibold tracking-wide transition-colors ${
-                      isParentActive(["/blog", "/blog-details"]) ? "text-[#b98754]" : "text-white hover:text-[#b98754]"
-                    }`}
-                  >
-                    Blog <i className="fas fa-chevron-down text-xs ml-1.5 opacity-70"></i>
-                  </Link>
-                  {desktopDropdown === "blog" && (
-                    <div
-                      className="position-absolute shadow-xl py-2"
-                      style={{
-                        top: "100%",
-                        left: 0,
-                        minWidth: "180px",
-                        backgroundColor: "#2B1912",
-                        border: "1px solid #4A352D",
-                        borderRadius: "4px",
-                        zIndex: 100,
-                      }}
-                    >
-                      <Link
-                        href="/blog"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/blog") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        Coffee Journal
-                      </Link>
-                      <Link
-                        href="/blog-details"
-                        className={`d-block px-4 py-2 text-sm transition-colors ${
-                          isActive("/blog-details") ? "text-[#b98754] font-bold" : "text-white hover:text-[#b98754]"
-                        }`}
-                      >
-                        Article Details
-                      </Link>
-                    </div>
-                  )}
-                </li>
-
-                {/* Contact Link */}
-                <li>
-                  <Link
-                    href="/contact"
-                    className={`py-2 text-sm font-semibold tracking-wide transition-colors ${
-                      isActive("/contact") ? "text-[#b98754]" : "text-white hover:text-[#b98754]"
-                    }`}
-                  >
-                    Contact
-                  </Link>
-                </li>
+                        {item.label}
+                        {isActive && (
+                          <span
+                            style={{
+                              position: "absolute",
+                              bottom: "-2px",
+                              left: 0,
+                              right: 0,
+                              height: "2px",
+                              backgroundColor: "#c59d5f",
+                              borderRadius: "2px",
+                              boxShadow: "0 0 8px rgba(197, 157, 95, 0.7)",
+                              animation: "fadeIn 0.2s ease-in-out",
+                            }}
+                          />
+                        )}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
-            {/* Desktop CTA Action Button */}
+            {/* Desktop CTA Action Button (Book A Table -> scrolls to #booking) */}
             <div className="d-none d-lg-block">
-              <Link
-                href="/contact"
-                className="btn d-inline-flex align-items-center justify-content-center"
+              <a
+                href="#booking"
+                onClick={(e) => scrollToSection(e, "booking")}
+                className="btn d-inline-flex align-items-center justify-content-center cursor-pointer"
                 style={{
-                  backgroundColor: "#B98754",
-                  color: "#FFFFFF",
+                  backgroundColor: activeSection === "booking" ? "#c59d5f" : "#b98754",
+                  color: "#ffffff",
                   fontWeight: 700,
                   fontSize: "13px",
-                  letterSpacing: "1px",
-                  padding: "12px 26px",
-                  borderRadius: "2px",
+                  letterSpacing: "0.8px",
+                  padding: "10px 22px",
+                  borderRadius: "4px",
                   border: "none",
-                  boxShadow: "0 4px 15px rgba(185, 135, 84, 0.3)",
-                  transition: "all 0.2s ease",
+                  boxShadow: activeSection === "booking"
+                    ? "0 0 15px rgba(197, 157, 95, 0.6)"
+                    : "0 4px 15px rgba(185, 135, 84, 0.3)",
+                  transition: "all 0.25s ease",
+                  textDecoration: "none",
                 }}
               >
                 <i className="fas fa-calendar-check mr-2"></i> Book A Table
-              </Link>
+              </a>
             </div>
 
             {/* Mobile Hamburger Button */}
@@ -375,8 +385,8 @@ export default function Header({ hideTopBar = false }: HeaderProps) {
                 className="d-flex align-items-center justify-content-center border-0 p-2 text-white"
                 style={{
                   backgroundColor: "#2B1912",
-                  border: "1px solid #B98754",
-                  borderRadius: "4px",
+                  border: "1px solid #c59d5f",
+                  borderRadius: "6px",
                   width: "42px",
                   height: "42px",
                   cursor: "pointer",
@@ -384,204 +394,85 @@ export default function Header({ hideTopBar = false }: HeaderProps) {
                 aria-label="Toggle navigation menu"
               >
                 <i
-                  className={`fas ${mobileMenuOpen ? "fa-times" : "fa-bars"} text-lg text-[#B98754]`}
+                  className={`fas ${mobileMenuOpen ? "fa-times" : "fa-bars"} text-lg`}
+                  style={{ color: "#c59d5f" }}
                 ></i>
               </button>
             </div>
           </div>
         </div>
 
-        {/* 3. Mobile Navigation Drawer */}
+        {/* 3. Mobile Navigation Drawer (Smooth In-Page Nav with Crisp White Links) */}
         {mobileMenuOpen && (
           <div
             className="d-lg-none w-full animate-fadeIn"
             style={{
-              backgroundColor: "#22130D",
-              borderTop: "1px solid #4A352D",
-              padding: "20px 24px 30px",
+              backgroundColor: "#20130d",
+              borderTop: "1px solid rgba(197, 157, 95, 0.2)",
+              padding: "18px 24px 28px",
+              maxHeight: "80vh",
+              overflowY: "auto",
             }}
           >
-            <ul className="list-unstyled mb-0" style={{ gap: "6px" }}>
-              {/* Mobile Home */}
-              <li style={{ borderBottom: "1px solid rgba(185, 135, 84, 0.15)", padding: "10px 0" }}>
-                <Link
-                  href="/"
-                  className={`d-block font-semibold ${
-                    isActive("/") ? "text-[#B98754]" : "text-white"
-                  }`}
-                >
-                  Home
-                </Link>
-              </li>
-
-              {/* Mobile About */}
-              <li style={{ borderBottom: "1px solid rgba(185, 135, 84, 0.15)", padding: "10px 0" }}>
-                <Link
-                  href="/about"
-                  className={`d-block font-semibold ${
-                    isActive("/about") ? "text-[#B98754]" : "text-white"
-                  }`}
-                >
-                  About Us
-                </Link>
-              </li>
-
-              {/* Mobile Menu */}
-              <li style={{ borderBottom: "1px solid rgba(185, 135, 84, 0.15)", padding: "10px 0" }}>
-                <Link
-                  href="/menu"
-                  className={`d-block font-semibold ${
-                    isActive("/menu") ? "text-[#B98754]" : "text-white"
-                  }`}
-                >
-                  Menu
-                </Link>
-              </li>
-
-              {/* Mobile Services */}
-              <li style={{ borderBottom: "1px solid rgba(185, 135, 84, 0.15)", padding: "10px 0" }}>
-                <div
-                  className="d-flex justify-content-between align-items-center text-white"
-                  onClick={() => toggleMobileDropdown("services")}
-                  style={{ cursor: "pointer", fontWeight: 600 }}
-                >
-                  <span className={isParentActive(["/services", "/single-service"]) ? "text-[#B98754]" : ""}>
-                    Services
-                  </span>
-                  <i
-                    className={`fas fa-chevron-down text-xs transition-transform ${
-                      activeDropdown === "services" ? "rotate-180 text-[#B98754]" : ""
-                    }`}
-                  ></i>
-                </div>
-                {activeDropdown === "services" && (
-                  <ul className="list-unstyled pl-3 pt-2 mb-0">
-                    <li className="py-1">
-                      <Link href="/services" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        All Services
-                      </Link>
-                    </li>
-                    <li className="py-1">
-                      <Link href="/single-service" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        Service Details
-                      </Link>
-                    </li>
-                  </ul>
-                )}
-              </li>
-
-              {/* Mobile Pages */}
-              <li style={{ borderBottom: "1px solid rgba(185, 135, 84, 0.15)", padding: "10px 0" }}>
-                <div
-                  className="d-flex justify-content-between align-items-center text-white"
-                  onClick={() => toggleMobileDropdown("pages")}
-                  style={{ cursor: "pointer", fontWeight: 600 }}
-                >
-                  <span
-                    className={
-                      isParentActive(["/projects", "/faq", "/team", "/shop", "/shop-details"])
-                        ? "text-[#B98754]"
-                        : ""
-                    }
+            <ul className="list-unstyled mb-0">
+              {mobileNavItems.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <li
+                    key={item.id}
+                    style={{
+                      borderBottom: "1px solid rgba(197, 157, 95, 0.12)",
+                      padding: "11px 0",
+                    }}
                   >
-                    Pages
-                  </span>
-                  <i
-                    className={`fas fa-chevron-down text-xs transition-transform ${
-                      activeDropdown === "pages" ? "rotate-180 text-[#B98754]" : ""
-                    }`}
-                  ></i>
-                </div>
-                {activeDropdown === "pages" && (
-                  <ul className="list-unstyled pl-3 pt-2 mb-0">
-                    <li className="py-1">
-                      <Link href="/projects" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        Roastery Gallery
-                      </Link>
-                    </li>
-                    <li className="py-1">
-                      <Link href="/faq" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        FAQ
-                      </Link>
-                    </li>
-                    <li className="py-1">
-                      <Link href="/team" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        Barista Team
-                      </Link>
-                    </li>
-                    <li className="py-1">
-                      <Link href="/shop" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        Coffee Beans &amp; Shop
-                      </Link>
-                    </li>
-                    <li className="py-1">
-                      <Link href="/shop-details" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        Product Details
-                      </Link>
-                    </li>
-                  </ul>
-                )}
-              </li>
-
-              {/* Mobile Blog */}
-              <li style={{ borderBottom: "1px solid rgba(185, 135, 84, 0.15)", padding: "10px 0" }}>
-                <div
-                  className="d-flex justify-content-between align-items-center text-white"
-                  onClick={() => toggleMobileDropdown("blog")}
-                  style={{ cursor: "pointer", fontWeight: 600 }}
-                >
-                  <span className={isParentActive(["/blog", "/blog-details"]) ? "text-[#B98754]" : ""}>
-                    Blog
-                  </span>
-                  <i
-                    className={`fas fa-chevron-down text-xs transition-transform ${
-                      activeDropdown === "blog" ? "rotate-180 text-[#B98754]" : ""
-                    }`}
-                  ></i>
-                </div>
-                {activeDropdown === "blog" && (
-                  <ul className="list-unstyled pl-3 pt-2 mb-0">
-                    <li className="py-1">
-                      <Link href="/blog" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        Coffee Journal
-                      </Link>
-                    </li>
-                    <li className="py-1">
-                      <Link href="/blog-details" className="text-[#E5DCD5] hover:text-[#B98754] text-sm">
-                        Article Details
-                      </Link>
-                    </li>
-                  </ul>
-                )}
-              </li>
-
-              {/* Mobile Contact */}
-              <li style={{ borderBottom: "1px solid rgba(185, 135, 84, 0.15)", padding: "10px 0" }}>
-                <Link
-                  href="/contact"
-                  className={`d-block font-semibold ${
-                    isActive("/contact") ? "text-[#B98754]" : "text-white"
-                  }`}
-                >
-                  Contact Us
-                </Link>
-              </li>
+                    <a
+                      href={`#${item.id}`}
+                      onClick={(e) => scrollToSection(e, item.id)}
+                      className="d-flex align-items-center justify-content-between font-semibold"
+                      style={{
+                        color: isActive ? "#c59d5f" : "#ffffff",
+                        textDecoration: "none",
+                        fontSize: "15px",
+                        transition: "color 0.2s ease",
+                      }}
+                    >
+                      <span style={{ color: isActive ? "#c59d5f" : "#ffffff" }}>{item.label}</span>
+                      {isActive && (
+                        <span
+                          style={{
+                            fontSize: "11px",
+                            backgroundColor: "rgba(197, 157, 95, 0.2)",
+                            color: "#c59d5f",
+                            padding: "2px 8px",
+                            borderRadius: "10px",
+                            border: "1px solid #c59d5f",
+                          }}
+                        >
+                          Active
+                        </span>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
 
               {/* Mobile CTA */}
               <li className="pt-3">
-                <Link
-                  href="/contact"
+                <a
+                  href="#booking"
+                  onClick={(e) => scrollToSection(e, "booking")}
                   className="btn d-block text-center w-full"
                   style={{
-                    backgroundColor: "#B98754",
-                    color: "#FFFFFF",
+                    backgroundColor: "#c59d5f",
+                    color: "#18100b",
                     fontWeight: 700,
                     padding: "12px",
-                    borderRadius: "4px",
+                    borderRadius: "6px",
+                    textDecoration: "none",
                   }}
                 >
-                  <i className="fas fa-calendar-check mr-2"></i> Book A Table
-                </Link>
+                  <i className="fas fa-calendar-check mr-2"></i> Book A Table Now
+                </a>
               </li>
             </ul>
           </div>

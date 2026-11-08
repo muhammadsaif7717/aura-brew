@@ -25,7 +25,7 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="newslater-area p-relative pt-120 pb-120" style={{ backgroundColor: "#f7f5f1" }}>
+    <section id="newsletter" className="newslater-area p-relative pt-120 pb-120" style={{ backgroundColor: "#f7f5f1" }}>
       <div className="animations-01">
         <img src="/img/bg/an-img-07.png" alt="animation" />
       </div>
@@ -82,7 +82,7 @@ export default function NewsletterSection() {
             ) : (
               <form onSubmit={handleSubmit} className="contact-form newslater" style={{ maxWidth: "600px", margin: "0 auto" }}>
                 <div
-                  className="form-group"
+                  className="form-group newsletter-pill-group"
                   style={{
                     position: "relative",
                     display: "flex",
