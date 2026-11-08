@@ -44,14 +44,18 @@ export default function CoffeeSkills() {
     const el = sectionRef.current;
     if (!el) return;
 
+    let animId: number | null = null;
+
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        if (entry.isIntersecting && !hasAnimated) {
+        if (entry.isIntersecting) {
           setHasAnimated(true);
 
+          if (animId) cancelAnimationFrame(animId);
+
           // Animate percentage numbers smoothly from 0 to target at a relaxed, graceful pace
-          const duration = 2400; // ms (smooth 2.4s count-up)
+          const duration = 2200; // ms (smooth 2.2s count-up)
           const startTime = performance.now();
 
           const updateNumbers = (currentTime: number) => {
@@ -67,7 +71,7 @@ export default function CoffeeSkills() {
             setCounts(updated);
 
             if (progress < 1) {
-              requestAnimationFrame(updateNumbers);
+              animId = requestAnimationFrame(updateNumbers);
             } else {
               // Ensure exact target numbers at end
               const finalCounts: { [key: string]: number } = {};
@@ -78,22 +82,31 @@ export default function CoffeeSkills() {
             }
           };
 
-          requestAnimationFrame(updateNumbers);
-          observer.unobserve(el);
+          animId = requestAnimationFrame(updateNumbers);
+        } else {
+          // When scrolling away (up or down), reset so it re-animates smoothly next time
+          if (animId) cancelAnimationFrame(animId);
+          setHasAnimated(false);
+          setCounts({
+            "single-origin": 0,
+            "roasting": 0,
+            "extraction": 0,
+          });
         }
       },
       {
-        threshold: 0.2,
-        rootMargin: "0px 0px -50px 0px",
+        threshold: 0.15,
+        rootMargin: "0px 0px -40px 0px",
       }
     );
 
     observer.observe(el);
 
     return () => {
+      if (animId) cancelAnimationFrame(animId);
       observer.disconnect();
     };
-  }, [hasAnimated]);
+  }, []);
 
   return (
     <section
