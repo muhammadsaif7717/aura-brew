@@ -8,6 +8,7 @@ import BookingForm from "@/components/BookingForm";
 import TestimonialSection from "@/components/TestimonialSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import GallerySection from "@/components/GallerySection";
+import CoffeeSkills from "@/components/CoffeeSkills";
 
 export const metadata: Metadata = {
   title: "AuraBrew | Artisanal Coffee Shop & Specialty Roastery",
@@ -648,59 +649,7 @@ export default function Page() {
                
             <TestimonialSection />
             
-            
-            <section id="skill" className="skill-area p-relative fix" style={{ "background": "#3f271e" }}>
-                 <div className="animations-01"><img src="/img/bg/an-img-05.png" alt="contact-bg-an-05" /></div>
-                <div className="container">
-                    <div className="row justify-content-center align-items-center">
-					   <div className="col-lg-6 col-md-12 col-sm-12">
-                            <div className="skills-content s-about-content">
-                                <div className="skills-title pb-20">                               
-                                    <h5><span className="circle-left"><img src="/img/bg/circle-left-w.png" alt="img" /></span> Coffee We Use</h5>
-                                <h2>
-                                 We Offer Wide Selection of Coffee
-                                </h2>                             
-                                </div>
-                                <p>We partner directly with sustainable, regenerative coffee farms in Ethiopia, Colombia, and Guatemala to source the world's finest Arabica cherries, roasted in small batches to preserve their unique terroir.</p>
-                                 <div className="skills-content s-about-content mt-20">
-                                <div className="skills">
-                                    <div className="skill mb-30">
-                                      <div className="skill-name">Ethical Single-Origin Direct Trade (96%)</div>
-                                      <div className="skill-bar">
-                                        <div className="skill-per" id="96" style={{ width: "96%", backgroundColor: "#c59d5f" }}></div>
-                                      </div>
-                                    </div>
-                                     <div className="skill mb-30">
-                                      <div className="skill-name">Small-Batch Drum Roasting Precision (92%)</div>
-                                      <div className="skill-bar">
-                                        <div className="skill-per" id="92" style={{ width: "92%", backgroundColor: "#c59d5f" }}></div>
-                                      </div>
-                                    </div>
-                                      <div className="skill mb-30">
-                                      <div className="skill-name">Master Barista Extraction Calibration (98%)</div>
-                                      <div className="skill-bar">
-                                        <div className="skill-per" id="98" style={{ width: "98%", backgroundColor: "#c59d5f" }}></div>
-                                      </div>
-                                    </div>
-
-                                </div>
-
-
-                                
-                            </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-12 col-sm-12 pr-30">
-                           <div className="skills-img">                               
-                                  <img src="/img/bg/skills-img.png" alt="img" className="img" />              
-                                </div>
-                        </div>
-                     
-                    </div>
-                </div>
-            </section>
-            
-          
+            <CoffeeSkills />
               
             <section id="blog" className="blog-area p-relative fix pt-90 pb-90">
                  <div className="animations-02"><img src="/img/bg/an-img-06.png" alt="contact-bg-an-05" /></div>

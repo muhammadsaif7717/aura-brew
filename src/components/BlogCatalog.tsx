@@ -317,6 +317,7 @@ export default function BlogCatalog() {
             {filteredPosts.map((post) => (
               <div key={post.id} className="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                 <article
+                  className="single-post2 animate-card"
                   style={{
                     backgroundColor: "#ffffff",
                     borderRadius: "12px",
