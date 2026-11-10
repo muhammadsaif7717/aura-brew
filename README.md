@@ -4,12 +4,12 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge&logo=vercel)](https://aura-brew-three.vercel.app)
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge&logo=vercel)](https://aura-brew-omega.vercel.app)
 [![License: Custom Evaluation](https://img.shields.io/badge/License-Evaluation_Only-orange?style=for-the-badge)](./LICENSE)
 
 > **AuraBrew Coffee Co.** is a feature-rich, multi-page web platform created for artisanal micro-roasters, specialty cafes, and gourmet coffeehouses. It pairs warm espresso-inspired aesthetics with modern e-commerce catalogs, online table reservation workflows, and interactive customer experiences.
 
-🌐 **Live Demo:** [https://aura-brew-three.vercel.app](https://aura-brew-three.vercel.app)
+🌐 **Live Demo:** [https://aura-brew-omega.vercel.app](https://aura-brew-omega.vercel.app)
 💻 **GitHub Repository:** [https://github.com/muhammadsaif7717/aura-brew](https://github.com/muhammadsaif7717/aura-brew)
 
 ---
@@ -177,7 +177,7 @@ npm run start
 
 **Muhammad Saif**
 - GitHub: [@muhammadsaif7717](https://github.com/muhammadsaif7717)
-- Live Project: [https://aura-brew-three.vercel.app](https://aura-brew-three.vercel.app)
+- Live Project: [https://aura-brew-omega.vercel.app](https://aura-brew-omega.vercel.app)
 
 ---
 
